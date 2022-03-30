@@ -32,3 +32,4 @@ Have a nice day‼️
 * [Lunacy](https://icons8.com/lunacy)
 * [Deep Rock Galactic](https://store.steampowered.com/app/548430/Deep_Rock_Galactic/)- 19% Done (3/30/2022)
 * [IMS - Network Minecraft (My Own)](https://israelmincraftml.wixsite.com/ims-network)
+* [ItemsAdder(A Minecraft Plugin)](https://spigot.devs.beer/itemsadder/) - Approve Stand By

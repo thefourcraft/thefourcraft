@@ -25,6 +25,10 @@ Our music is on our youtube channel please don't copy 😇\
 If anyone that will find his own music in our video should check the description 🧐\
 Have a nice day‼️
 ## Translation Projects - Hebrew
+### What?
+I dadacate my time to translate serveis that help me and people to my language hebrew.\
+This Help A Lot of people finding information and discovering new things.\
+### Projects
 * [Luck Perms(A Minecraft Plugin)](https://luckperms.net/)
 * [Minecraft Java Edition](https://www.minecraft.net/en-us/store/minecraft-java-edition)
 * [Minecraft Windows 10 & Bedrock](https://www.minecraft.net/en-us/store/minecraft-windows10)

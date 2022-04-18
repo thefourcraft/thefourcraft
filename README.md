@@ -4,6 +4,7 @@ My name is david, 17 years old\
 I'm a DJ, Music Producer, Translator and Much More 🇮🇱\
 I know `java - 30%, C# - 140%, HTML, CSS, JavaScript - 40%`\
 I Manage & Founded Two Companies [side_or_slide music](https://www.youtube.com/c/sideorslideMusic) & [IMS - Network](https://israelmincraftml.wixsite.com/ims-network)
+## My Work
 ### IMS - Network
 Founded In 2020, With A Simple Goal To Create Game Server For Everyone For Free
 > Hello, we are IMS - Network. 👋\
@@ -23,7 +24,7 @@ live Before You Die🥂\
 Our music is on our youtube channel please don't copy 😇\
 If anyone that will find his own music in our video should check the description 🧐\
 Have a nice day‼️
-### Translation Projects - Hebrew
+## Translation Projects - Hebrew
 * [Luck Perms(A Minecraft Plugin)](https://luckperms.net/)
 * [Minecraft Java Edition](https://www.minecraft.net/en-us/store/minecraft-java-edition)
 * [Minecraft Windows 10 & Bedrock](https://www.minecraft.net/en-us/store/minecraft-windows10)

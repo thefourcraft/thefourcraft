@@ -15,14 +15,16 @@ We build, develop, and Maintain
 Free game servers for everyone.😇\
 All our team does it willingly, our goal is to cover as many games as possible and ensure the best quality and safety of the game. 🤩
 #### Contact
-[![Website-logo](photos/Website-icon.svg)](https://israelmincraftml.wixsite.com/ims-network)[![Twitter-logo](photos/Twitter-icon.svg)](https://twitter.com/network_ims)
-* [Discord]()
-* [YouTube]()
-* [GitHub]()
-* [Instngram]()
-* [Facebook]()
-* [TikTok]()
-* [Email]()
+[![Website-logo](photos/Website-icon.svg)](https://israelmincraftml.wixsite.com/ims-network)
+[![Twitter-logo](photos/Twitter-icon.svg)](https://twitter.com/network_ims)
+[![Discord-logo](photos/Discord-icon.svg)](https://discord.ims-network.net)
+[![YouTube-logo](photos/Play-icon.svg)](https://www.youtube.com/channel/UC2k502VERIriL01UtnpE_wQ)
+[![GitHub-logo](photos/Github-icon.svg)](https://github.com/IMS-Network)
+[![Instagram-logo](photos/Instagram-icon.svg)](https://www.instagram.com/ims__network/)
+[![Facebook-logo](photos/Facebook-icon.svg)](https://www.facebook.com/IMSNetworkOfficial)
+[![TikTok-logo](photos/Tiktok-icon.svg)](https://www.tiktok.com/@ims_network)
+[![Reddit-logo](photos/Reddit-icon.svg)](https://www.reddit.com/r/IMS_Network/)
+[![Email-logo](photos/Email-icon.svg)](mailto:support@ims-network.net)
 ### SOS Music (side_or_slide)
 Founded in 2018, The Place Ware I Show My Music Skills & Knowledge
 > On the side_or_slide youtube Chanel, you can find amazing high-quality music🎧\

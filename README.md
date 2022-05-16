@@ -59,9 +59,8 @@ Have a nice day‼️
 I dadacate my time to translate serveis that help me and people to my language hebrew.\
 This Help A Lot of people finding information and discovering new things.
 ### Projects
-#### LuckPerms
-![Lackperms-logo](photos/LackPerms.svg)\
-LuckPerms is a permissions plugin for Minecraft servers (Bukkit/Spigot, BungeeCord & more). It allows server admins to control what features players can use by creating groups and assigning permissions.\
+#### LuckPerms![Lackperms-logo](photos/LackPerms.svg)
+LuckPerms is a permissions plugin for Minecraft servers (Bukkit/Spigot, BungeeCord & more). It allows server admins to control what features players can use by creating groups and assigning permissions.
 ##### Links
 * [Luck Perms(A Minecraft Plugin)](https://luckperms.net/)
 * [Minecraft Java Edition](https://www.minecraft.net/en-us/store/minecraft-java-edition)

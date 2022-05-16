@@ -57,8 +57,12 @@ Have a nice day‼️
 ## Translation Projects - Hebrew
 ### What?
 I dadacate my time to translate serveis that help me and people to my language hebrew.\
-This Help A Lot of people finding information and discovering new things.\
+This Help A Lot of people finding information and discovering new things.
 ### Projects
+####LuckPerms
+![Lackperms-logo](photos/LackPerms.svg)\
+LuckPerms is a permissions plugin for Minecraft servers (Bukkit/Spigot, BungeeCord & more). It allows server admins to control what features players can use by creating groups and assigning permissions.\
+#####Links
 * [Luck Perms(A Minecraft Plugin)](https://luckperms.net/)
 * [Minecraft Java Edition](https://www.minecraft.net/en-us/store/minecraft-java-edition)
 * [Minecraft Windows 10 & Bedrock](https://www.minecraft.net/en-us/store/minecraft-windows10)
@@ -66,7 +70,7 @@ This Help A Lot of people finding information and discovering new things.\
 * [OBS Studio](https://obsproject.com/)
 * [Heads-up Notifications](http://simen.codes/app/android-5-headsup-notifications/)
 * [Lunacy](https://icons8.com/lunacy)
-* [Deep Rock Galactic](https://store.steampowered.com/app/548430/Deep_Rock_Galactic/)- 19% Done (3/30/2022)
+* [Deep Rock Galactic](https://store.steampowered.com/app/548430/Deep_Rock_Galactic/)- 30% Done (5/16/2022)
 * [IMS - Network Minecraft (My Own)](https://israelmincraftml.wixsite.com/ims-network)
-* [ItemsAdder(A Minecraft Plugin)](https://spigot.devs.beer/itemsadder/) - Approve Stand By
+* [ItemsAdder(A Minecraft Plugin)](https://spigot.devs.beer/itemsadder/)
 * [Be My Eyes iOS](https://www.bemyeyes.com/)

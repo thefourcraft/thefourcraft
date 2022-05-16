@@ -66,8 +66,10 @@ LuckPerms is a permissions plugin for Minecraft servers (Bukkit/Spigot, BungeeCo
 [![Discord-logo](photos/Discord-icon.svg)](https://discord.gg/luckperms)
 [![GitHub-logo](photos/Github-icon.svg)](https://github.com/LuckPerms/LuckPerms)
 [![Spigot-logo](photos/Spigot-icon.svg)](https://www.spigotmc.org/resources/luckperms.28140/)
-
-* [Minecraft Java Edition](https://www.minecraft.net/en-us/store/minecraft-java-edition)
+#### Minecraft Java Edition
+The original version of Minecraft! Java Edition has cross-platform play between Windows, Linux and macOS, and also supports user-created skins and mods.
+##### Links
+[Minecraft Java Edition](https://www.minecraft.net/en-us/store/minecraft-java-edition)
 * [Minecraft Windows 10 & Bedrock](https://www.minecraft.net/en-us/store/minecraft-windows10)
 * [Stay Hydrated](https://www.gndzkrkc.com/stayhydrated/)
 * [OBS Studio](https://obsproject.com/)

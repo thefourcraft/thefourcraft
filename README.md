@@ -1,8 +1,8 @@
 # Welcome 👋
 ## About
-My name is david, 17 years old
-I'm a DJ, Music Producer, Translator and Much More 🇮🇱
-I Manage & Founded Two Companies [side_or_slide music](https://www.youtube.com/c/sideorslideMusic) & [IMS - Network](https://israelmincraftml.wixsite.com/ims-network)\
+My name is david, 17 years old\
+I'm a DJ, Music Producer, Translator and Much More 🇮🇱\
+I Manage & Founded Two Companies [side_or_slide music](https://www.youtube.com/c/sideorslideMusic) & [IMS - Network](https://israelmincraftml.wixsite.com/ims-network)
 ### Git-Hub Stats
 ![My GitHub stats](https://github-readme-stats.vercel.app/api?username=thefourcraft&show_icons=true&theme=dark)\
 ![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=thefourcraft&theme=dark&langs_count=8)

@@ -62,7 +62,11 @@ This Help A Lot of people finding information and discovering new things.
 #### ![Lackperms-logo](photos/LackPerms.svg)
 LuckPerms is a permissions plugin for Minecraft servers (Bukkit/Spigot, BungeeCord & more). It allows server admins to control what features players can use by creating groups and assigning permissions.
 ##### Links
-[Website](https://luckperms.net/)
+[![Website-logo](photos/Website-icon.svg)](https://luckperms.net/)
+[![Discord-logo](photos/Discord-icon.svg)](https://discord.gg/luckperms)
+[![GitHub-logo](photos/Github-icon.svg)](https://github.com/LuckPerms/LuckPerms)
+[![Spigot-logo](photos/Spigot-icon.svg)](https://www.spigotmc.org/resources/luckperms.28140/)
+
 * [Minecraft Java Edition](https://www.minecraft.net/en-us/store/minecraft-java-edition)
 * [Minecraft Windows 10 & Bedrock](https://www.minecraft.net/en-us/store/minecraft-windows10)
 * [Stay Hydrated](https://www.gndzkrkc.com/stayhydrated/)

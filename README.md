@@ -2,8 +2,10 @@
 ## About
 My name is david, 17 years old\
 I'm a DJ, Music Producer, Translator and Much More 🇮🇱\
-I know `java - 30%, C# - 140%, HTML, CSS, JavaScript - 40%`\
-I Manage & Founded Two Companies [side_or_slide music](https://www.youtube.com/c/sideorslideMusic) & [IMS - Network](https://israelmincraftml.wixsite.com/ims-network)
+I Manage & Founded Two Companies [side_or_slide music](https://www.youtube.com/c/sideorslideMusic) & [IMS - Network](https://israelmincraftml.wixsite.com/ims-network)\
+### Git-Hub Stats
+[![My GitHub stats](https://github-readme-stats.vercel.app/api?username=thefourcraft&show_icons=true&theme=dark)](https://github.com/anuraghazra/github-readme-stats)\
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=thefourcraft&theme=dark&langs_count=8)](https://github.com/anuraghazra/github-readme-stats)
 ## My Work
 ### IMS - Network
 Founded In 2020, With A Simple Goal To Create Game Server For Everyone For Free
@@ -12,6 +14,15 @@ We are a group of people who invest time in improving our servers and the Israel
 We build, develop, and Maintain
 Free game servers for everyone.😇\
 All our team does it willingly, our goal is to cover as many games as possible and ensure the best quality and safety of the game. 🤩
+#### Contact
+[![Website-logo](photos/Website-icon.svg)](https://israelmincraftml.wixsite.com/ims-network)[![Twitter-logo](photos/Twitter-icon.svg)](https://twitter.com/network_ims)
+* [Discord]()
+* [YouTube]()
+* [GitHub]()
+* [Instngram]()
+* [Facebook]()
+* [TikTok]()
+* [Email]()
 ### SOS Music (side_or_slide)
 Founded in 2018, The Place Ware I Show My Music Skills & Knowledge
 > On the side_or_slide youtube Chanel, you can find amazing high-quality music🎧\

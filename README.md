@@ -1,6 +1,6 @@
 # Welcome 👋
 ## About
-My name is david, 17 years old\
+My name is david, 17 years old
 I'm a DJ, Music Producer, Translator and Much More 🇮🇱
 I Manage & Founded Two Companies [side_or_slide music](https://www.youtube.com/c/sideorslideMusic) & [IMS - Network](https://israelmincraftml.wixsite.com/ims-network)\
 ### Git-Hub Stats

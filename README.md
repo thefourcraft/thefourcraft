@@ -4,8 +4,8 @@ My name is david, 17 years old\
 I'm a DJ, Music Producer, Translator and Much More 🇮🇱
 I Manage & Founded Two Companies [side_or_slide music](https://www.youtube.com/c/sideorslideMusic) & [IMS - Network](https://israelmincraftml.wixsite.com/ims-network)\
 ### Git-Hub Stats
-[![My GitHub stats](https://github-readme-stats.vercel.app/api?username=thefourcraft&show_icons=true&theme=dark)](https://github.com/anuraghazra/github-readme-stats)\
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=thefourcraft&theme=dark&langs_count=8)](https://github.com/anuraghazra/github-readme-stats)
+![My GitHub stats](https://github-readme-stats.vercel.app/api?username=thefourcraft&show_icons=true&theme=dark)\
+![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=thefourcraft&theme=dark&langs_count=8)
 ### Contact Me
 [![Twitter-logo](photos/Twitter-icon.svg)](https://twitter.com/thefourcraft)
 [![GitHub-logo](photos/Github-icon.svg)](https://github.com/thefourcraft)
@@ -65,7 +65,9 @@ LuckPerms is a permissions plugin for Minecraft servers (Bukkit/Spigot, BungeeCo
 [![Website-logo](photos/Website-icon.svg)](https://luckperms.net/)
 [![Discord-logo](photos/Discord-icon.svg)](https://discord.gg/luckperms)
 [![GitHub-logo](photos/Github-icon.svg)](https://github.com/LuckPerms/LuckPerms)
-[![Spigot-logo](photos/Spigot-icon.svg)](https://www.spigotmc.org/resources/luckperms.28140/)
+##### GitHub Info
+![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=LuckPerms&repo=LuckPerms&theme=dark)
+![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=LuckPerms&repo=LuckPermsWeb&theme=dark)
 #### Minecraft Java Edition
 The original version of Minecraft! Java Edition has cross-platform play between Windows, Linux and macOS, and also supports user-created skins and mods.
 ##### Links
@@ -77,10 +79,29 @@ The original version of Minecraft! Java Edition has cross-platform play between 
 [![Facebook-logo](photos/Facebook-icon.svg)](https://www.facebook.com/minecraft/)
 [![TikTok-logo](photos/Tiktok-icon.svg)](https://www.tiktok.com/@ims_network)
 [![Reddit-logo](photos/Reddit-icon.svg)](https://www.reddit.com/r/Minecraft/)
-
-* [Minecraft Windows 10 & Bedrock](https://www.minecraft.net/en-us/store/minecraft-windows10)
+#### Minecraft Windows 10 & Bedrock
+Explore infinite worlds and build everything from the simplest of homes to the grandest of castles. Create, explore, and survive alone or with friends on mobile, PC, and console devices.
+##### Links
+[![Website-logo](photos/Website-icon.svg)](https://www.minecraft.net/en-us/store/minecraft-windows10)
+[![Twitter-logo](photos/Twitter-icon.svg)](https://twitter.com/Minecraft)
+[![Discord-logo](photos/Discord-icon.svg)](https://discord.com/invite/minecraft)
+[![YouTube-logo](photos/Play-icon.svg)](https://www.youtube.com/minecraft)
+[![Instagram-logo](photos/Instagram-icon.svg)](https://www.instagram.com/minecraft/)
+[![Facebook-logo](photos/Facebook-icon.svg)](https://www.facebook.com/minecraft/)
+[![TikTok-logo](photos/Tiktok-icon.svg)](https://www.tiktok.com/@ims_network)
+[![Reddit-logo](photos/Reddit-icon.svg)](https://www.reddit.com/r/Minecraft/)
+#### OBS Studio
+Free and open source software for video recording and live streaming.
+##### Links
+[![Website-logo](photos/Website-icon.svg)](https://obsproject.com/)
+[![Twitter-logo](photos/Twitter-icon.svg)](https://twitter.com/OBSProject)
+[![Discord-logo](photos/Discord-icon.svg)](https://obsproject.com/discord)
+[![Facebook-logo](photos/Facebook-icon.svg)](https://facebook.com/OpenBroadcasterSoftware)
+[![GitHub-logo](photos/Github-icon.svg)](https://github.com/obsproject/obs-studio)
+##### GitHub Info
+![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=obsproject&repo=obs-studio&theme=dark)
+![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=obsproject&repo=obs-crowdin-sync&theme=dark)
 * [Stay Hydrated](https://www.gndzkrkc.com/stayhydrated/)
-* [OBS Studio](https://obsproject.com/)
 * [Heads-up Notifications](http://simen.codes/app/android-5-headsup-notifications/)
 * [Lunacy](https://icons8.com/lunacy)
 * [Deep Rock Galactic](https://store.steampowered.com/app/548430/Deep_Rock_Galactic/)- 30% Done (5/16/2022)

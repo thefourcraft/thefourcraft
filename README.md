@@ -1,11 +1,17 @@
 # Welcome 👋
 ## About
 My name is david, 17 years old\
-I'm a DJ, Music Producer, Translator and Much More 🇮🇱\
+I'm a DJ, Music Producer, Translator and Much More 🇮🇱
 I Manage & Founded Two Companies [side_or_slide music](https://www.youtube.com/c/sideorslideMusic) & [IMS - Network](https://israelmincraftml.wixsite.com/ims-network)\
 ### Git-Hub Stats
 [![My GitHub stats](https://github-readme-stats.vercel.app/api?username=thefourcraft&show_icons=true&theme=dark)](https://github.com/anuraghazra/github-readme-stats)\
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=thefourcraft&theme=dark&langs_count=8)](https://github.com/anuraghazra/github-readme-stats)
+### Contact Me
+[![Twitter-logo](photos/Twitter-icon.svg)](https://twitter.com/thefourcraft)
+[![GitHub-logo](photos/Github-icon.svg)](https://github.com/thefourcraft)
+[![Instagram-logo](photos/Instagram-icon.svg)](https://www.instagram.com/david_furman/)
+[![Facebook-logo](photos/Facebook-icon.svg)](https://www.facebook.com/david2004furman)
+[![Email-logo](photos/Email-icon.svg)](mailto:coo@ims-network.net)
 ## My Work
 ### IMS - Network
 Founded In 2020, With A Simple Goal To Create Game Server For Everyone For Free

@@ -11,7 +11,7 @@ I Manage & Founded Two Companies [side_or_slide music](https://www.youtube.com/c
 [![GitHub-logo](photos/Github-icon.svg)](https://github.com/thefourcraft)
 [![Instagram-logo](photos/Instagram-icon.svg)](https://www.instagram.com/david_furman/)
 [![Facebook-logo](photos/Facebook-icon.svg)](https://www.facebook.com/david2004furman)
-[![Email-logo](photos/Email-icon.svg)](coo@ims-network.net)
+[![Email-logo](photos/Email-icon.svg)](mailto:coo@ims-network.net?subject=[GitHub])
 ## My Work
 ### IMS - Network
 Founded In 2020, With A Simple Goal To Create Game Server For Everyone For Free
@@ -30,7 +30,7 @@ All our team does it willingly, our goal is to cover as many games as possible a
 [![Facebook-logo](photos/Facebook-icon.svg)](https://www.facebook.com/IMSNetworkOfficial)
 [![TikTok-logo](photos/Tiktok-icon.svg)](https://www.tiktok.com/@ims_network)
 [![Reddit-logo](photos/Reddit-icon.svg)](https://www.reddit.com/r/IMS_Network/)
-[![Email-logo](photos/Email-icon.svg)](support@ims-network.net)
+[![Email-logo](photos/Email-icon.svg)](mailto:support@ims-network.net?subject=[GitHub])
 ### SOS Music (side_or_slide)
 Founded in 2018, The Place Ware I Show My Music Skills & Knowledge
 > On the side_or_slide youtube Chanel, you can find amazing high-quality music🎧\
@@ -53,7 +53,7 @@ Have a nice day‼️
 [![Facebook-logo](photos/Facebook-icon.svg)](https://www.facebook.com/sideorslide)
 [![TikTok-logo](photos/Tiktok-icon.svg)](https://www.tiktok.com/@side_or_slide)
 [![Fandom-logo](photos/Fandom-icon.svg)](https://trance.fandom.com/wiki/Side_or_slide)
-[![Email-logo](photos/Email-icon.svg)](you.side.or.slide.7715@gmail.com)
+[![Email-logo](photos/Email-icon.svg)](mailto:you.side.or.slide.7715@gmail.com?subject=[GitHub])
 ## Translation Projects - Hebrew
 ### What?
 I dadacate my time to translate serveis that help me and people to my language hebrew.\

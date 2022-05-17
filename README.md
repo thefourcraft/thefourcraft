@@ -36,8 +36,8 @@ Founded in 2018, The Place Ware I Show My Music Skills & Knowledge
 > On the side_or_slide youtube Chanel, you can find amazing high-quality music🎧\
 we make psytrance and progressive music🎚️\
 Every upload we continue doing the best to improve and grow our community ✨\
-Also, we try to make the expires as simple as possible😌\
-We and to create a world of peace, love, and joy ❤️\
+Also, we try to make the experience as simple as possible😌\
+We want to create a world of peace, love, and joy ❤️\
 So be ready for the best adventure of your life 🤩\
 live Before You Die🥂\
 Our music is on our youtube channel please don't copy 😇\
@@ -101,6 +101,16 @@ Free and open source software for video recording and live streaming.
 ##### GitHub Info
 ![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=obsproject&repo=obs-studio&theme=dark)
 ![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=obsproject&repo=obs-crowdin-sync&theme=dark)
+#### Lunacy
+Free design software that keeps your flow with AI tools and built-in graphics. Lunacy works fast and smoothly. It’s not a sluggish browser wrapped in Electron and pretending to be an app. Share a documents with your team and edit it together. Side by side. In real-time. Or watch what others are doing, exchange comments, and get feedback. We have a great team of Lunacy enthusiasts helping us with localization of the app interface. Big thanks to them for helping other users who are not comfortable with English.
+##### Links
+[![Website-logo](photos/Website-icon.svg)](https://icons8.com/lunacy)
+[![Twitter-logo](photos/Twitter-icon.svg)](https://twitter.com/Icons8_Lunacy)
+[![YouTube-logo](photos/Play-icon.svg)](https://www.youtube.com/channel/UCRXYx6Qg7kgH0EAqa-Gl0HA)
+[![Instagram-logo](photos/Instagram-icon.svg)](https://www.instagram.com/icons8)
+[![Facebook-logo](photos/Facebook-icon.svg)](https://www.facebook.com/Icons8)
+
+
 * [Stay Hydrated](https://www.gndzkrkc.com/stayhydrated/)
 * [Heads-up Notifications](http://simen.codes/app/android-5-headsup-notifications/)
 * [Lunacy](https://icons8.com/lunacy)

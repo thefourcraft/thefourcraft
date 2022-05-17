@@ -1,6 +1,6 @@
 # שלום 👋
 קראו את הדף הזה בשפה שלכם\
-[![Hebrew](photos/Israel.svg)]()[![Arbic](photos/uae.svg)]()[![Russian](photos/russia.svg)]()[![Ukraine](photos/Ukraine.svg)]()
+[![English](photos/Usa.svg)]()[![Arbic](photos/uae.svg)]()[![Russian](photos/russia.svg)]()[![Ukraine](photos/Ukraine.svg)]()
 ## אודות
 היי, אני דוד בן 17\
 אני דייג'י, מפיק מוזיקה, מתרגם, מתכנת ועוד המון\

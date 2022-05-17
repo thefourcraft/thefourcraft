@@ -57,7 +57,7 @@ Have a nice day‼️
 ## Translation Projects - Hebrew
 ### What?
 I dadacate my time to translate serveis that help me and people to my language hebrew.\
-This Help A Lot of people finding information and discovering new things.
+This Helps A Lot of people finding information and discovering new things.
 ### Projects
 #### ![Lackperms-logo](photos/LackPerms.svg)
 LuckPerms is a permissions plugin for Minecraft servers (Bukkit/Spigot, BungeeCord & more). It allows server admins to control what features players can use by creating groups and assigning permissions.
@@ -68,7 +68,7 @@ LuckPerms is a permissions plugin for Minecraft servers (Bukkit/Spigot, BungeeCo
 ##### GitHub Info
 ![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=LuckPerms&repo=LuckPerms&theme=dark)
 ![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=LuckPerms&repo=LuckPermsWeb&theme=dark)
-#### Minecraft Java Edition
+#### ![Minecraft Java Edition](photos/Minecraft-java-logo.svg)
 The original version of Minecraft! Java Edition has cross-platform play between Windows, Linux and macOS, and also supports user-created skins and mods.
 ##### Links
 [![Website-logo](photos/Website-icon.svg)](https://www.minecraft.net/en-us/store/minecraft-java-edition)

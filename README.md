@@ -1,4 +1,6 @@
 # Welcome 👋
+Read It in your Language\
+[![Hebrew](photos/Israel.svg)]()[![Arbic](photos/uae.svg)]()[![Russian](photos/russia.svg)]()[![Ukraine](photos/Ukraine.svg)]()
 ## About
 My name is david, 17 years old\
 I'm a DJ, Music Producer, Translator and Much More 🇮🇱\

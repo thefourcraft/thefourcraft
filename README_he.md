@@ -6,8 +6,9 @@
 אני דייג'י, מפיק מוזיקה, מתרגם, מתכנת ועוד המון\
 אני מנהל ומייסד שתי חברות [side_or_slide music](https://www.youtube.com/c/sideorslideMusic) & [IMS - Network](https://israelmincraftml.wixsite.com/ims-network)
 ### סטאטוס ב-Git-Hub
-![סטאטוס של הפלטפורמה](https://github-readme-stats.vercel.app/api?username=thefourcraft&show_icons=true&theme=dark)\
-![שפות תכנות שלי](https://github-readme-stats.vercel.app/api/top-langs/?username=thefourcraft&theme=dark&langs_count=8)
+![](https://github-readme-stats.vercel.app/api?username=thefourCraft&theme=dark&hide_border=true&include_all_commits=true&count_private=false)<br/>
+![](https://github-readme-streak-stats.herokuapp.com/?user=thefourCraft&theme=dark&hide_border=true)<br/>
+![](https://github-readme-stats.vercel.app/api/top-langs/?username=thefourCraft&theme=dark&hide_border=true&include_all_commits=true&count_private=false&layout=compact)
 ### צרו קשר איתי
 [![לוגו טוויטר](photos/Twitter-icon.svg)](https://twitter.com/thefourcraft)
 [![לוגו גיטהאב](photos/Github-icon.svg)](https://github.com/thefourcraft)

@@ -3,8 +3,8 @@ Read It in your Language\
 [![Hebrew](photos/Israel.svg)](README_he.md)[![Arbic](photos/uae.svg)]()[![Russian](photos/russia.svg)]()[![Ukraine](photos/Ukraine.svg)]()
 ## About
 My name is david, 17 years old\
-I'm a DJ, Music Producer, Translator and Much More 🇮🇱\
-I Manage & Founded Two Companies [side_or_slide music](https://www.youtube.com/c/sideorslideMusic) & [IMS - Network](https://israelmincraftml.wixsite.com/ims-network)
+I'm a\
+![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Varela+Round&duration=2000&color=F7F7F7&width=650&height=30&lines=DJ;Music+Producer+;Translator;Photographer+;Video+Editor;Developer;Beta+Tester;Founder;COO+%40ims-network;CEO+%40side_or_slide+music;%5E_%5E)
 ### Git-Hub Stats
 ![](https://github-readme-stats.vercel.app/api?username=thefourCraft&theme=dark&hide_border=true&include_all_commits=true&count_private=false)<br/>
 ![](https://github-readme-streak-stats.herokuapp.com/?user=thefourCraft&theme=dark&hide_border=true)<br/>

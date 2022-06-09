@@ -7,7 +7,7 @@
 אני מנהל ומייסד שתי חברות [side_or_slide music](https://www.youtube.com/c/sideorslideMusic) & [IMS - Network](https://israelmincraftml.wixsite.com/ims-network)
 ### סטאטוס ב-Git-Hub
 ![](https://github-readme-stats.vercel.app/api?username=thefourCraft&theme=dark&hide_border=true&include_all_commits=true&count_private=false)<br/>
-![](https://github-readme-streak-stats.herokuapp.com/?user=thefourCraft&theme=dark&hide_border=true)<br/>
+![](https://github-readme-streak-stats.herokuapp.com?user=thefourCraft&theme=dark&hide_border=true&date_format=n%2Fj%5B%2FY%5D&background=000000&ring=DD2727&fire=FFF915&sideNums=42DD05)<br/>
 ![](https://github-readme-stats.vercel.app/api/top-langs/?username=thefourCraft&theme=dark&hide_border=true&include_all_commits=true&count_private=false&layout=compact)
 ### צרו קשר איתי
 [![לוגו טוויטר](photos/Twitter-icon.svg)](https://twitter.com/thefourcraft)

@@ -62,7 +62,7 @@
 ### פרוייקטים
 #### ![לוגו לאקפרמס](photos/LackPerms.svg)
 הפלאגין LuckPerms הוא תוסף הרשאות עבור שרתי Minecraft (Bukkit/Spigot, BungeeCord ועוד). זה מאפשר למנהלי שרת לשלוט באילו תכונות שחקנים יכולים להשתמש על ידי יצירת קבוצות והקצאת הרשאות.
-##### Links
+##### קישורים
 [![לוגו אתר](photos/Website-icon.svg)](https://luckperms.net/)
 [![לוגו דיסקורד](photos/Discord-icon.svg)](https://discord.gg/luckperms)
 [![לוגו גיטהאב](photos/Github-icon.svg)](https://github.com/LuckPerms/LuckPerms)

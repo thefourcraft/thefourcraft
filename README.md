@@ -8,7 +8,7 @@ I'm a\
 ### Git-Hub Stats
 ![](https://github-readme-stats.vercel.app/api?username=thefourCraft&theme=dark&hide_border=true&include_all_commits=true&count_private=false)<br/>
 ![](https://github-readme-streak-stats.herokuapp.com?user=thefourCraft&theme=dark&hide_border=true&date_format=n%2Fj%5B%2FY%5D&background=000000&ring=DD2727&fire=FFF915&sideNums=42DD05)<br/>
-![](https://github-readme-stats.vercel.app/api/top-langs/?username=thefourcraft&theme=dark&hide_border=true&include_all_commits=true&count_private=true&layout=compact)
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=thefourcraft&theme=dark&hide_border=true&include_all_commits=true&count_private=true&layout=compact)
 ### Contact Me
 [![Twitter-logo](photos/Twitter-icon.svg)](https://twitter.com/thefourcraft)
 [![GitHub-logo](photos/Github-icon.svg)](https://github.com/thefourcraft)

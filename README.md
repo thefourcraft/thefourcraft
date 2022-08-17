@@ -35,17 +35,16 @@ All our team does it willingly, our goal is to cover as many games as possible a
 [![Reddit-logo](photos/Reddit-icon.svg)](https://www.reddit.com/r/IMS_Network/)
 [![Email-logo](photos/Email-icon.svg)](mailto:support@ims-network.net?subject=[GitHub])
 ### SOS Music (side_or_slide)
-Founded in 2018, The Place Ware I Show My Music Skills & Knowledge
-> On the side_or_slide youtube Chanel, you can find amazing high-quality music🎧\
+Founded in 2018, The Place Where I Show My Music Skills & Knowledge
+>On the side_or_slide YouTube Chanel, you can find amazing high-quality music🎧\
 we make psytrance and progressive music🎚️\
-Every upload we continue doing the best to improve and grow our community ✨\
+Every upload we continue doing our best to improve and grow our community ✨\
 Also, we try to make the experience as simple as possible😌\
 We want to create a world of peace, love, and joy ❤️\
 So be ready for the best adventure of your life 🤩\
 live Before You Die🥂\
-Our music is on our youtube channel please don't copy 😇\
-If anyone that will find his own music in our video should check the description 🧐
-Have a nice day‼️
+Our music is on our YouTube channel please don't copy 😇\
+If anyone that will find his own music in our video should check the description 🧐 Have a nice day‼️\
 #### Contact
 [![Website-logo](photos/Website-icon.svg)](https://yousideorslide7715.wixsite.com/website)
 [![Twitter-logo](photos/Twitter-icon.svg)](https://twitter.com/or_slide)

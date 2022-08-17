@@ -1,0 +1,20 @@
+@font-face {
+   font-family: 'HE 5';
+   font-display: swap;
+   src: url('HE 5/font.ttf');
+}
+@font-face {
+   font-family: 'HE 4';
+   font-display: swap;
+   src: url('HE 4/font.ttf');
+}
+@font-face {
+   font-family: 'HE 6';
+   font-display: swap;
+   src: url('HE 6/font.ttf');
+}
+@font-face {
+   font-family: 'HE 1';
+   font-display: swap;
+   src: url('HE 1/font.ttf');
+}

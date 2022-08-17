@@ -59,8 +59,8 @@ Have a nice day‼️
 [![Email-logo](photos/Email-icon.svg)](mailto:you.side.or.slide.7715@gmail.com?subject=[GitHub])
 ## Translation Projects - Hebrew
 ### What?
-I dadacate my time to translate serveis that help me and people to my language hebrew.\
-This Helps A Lot of people finding information and discovering new things.
+I dedicate my time to translating services that help me and people in my language Hebrew.\
+This Helps A Lot of people find information and discover new things.
 ### Projects
 #### ![Lackperms-logo](photos/LackPerms.svg)
 LuckPerms is a permissions plugin for Minecraft servers (Bukkit/Spigot, BungeeCord & more). It allows server admins to control what features players can use by creating groups and assigning permissions.

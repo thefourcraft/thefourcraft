@@ -40,7 +40,7 @@ alt="Typing SVG" />
     src="photos/Email-icon.svg"/>
     </a>
 </p>
-Icons by <a target="_blank" href="https://icons8.com">Icons8</a>
+<b>Note:</b> Icons by <a target="_blank" href="https://icons8.com">Icons8</a>
 
 <div align="center">
 <h3>Frontend</h3> 
@@ -81,32 +81,6 @@ Icons by <a target="_blank" href="https://icons8.com">Icons8</a>
 </td></tr></table>  
 
 <br/>
-
-<div align="center">
-<h2>💻 GitHub Profile Stats</h2>
-</div>
-
-  <br/>
-    <a href="https://github.com/anuraghazra/github-readme-stats">
-    <img alt="thefourcraft Github Stats" 
-    src="https://streak-stats.demolab.com?user=thefourcraft&theme=dark&hide_border=true&date_format=j%2Fn%5B%2FY%5D&fire=DD2727" 
-    height="192px" width= "3000px"/>
-    </a>
-    <div align="center">
-        <a href="https://github.com/anuraghazra/github-readme-stats">
-        <img alt="thefourcraft Score" 
-        src="https://github-readme-stats.vercel.app/api?username=thefourCraft&theme=dark&hide_border=true&include_all_commits=true&count_private=true" 
-        height="192px"/>
-        </a>
-        <a href="https://github.com/anuraghazra/github-readme-stats">
-        <img alt="DenverCoder1's Top Languages" 
-        src="https://github-readme-stats.vercel.app/api/top-langs/?username=thefourcraft&theme=dark&hide_border=true&include_all_commits=true&count_private=true" 
-        height="192px"/>
-        </a>
-    </div>
-  <br/>
-<b>Note:</b> Top languages are only a metric of the languages my public code consists of and doesn't reflect experience or skill level.
-
 
 ## My Work
 ### IMS - Network
@@ -151,8 +125,89 @@ If anyone that will find his own music in our video should check the description
 [![Fandom-logo](photos/Fandom-icon.svg)](https://trance.fandom.com/wiki/Side_or_slide)
 [![Email-logo](photos/Email-icon.svg)](mailto:you.side.or.slide.7715@gmail.com?subject=[GitHub])
 
-## Read It in your Language
-[![Hebrew](photos/Israel.svg)](README_he.md)
-[![Arbic](photos/uae.svg)]()
-[![Russian](photos/russia.svg)]()
-[![Ukraine](photos/Ukraine.svg)]()
+<!-- https://github.com/anuraghazra/github-readme-stats -->
+<div align="center">
+<h2>💻 GitHub Profile Stats</h2>
+</div>
+
+  <br/>
+    <a href="https://github.com/anuraghazra/github-readme-stats">
+    <img alt="thefourcraft Github Stats" 
+    src="https://streak-stats.demolab.com?user=thefourcraft&theme=dark&hide_border=true&date_format=j%2Fn%5B%2FY%5D&fire=DD2727" 
+    height="192px" width= "3000px"/>
+    </a>
+    <div align="center">
+        <a href="https://github.com/anuraghazra/github-readme-stats">
+        <img alt="thefourcraft Score" 
+        src="https://github-readme-stats.vercel.app/api?username=thefourCraft&theme=dark&hide_border=true&include_all_commits=true&count_private=true" 
+        height="192px"/>
+        </a>
+        <a href="https://github.com/anuraghazra/github-readme-stats">
+        <img alt="DenverCoder1's Top Languages" 
+        src="https://github-readme-stats.vercel.app/api/top-langs/?username=thefourcraft&theme=dark&hide_border=true&include_all_commits=true&count_private=true" 
+        height="192px"/>
+        </a>
+    </div>
+  <br/>
+<b>Note:</b> Top languages are only a metric of the languages my public code consists of and doesn't reflect experience or skill level.
+<br><br>
+<div align="center">
+<h2>📕 Top projects I've contributed to</h2></div>
+<p align="center">
+    <a href="https://github.com/anuraghazra/github-readme-stats">
+    <img width="278" 
+    src="https://denvercoder1-github-readme-stats.vercel.app/api/pin/?username=ims-network&repo=Playit.gg-Docs&&theme=dark&hide_border=true" 
+    alt="Github-readme-stats">
+    </a>
+    <a href="https://github.com/anuraghazra/github-readme-stats">
+    <img width="278" 
+    src="https://denvercoder1-github-readme-stats.vercel.app/api/pin/?username=ims-network&repo=ims-jobs&&theme=dark&hide_border=true" 
+    alt="Github-readme-stats">
+    </a>
+    <a href="https://github.com/anuraghazra/github-readme-stats">
+    <img width="278" 
+    src="https://denvercoder1-github-readme-stats.vercel.app/api/pin/?username=ims-network&repo=Alfine&&theme=dark&hide_border=true" 
+    alt="Github-readme-stats">
+    </a>
+    <a href="https://github.com/anuraghazra/github-readme-stats">
+    <img width="278" 
+    src="https://denvercoder1-github-readme-stats.vercel.app/api/pin/?username=ims-network&repo=Andrada-City&&theme=dark&hide_border=true" 
+    alt="Github-readme-stats">
+    </a>
+    <a href="https://github.com/anuraghazra/github-readme-stats">
+    <img width="278" 
+    src="https://denvercoder1-github-readme-stats.vercel.app/api/pin/?username=ims-network&repo=ims-legal&&theme=dark&hide_border=true" 
+    alt="Github-readme-stats">
+    </a>
+    <a href="https://github.com/anuraghazra/github-readme-stats">
+    <img width="278" 
+    src="https://denvercoder1-github-readme-stats.vercel.app/api/pin/?username=LoneDev6&repo=Wiki-ItemsAdder&&theme=dark&hide_border=true" 
+    alt="Github-readme-stats">
+    </a>
+</p>
+
+<!-- https://github.com/ashutosh00710/github-readme-activity-graph -->
+
+<a href="https://github.com/ashutosh00710/github-readme-activity-graph">
+<img alt="My Activity Graph" 
+src="https://denvercoder1-activity-graph.herokuapp.com/graph/?username=thefourcraft&bg_color=161616&color=d3d3d3&line=e8eaea&point=5b5959&hide_border=true"/></a>
+
+<div align="center">
+<h2>Read It in your Language</h2>
+    <a href="README_he.md">
+    <img alt="Hebrew" title="Hebrew" 
+    src="photos/Israel.svg"/>
+    </a>
+    <a href="README_ar.md">
+    <img alt="Arbic" title="Arbic" 
+    src="photos/uae.svg"/>
+    </a>
+    <a href="README_ru.md">
+    <img alt="Russian" title="Russian #StopTheWar" 
+    src="photos/russia.svg"/>
+    </a>
+    <a href="README_au.md">
+    <img alt="Ukraine" title="Ukraine" 
+    src="photos/Ukraine.svg"/>
+    </a>
+</div>

@@ -80,22 +80,33 @@ Icons by <a target="_blank" href="https://icons8.com">Icons8</a>
 
 </td></tr></table>  
 
-<br/>  
+<br/>
+
 <div align="center">
-<h2>Git-Hub Stats</h2>
-
-<img src= "https://streak-stats.demolab.com?user=thefourcraft&theme=dark&hide_border=true&date_format=j%2Fn%5B%2FY%5D&fire=DD2727)](https://git.io/streak-stats" 
-align="center" style="width: 50%" />
-
-<br/>
-
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=thefourcraft&theme=dark&hide_border=true&include_all_commits=true&count_private=true" align="center" style="width: 50%" />
-
-<br/>
-
-<img src= "https://github-readme-stats.vercel.app/api?username=thefourCraft&theme=dark&hide_border=true&include_all_commits=true&count_private=true" 
-align="center" style="width: 50%" />
+<h2>💻 GitHub Profile Stats</h2>
 </div>
+
+  <br/>
+    <a href="https://github.com/anuraghazra/github-readme-stats">
+    <img alt="thefourcraft Github Stats" 
+    src="https://streak-stats.demolab.com?user=thefourcraft&theme=dark&hide_border=true&date_format=j%2Fn%5B%2FY%5D&fire=DD2727" 
+    height="192px" width= "3000px"/>
+    </a>
+    <div align="center">
+        <a href="https://github.com/anuraghazra/github-readme-stats">
+        <img alt="thefourcraft Score" 
+        src="https://github-readme-stats.vercel.app/api?username=thefourCraft&theme=dark&hide_border=true&include_all_commits=true&count_private=true" 
+        height="192px"/>
+        </a>
+        <a href="https://github.com/anuraghazra/github-readme-stats">
+        <img alt="DenverCoder1's Top Languages" 
+        src="https://github-readme-stats.vercel.app/api/top-langs/?username=thefourcraft&theme=dark&hide_border=true&include_all_commits=true&count_private=true" 
+        height="192px"/>
+        </a>
+    </div>
+  <br/>
+<b>Note:</b> Top languages are only a metric of the languages my public code consists of and doesn't reflect experience or skill level.
+
 
 ## My Work
 ### IMS - Network

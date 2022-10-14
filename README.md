@@ -85,21 +85,21 @@ Icons by <a target="_blank" href="https://icons8.com">Icons8</a>
 <h2>Git-Hub Stats</h2>
 
 <img src= "https://streak-stats.demolab.com?user=thefourcraft&theme=dark&hide_border=true&date_format=j%2Fn%5B%2FY%5D&fire=DD2727)](https://git.io/streak-stats" 
-align="center" style="width: 100%" />
+align="center" style="width: 50%" />
 
 <br/>
 
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=thefourcraft&theme=dark&hide_border=true&include_all_commits=true&count_private=true" align="center" style="width: 80%" />
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=thefourcraft&theme=dark&hide_border=true&include_all_commits=true&count_private=true" align="center" style="width: 50%" />
 
 <br/>
 
 <img src= "https://github-readme-stats.vercel.app/api?username=thefourCraft&theme=dark&hide_border=true&include_all_commits=true&count_private=true" 
-align="center" style="width: 100%" />
+align="center" style="width: 50%" />
 </div>
 
 ## My Work
 ### IMS - Network
-Founded In 2020, With A Simple Goal To Create Game Server For Everyone For Free
+Founded In 2020, With A Simple Goal To Create A Reevultny Gaming community, With A Focus On Privacy And Security.
 > We are IMS - Network. 👋\
 The Most Advanced Gaming Community In Israel 🌐\
 We are a group of people who invest time in improving our servers and the Israeli gaming community. ✌️\

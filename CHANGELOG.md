@@ -1,3 +1,20 @@
+# Virsion 1.5
+
+- Fixed Typos (report if you see any) ✔
+
+## Blogs v1.0.8
+- New CSS 🆕
+- New Layout 🆕
+- CSS Improvments 💡
+- Increased Bandwith To ∞ 💡
+- Increased Caching Capacity To ∞ 💡
+- Better Font 💡
+- Improved SEO ⚙
+- Removed Old CSS ⛔
+- Removed Old Buggy Serch ⛔
+- Preparations For New On Site Index ⚙
+
+
 # Virsion 1.4
 
 - Removed Scroll Animation on the Privacy Policy Page ⛔
@@ -11,7 +28,7 @@
 - Updaed Information on Contact Page 💡
 - Increased Bandwith To ∞ 💡
 - Increased Caching Capacity To ∞ 💡
-- Pepertions For IMS - Analytics Intagration ⚙
+- Preparations For IMS - Analytics Intagration ⚙
 
 
 

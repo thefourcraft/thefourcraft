@@ -39,9 +39,8 @@ alt="Typing SVG" />
     <img alt="Email" title="Email" 
     src="photos/Email-icon.svg"/>
     </a>
-    <b>Note:</b> Icons by <a target="_blank" href="https://icons8.com">Icons8</a>
 </p>
-
+<b>Note:</b> Icons by <a target="_blank" href="https://icons8.com">Icons8</a>
 
 <div align="center">
 <h3>Frontend</h3> 

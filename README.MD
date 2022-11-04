@@ -3,7 +3,8 @@ This repostory conatins the sursce code for my [website](https://www.thefourcraf
 Here you can see the "backend" Code For My Website 🙂\
 If you wish to see my blog beckned, [CLICK HERE](https://github.com/theforucraft/DF-Blog)
 ## Updates
-All The Information Is Avilible In The [CHANGELOG.md](CHANGELOG.md)
+All The Information Is Avilible In The [CHANGELOG.md](CHANGELOG.md)\
+V2 OUT 🎉
 
 ## Legal
 ALL The Rights Are Reserved To @thefourcraft, you are not allowed to share/copy information form my website.\

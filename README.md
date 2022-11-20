@@ -148,7 +148,7 @@ If anyone that will find his own music in our video should check the description
         height="192px"/>
         </a>
         <img
-        src="https://github-readme-stats.vercel.app/api/wakatime?username=thefourCraft&layout=compact&theme=dark" />
+        src="https://github-readme-stats.vercel.app/api/wakatime?         username=thefourCraft&layout=compact&theme=dark&hide_border=true&include_all_commits=true&count_private=true" />
     </div>
   <br/>
 <b>Note:</b> Top languages are only a metric of the languages my public code consists of and doesn't reflect experience or skill level.

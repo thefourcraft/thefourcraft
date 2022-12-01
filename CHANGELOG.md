@@ -1,3 +1,11 @@
+# Version 2.1
+- Updated Page [resume.html](resume.html)
+- Updated Page [projects.html](projects.html)
+- PAW Support 🆕
+- Fixed Typos On the Projects Page 💡
+- Improved Global CDN 💡
+- Removed Unused CSS ⛔
+
 # Version 2
 **THE BIG NETWORK UPDATE 🎉**
 - All New CSS 🆕

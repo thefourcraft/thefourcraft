@@ -1,121 +1,176 @@
-# שלום 👋
-קראו את הדף הזה בשפה שלכם\
-[![English](photos/Usa.svg)](README.md)[![Arbic](photos/uae.svg)]()[![Russian](photos/russia.svg)]()[![Ukraine](photos/Ukraine.svg)]()
-## אודות
-היי, אני דוד בן 17\
-אני דייג'י, מפיק מוזיקה, מתרגם, מתכנת ועוד המון\
-אני מנהל ומייסד שתי חברות [side_or_slide music](https://www.youtube.com/c/sideorslideMusic) & [IMS - Network](https://israelmincraftml.wixsite.com/ims-network)
-### סטאטוס ב-Git-Hub
-![](https://github-readme-stats.vercel.app/api?username=thefourCraft&theme=dark&hide_border=true&include_all_commits=true&count_private=false)<br/>
-![](https://github-readme-streak-stats.herokuapp.com?user=thefourCraft&theme=dark&hide_border=true&date_format=n%2Fj%5B%2FY%5D&background=000000&ring=DD2727&fire=FFF915&sideNums=42DD05)<br/>
-![](https://github-readme-stats.vercel.app/api/top-langs/?username=thefourCraft&theme=dark&hide_border=true&include_all_commits=true&count_private=false&layout=compact)
-### צרו קשר איתי
-[![לוגו טוויטר](photos/Twitter-icon.svg)](https://twitter.com/thefourcraft)
-[![לוגו גיטהאב](photos/Github-icon.svg)](https://github.com/thefourcraft)
-[![לוגו אינסטנגרם](photos/Instagram-icon.svg)](https://www.instagram.com/david_furman/)
-[![לוגו פייסבוק](photos/Facebook-icon.svg)](https://www.facebook.com/david2004furman)
-[![לוגו אימייל](photos/Email-icon.svg)](mailto:coo@ims-network.net?subject=[GitHub])
-## העבודה שלי
-### חברת IMS - Network
-נוסדה בשנת 2020, במטרה פשוטה ליצור שרתי משחקים לכולם בחינם
-> שלום, אנחנו IMS - Network. 👋\
-אנחנו קבוצה של אנשים שמשקיעה זמן בשיפור השרתים שלנו ובקהילת המשחקים הישראלית. ✌️\
-אנחנו בונים, מפתחים, ומתחזקים שרתי משחקים בחינם לכולם.😇\
-כל הצוות שלנו עושה זאת ברצון, המטרה שלנו היא לכסות כמה שיותר משחקים ולדאוג לאיכות ובטיחות המשחק הטובה ביותר. 🤩\
-#### צרו קשר
-[![לוגו אתר](photos/Website-icon.svg)](https://israelmincraftml.wixsite.com/ims-network)
-[![לוגו טוויטר](photos/Twitter-icon.svg)](https://twitter.com/network_ims)
-[![לוגו דיסקורד](photos/Discord-icon.svg)](https://discord.ims-network.net)
-[![לוגו יוטיוב](photos/Play-icon.svg)](https://www.youtube.com/channel/UC2k502VERIriL01UtnpE_wQ)
-[![לוגו גיטהאב](photos/Github-icon.svg)](https://github.com/IMS-Network)
-[![לוגו אינסטנגרם](photos/Instagram-icon.svg)](https://www.instagram.com/ims__network/)
-[![לוגו פייסבוק](photos/Facebook-icon.svg)](https://www.facebook.com/IMSNetworkOfficial)
-[![לוגו טיקטוק](photos/Tiktok-icon.svg)](https://www.tiktok.com/@ims_network)
-[![לוגו רדיט](photos/Reddit-icon.svg)](https://www.reddit.com/r/IMS_Network/)
-[![לוגו אימייל](photos/Email-icon.svg)](mailto:support@ims-network.net?subject=[GitHub])
-### מוזיקה SOS Music (side_or_slide)
-נוסדה בשנת 2018, המקום שבו אני מראה את כישורי המוזיקה והידע שלי\
->בערוץ היוטיוב - side_or_slide, תוכלו  למצוא מוזיקה מדהימה באיכות הכי גבוהה שאפשר🎧\
-סטייל המוזיקה שלנו הוא psytrance , progressive🎚️\
-בכל העלאה אנו ממשיכים לעשות את המיטב כדי לשפר ולגדל את הקהילה שלנו ✨\
-כמו כן, אנו מנסים להפוך את החוויה לפשוטה ככל האפשר😌\
-אנחנו בעד ליצור עולם של שלום, אהבה ושמחה ❤️\
-אז התכוננו  להרפתקה הטובה ביותר בחייכם 🤩\
-זכרו "live Before You Die"🥂\
-אם מישהו מוצא מוזיקה שלו בסרטון שלנו, נא לבדוק את התיאור 🧐\
-המשך יום נעים‼ ️\
-#### צרו קשר
-[![לוגו אתר](photos/Website-icon.svg)](https://yousideorslide7715.wixsite.com/website)
-[![לוגו טוויטר](photos/Twitter-icon.svg)](https://twitter.com/or_slide)
-[![לוגו יוטיוב](photos/Play-icon.svg)](https://www.youtube.com/channel/UCEGkCJFSotCr4F4sMmshHsA)
-[![לוגו סאונד כלאוד](photos/Soundcloud-icon.svg)](https://soundcloud.com/side_or-slide)
-[![לוגו מיקס כלאוד](photos/Mixcloud-icon.svg)](https://www.mixcloud.com/side_or_slide/)
-[![לוגו אינסטנגרם](photos/Instagram-icon.svg)](https://www.instagram.com/side_or_slide/)
-[![לוגו פייסבוק](photos/Facebook-icon.svg)](https://www.facebook.com/sideorslide)
-[![לוגו טיקטוק](photos/Tiktok-icon.svg)](https://www.tiktok.com/@side_or_slide)
-[![לוגו פאנדום](photos/Fandom-icon.svg)](https://trance.fandom.com/wiki/Side_or_slide)
-[![לוגו אימייל](photos/Email-icon.svg)](mailto:you.side.or.slide.7715@gmail.com?subject=[GitHub])
-## פרוייקטי תרגום לעברית
-### מה?
-אני מקדיש את זמני לתרגום שירותים שעוזרים לי ולאנשים אחרים (מאנגלית לעברית).\ 
-זה עוזר להרבה אנשים למצוא מידע ולגלות דברים חדשים.
-### פרוייקטים
-#### ![לוגו לאקפרמס](photos/LackPerms.svg)
-הפלאגין LuckPerms הוא תוסף הרשאות עבור שרתי Minecraft (Bukkit/Spigot, BungeeCord ועוד). זה מאפשר למנהלי שרת לשלוט באילו תכונות שחקנים יכולים להשתמש על ידי יצירת קבוצות והקצאת הרשאות.
-##### קישורים
-[![לוגו אתר](photos/Website-icon.svg)](https://luckperms.net/)
-[![לוגו דיסקורד](photos/Discord-icon.svg)](https://discord.gg/luckperms)
-[![לוגו גיטהאב](photos/Github-icon.svg)](https://github.com/LuckPerms/LuckPerms)
-##### GitHub Info
-![כרטיס מידע](https://github-readme-stats.vercel.app/api/pin/?username=LuckPerms&repo=LuckPerms&theme=dark)
-![כרטיס מידע](https://github-readme-stats.vercel.app/api/pin/?username=LuckPerms&repo=LuckPermsWeb&theme=dark)
-#### ![Minecraft Java Edition](photos/Minecraft-java-logo.svg)
-The original version of Minecraft! Java Edition has cross-platform play between Windows, Linux and macOS, and also supports user-created skins and mods.
-##### Links
-[![לוגו אתר](photos/Website-icon.svg)](https://www.minecraft.net/en-us/store/minecraft-java-edition)
-[![לוגו טוויטר](photos/Twitter-icon.svg)](https://twitter.com/Minecraft)
-[![לוגו דיסקורד](photos/Discord-icon.svg)](https://discord.com/invite/minecraft)
-[![לוגו יוטיוב](photos/Play-icon.svg)](https://www.youtube.com/minecraft)
-[![לוגו אינסטנגרם](photos/Instagram-icon.svg)](https://www.instagram.com/minecraft/)
-[![לוגו פייסבוק](photos/Facebook-icon.svg)](https://www.facebook.com/minecraft/)
-[![לוגו טיקטוק](photos/Tiktok-icon.svg)](https://www.tiktok.com/@ims_network)
-[![לוגו רדיט](photos/Reddit-icon.svg)](https://www.reddit.com/r/Minecraft/)
-#### Minecraft Windows 10 & Bedrock
-Explore infinite worlds and build everything from the simplest of homes to the grandest of castles. Create, explore, and survive alone or with friends on mobile, PC, and console devices.
-##### Links
-[![לוגו אתר](photos/Website-icon.svg)](https://www.minecraft.net/en-us/store/minecraft-windows10)
-[![לוגו טוויטר](photos/Twitter-icon.svg)](https://twitter.com/Minecraft)
-[![לוגו דיסקורד](photos/Discord-icon.svg)](https://discord.com/invite/minecraft)
-[![לוגו יוטיוב](photos/Play-icon.svg)](https://www.youtube.com/minecraft)
-[![לוגו אינסטנגרם](photos/Instagram-icon.svg)](https://www.instagram.com/minecraft/)
-[![לוגו פייסבוק](photos/Facebook-icon.svg)](https://www.facebook.com/minecraft/)
-[![לוגו טיקטוק](photos/Tiktok-icon.svg)](https://www.tiktok.com/@ims_network)
-[![לוגו רדיט](photos/Reddit-icon.svg)](https://www.reddit.com/r/Minecraft/)
-#### OBS Studio
-Free and open source software for video recording and live streaming.
-##### Links
-[![לוגו אתר](photos/Website-icon.svg)](https://obsproject.com/)
-[![לוגו טוויטר](photos/Twitter-icon.svg)](https://twitter.com/OBSProject)
-[![לוגו דיסקורד](photos/Discord-icon.svg)](https://obsproject.com/discord)
-[![לוגו פייסבוק](photos/Facebook-icon.svg)](https://facebook.com/OpenBroadcasterSoftware)
-[![לוגו גיטהאב](photos/Github-icon.svg)](https://github.com/obsproject/obs-studio)
-##### GitHub Info
-![כרטיס מידע](https://github-readme-stats.vercel.app/api/pin/?username=obsproject&repo=obs-studio&theme=dark)
-![כרטיס מידע](https://github-readme-stats.vercel.app/api/pin/?username=obsproject&repo=obs-crowdin-sync&theme=dark)
-#### Lunacy
-Free design software that keeps your flow with AI tools and built-in graphics. Lunacy works fast and smoothly. It’s not a sluggish browser wrapped in Electron and pretending to be an app. Share a documents with your team and edit it together. Side by side. In real-time. Or watch what others are doing, exchange comments, and get feedback. We have a great team of Lunacy enthusiasts helping us with localization of the app interface. Big thanks to them for helping other users who are not comfortable with English.
-##### Links
-[![לוגו אתר](photos/Website-icon.svg)](https://icons8.com/lunacy)
-[![לוגו טוויטר](photos/Twitter-icon.svg)](https://twitter.com/Icons8_Lunacy)
-[![לוגו יוטיוב](photos/Play-icon.svg)](https://www.youtube.com/channel/UCRXYx6Qg7kgH0EAqa-Gl0HA)
-[![לוגו אינסטנגרם](photos/Instagram-icon.svg)](https://www.instagram.com/icons8)
-[![לוגו פייסבוק](photos/Facebook-icon.svg)](https://www.facebook.com/Icons8)
+<!-- Welcome Text -->
+<div align="center"><h1>שלום
+<img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="28">
+</h1>
+
+<!-- Typing SVG by DenverCoder1 - https://github.com/DenverCoder1/readme-typing-svg -->
+<a href="https://git.io/typing-svg">
+<img src="https://readme-typing-svg.herokuapp.com?font=M+PLUS+Rounded+1c&pause=2000&color=F7F7F7&center=true&vCenter=true&width=435&lines=Self+Thought+DevOps+And+QA+Engineer;Open+Source+Advocate;Considered+Entrepreneur;Zero+Trust+Network+Architecture+Fan;Past+Music+Producer;OSS+Contributor;Community+Manager;Israeli;Photographer;Local+Guides+Contributor;Translator" 
+alt="Typing SVG" />
+</a>
+</div>
+
+<!-- Contact Me -->
+<p dir="rtl" align="center">
+    <a href="https://twitter.com/thefourcraft">
+    <img alt="טוויטר" title="טוויטר" 
+    src="photos/Twitter-icon.svg"/>
+    </a>
+    <a href="https://www.instagram.com/david_furman/">
+    <img alt="אינסטגרם" title="אינסטגרם" 
+    src="photos/Instagram-icon.svg"/>
+    </a>
+    <a href="https://www.linkedin.com/in/david-furman/t">
+    <img alt="לינקדאין" title="לינקדאין" 
+    src="photos/Linkedin-Icon.svg"/>
+    <a href="https://thefourcraft.com">
+    <img alt="האתר שלי" title="האתר שלי" 
+    src="photos/Website-big-Icon.svg"/>
+    </a>
+    <a href="https://github.com/thefourcraft">
+    <img alt="גיטהאב" title="גיטהאב" 
+    src="photos/Github-icon.svg"/>
+    </a>
+    <a href="https://www.facebook.com/david2004furman">
+    <img alt="פייסבוק" title="פייסבוק" 
+    src="photos/Facebook-icon.svg"/>
+    </a>
+    <a href="mailto:me@thefourcraft.com?subject=[GitHub]">
+    <img alt="אימייל" title="אימייל" 
+    src="photos/Email-icon.svg"/>
+    </a>
+</p>
+
+> **Note**
+<a target="_blank" href="https://icons8.com">Icons8</a>אייקונים מתוך
+
+<div align="center">
+<h3>Frontend</h3> 
+<a href="https://getbootstrap.com/docs/3.4/javascript/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/bootstrap-plain.svg" alt="Bootstrap" height="50" /></a>  
+<a href="https://en.wikipedia.org/wiki/HTML5" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/html5-original-wordmark.svg" alt="HTML5" height="50" /></a>  
+<a href="https://docs.microsoft.com/en-us/dotnet/csharp/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/csharp-original.svg" alt="C#" height="50" /></a>  
+<a href="https://go.dev/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/go-original.svg" alt="Go" height="50" /></a>  
+<a href="https://www.w3schools.com/css/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/css3-original-wordmark.svg" alt="CSS3" height="50" /></a>  
+<a href="https://www.php.net/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/php-original.svg" alt="PHP" height="50" /></a>  
+<a href="https://laravel.com/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/laravel-plain-wordmark.svg" alt="Laravel" height="50" /></a>  
+<a href="https://www.javascript.com/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/javascript-original.svg" alt="JavaScript" height="50" /></a>  
+</div>
+
+</td><td valign="top" width="33%">
 
 
-* [Stay Hydrated](https://www.gndzkrkc.com/stayhydrated/)
-* [Heads-up Notifications](http://simen.codes/app/android-5-headsup-notifications/)
-* [Lunacy](https://icons8.com/lunacy)
-* [Deep Rock Galactic](https://store.steampowered.com/app/548430/Deep_Rock_Galactic/)- 30% Done (5/16/2022)
-* [IMS - Network Minecraft (My Own)](https://israelmincraftml.wixsite.com/ims-network)
-* [ItemsAdder(A Minecraft Plugin)](https://spigot.devs.beer/itemsadder/)
-* [Be My Eyes iOS](https://www.bemyeyes.com/)
+<div align="center">
+<h3>Backend</h3>
+<a href="https://www.php.net/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/php-original.svg" alt="PHP" height="50" /></a>  
+<a href="https://www.mongodb.com/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/mongodb-original-wordmark.svg" alt="MongoDB" height="50" /></a>  
+<a href="https://www.nginx.com/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/nginx-original.svg" alt="Nginx" height="50" /></a>   
+<a href="https://github.com/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/git-scm-icon.svg" alt="Git" height="50" /></a>  
+<a href="https://nodejs.org/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/nodejs-original-wordmark.svg" alt="Node.js" height="50" /></a>  
+<a href="https://go.dev/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/go-original.svg" alt="Go" height="50" /></a>  
+<a href="https://www.mysql.com/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/mysql-original-wordmark.svg" alt="MySQL" height="50" /></a>  
+<a href="https://www.postgresql.org/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/postgresql-original-wordmark.svg" alt="PostgreSQL" height="50" /></a>  
+</div>
+
+</td><td valign="top" width="33%">
+
+
+<div align="center"> 
+<h3>DevOps</h3>  
+<a href="https://www.linux.org/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/linux-original.svg" alt="Linux" height="50" /></a>
+<a href="https://www.docker.com/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/docker-original-wordmark.svg" alt="Docker" height="50" /></a>  
+</div>
+
+</td></tr></table>  
+
+<!-- https://github.com/anuraghazra/github-readme-stats -->
+<div align="center">
+<h2>💻 סטטיסטיקות גיטהאב</h2>
+</div>
+
+  <br/>
+    <a href="https://github.com/anuraghazra/github-readme-stats">
+    <img alt="thefourcraft Github Stats" 
+    src="https://streak-stats.demolab.com?user=thefourcraft&theme=dark&hide_border=true&date_format=j%2Fn%5B%2FY%5D&fire=DD2727" 
+    height="192px" width= "3000px"/>
+    </a>
+    <div align="center">
+        <a href="https://github.com/anuraghazra/github-readme-stats">
+        <img alt="thefourcraft Score" 
+        src="https://github-readme-stats.vercel.app/api?username=thefourCraft&theme=dark&hide_border=true&include_all_commits=true&count_private=true" 
+        height="192px"/>
+        </a>
+        <a href="https://github.com/anuraghazra/github-readme-stats">
+        <img alt="thefourCraft's Top Languages" 
+        src="https://github-readme-stats.vercel.app/api/top-langs/?username=thefourcraft&theme=dark&hide_border=true&include_all_commits=true&count_private=true" 
+        height="192px"/>
+        </a>
+        <img
+        src="https://github-readme-stats.vercel.app/api/wakatime?username=thefourCraft&layout=compact&theme=dark&hide_border=true" />
+    </div>
+  <br/>
+  
+> **Note**\
+השפות המובילות הן רק מדד מהשפות שמהן מורכב הקוד הציבורי שלי ואינן משקפות ניסיון או רמת מיומנות.\
+סטטיסטיקות "ווקאטיים" הן תוספת חדשה מאז 20 בנובמבר 2022 [למידע נוסף](https://wakatime.com/@thefourCraft)
+
+<br><br>
+<div align="center">
+<h2>📕 פרויקטים מובילים שתרמתי להם</h2></div>
+<p align="center">
+    <a href="https://github.com/anuraghazra/github-readme-stats">
+    <img width="278" 
+    src="https://denvercoder1-github-readme-stats.vercel.app/api/pin/?username=ims-network&repo=Playit.gg-Docs&&theme=dark&hide_border=true" 
+    alt="Github-readme-stats">
+    </a>
+    <a href="https://github.com/anuraghazra/github-readme-stats">
+    <img width="278" 
+    src="https://denvercoder1-github-readme-stats.vercel.app/api/pin/?username=ims-network&repo=ims-jobs&&theme=dark&hide_border=true" 
+    alt="Github-readme-stats">
+    </a>
+    <a href="https://github.com/anuraghazra/github-readme-stats">
+    <img width="278" 
+    src="https://denvercoder1-github-readme-stats.vercel.app/api/pin/?username=ims-network&repo=Alfine&&theme=dark&hide_border=true" 
+    alt="Github-readme-stats">
+    </a>
+    <a href="https://github.com/anuraghazra/github-readme-stats">
+    <img width="278" 
+    src="https://denvercoder1-github-readme-stats.vercel.app/api/pin/?username=ims-network&repo=Andrada-City&&theme=dark&hide_border=true" 
+    alt="Github-readme-stats">
+    </a>
+    <a href="https://github.com/anuraghazra/github-readme-stats">
+    <img width="278" 
+    src="https://denvercoder1-github-readme-stats.vercel.app/api/pin/?username=ims-network&repo=ims-legal&&theme=dark&hide_border=true" 
+    alt="Github-readme-stats">
+    </a>
+    <a href="https://github.com/anuraghazra/github-readme-stats">
+    <img width="278" 
+    src="https://denvercoder1-github-readme-stats.vercel.app/api/pin/?username=LoneDev6&repo=Wiki-ItemsAdder&&theme=dark&hide_border=true" 
+    alt="Github-readme-stats">
+    </a>
+</p>
+
+<!-- https://github.com/ashutosh00710/github-readme-activity-graph -->
+
+<a href="https://github.com/ashutosh00710/github-readme-activity-graph">
+<img alt="My Activity Graph" 
+src="https://activity-graph.herokuapp.com/graph?username=thefourcraft&bg_color=161616&color=d3d3d3&line=e8eaea&point=5b5959&hide_border=true"/></a>
+
+<div align="center">
+<h2>Read It in your Language</h2>
+    <a href="README_he.md">
+    <img alt="Hebrew" title="Hebrew" 
+    src="photos/Israel.svg"/>
+    </a>
+    <a href="README_ar.md">
+    <img alt="Arbic" title="Arbic" 
+    src="photos/uae.svg"/>
+    </a>
+    <a href="README_ru.md">
+    <img alt="Russian" title="Russian #StopTheWar" 
+    src="photos/russia.svg"/>
+    </a>
+    <a href="README_au.md">
+    <img alt="Ukraine" title="Ukraine" 
+    src="photos/Ukraine.svg"/>
+    </a>
+</div>

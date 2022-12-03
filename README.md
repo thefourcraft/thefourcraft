@@ -5,7 +5,7 @@
 
 <!-- Typing SVG by DenverCoder1 - https://github.com/DenverCoder1/readme-typing-svg -->
 <a href="https://git.io/typing-svg">
-<img src="https://readme-typing-svg.herokuapp.com?font=M+PLUS+Rounded+1c&pause=2000&color=F7F7F7&center=true&vCenter=true&width=435&lines=A+Beginner+DevOps+Engineer;Music+Producer;OSS+Contributor;Community+Manager;israeli;Photographer+;Local+Guides+Contributor;Translator+" 
+<img src="https://readme-typing-svg.herokuapp.com?font=M+PLUS+Rounded+1c&pause=2000&color=F7F7F7&center=true&vCenter=true&width=435&lines=Self+Thought+DevOps+And+QA+Engineer;Open+Source+Advocate;Considered+Entrepreneur;Zero+Trust+Network+Architecture+Fan;Past+Music+Producer;OSS+Contributor;Community+Manager;Israeli;Photographer;Local+Guides+Contributor;Translator" 
 alt="Typing SVG" />
 </a>
 </div>
@@ -80,52 +80,7 @@ Icons by <a target="_blank" href="https://icons8.com">Icons8</a>
 <a href="https://www.docker.com/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/docker-original-wordmark.svg" alt="Docker" height="50" /></a>  
 </div>
 
-</td></tr></table>  
-
-<br/>
-
-## My Work
-### IMS - Network
-Founded In 2020, With A Simple Goal To Create A Reevultny Gaming community, With A Focus On Privacy And Security.
-> We are IMS - Network. 👋\
-The Most Advanced Gaming Community In Israel 🌐\
-We are a group of people who invest time in improving our servers and the Israeli gaming community. ✌️\
-We build, develop, and maintain an advanced gaming community.😇\
-All our team does it willingly, our goal is to cover as many games as possible and ensure the best quality and safety of the game. 🤩\
-The only gaming community in Israel that puts privacy and safety first. 🔐
-#### Contact
-[![Website-logo](photos/Website-icon.svg)](https://israelmincraftml.wixsite.com/ims-network)
-[![Twitter-logo](photos/Twitter-icon.svg)](https://twitter.com/network_ims)
-[![Discord-logo](photos/Discord-icon.svg)](https://discord.ims-network.net)
-[![YouTube-logo](photos/Play-icon.svg)](https://www.youtube.com/channel/UC2k502VERIriL01UtnpE_wQ)
-[![GitHub-logo](photos/Github-icon.svg)](https://github.com/IMS-Network)
-[![Instagram-logo](photos/Instagram-icon.svg)](https://www.instagram.com/ims__network/)
-[![Facebook-logo](photos/Facebook-icon.svg)](https://www.facebook.com/IMSNetworkOfficial)
-[![TikTok-logo](photos/Tiktok-icon.svg)](https://www.tiktok.com/@ims_network)
-[![Reddit-logo](photos/Reddit-icon.svg)](https://www.reddit.com/r/IMS_Network/)
-[![Email-logo](photos/Email-icon.svg)](mailto:support@ims-network.net?subject=[GitHub])
-### SOS Music (side_or_slide)
-Founded in 2018, The Place Where I Show My Music Skills & Knowledge
->On the side_or_slide YouTube Chanel, you can find amazing high-quality music🎧\
-we make psytrance and progressive music🎚️\
-Every upload we continue doing our best to improve and grow our community ✨\
-Also, we try to make the experience as simple as possible😌\
-We want to create a world of peace, love, and joy ❤️\
-So be ready for the best adventure of your life 🤩\
-live Before You Die🥂\
-Our music is on our YouTube channel please don't copy 😇\
-If anyone that will find his own music in our video should check the description 🧐 Have a nice day‼️
-#### Contact
-[![Website-logo](photos/Website-icon.svg)](https://yousideorslide7715.wixsite.com/website)
-[![Twitter-logo](photos/Twitter-icon.svg)](https://twitter.com/or_slide)
-[![YouTube-logo](photos/Play-icon.svg)](https://www.youtube.com/channel/UCEGkCJFSotCr4F4sMmshHsA)
-[![Soundcloud-logo](photos/Soundcloud-icon.svg)](https://soundcloud.com/side_or-slide)
-[![Mixcloud-logo](photos/Mixcloud-icon.svg)](https://www.mixcloud.com/side_or_slide/)
-[![Instagram-logo](photos/Instagram-icon.svg)](https://www.instagram.com/side_or_slide/)
-[![Facebook-logo](photos/Facebook-icon.svg)](https://www.facebook.com/sideorslide)
-[![TikTok-logo](photos/Tiktok-icon.svg)](https://www.tiktok.com/@side_or_slide)
-[![Fandom-logo](photos/Fandom-icon.svg)](https://trance.fandom.com/wiki/Side_or_slide)
-[![Email-logo](photos/Email-icon.svg)](mailto:you.side.or.slide.7715@gmail.com?subject=[GitHub])
+</td></tr></table>
 
 <!-- https://github.com/anuraghazra/github-readme-stats -->
 <div align="center">
@@ -160,7 +115,8 @@ Wakatime stats are a new addition since Nov 20 2022 [Learn More](https://wakatim
 
 <br><br>
 <div align="center">
-<h2>📕 Top projects I've contributed to</h2></div>
+<h2>📕 Top projects I've contributed to</h2>
+</div>
 <p align="center">
     <a href="https://github.com/anuraghazra/github-readme-stats">
     <img width="278" 

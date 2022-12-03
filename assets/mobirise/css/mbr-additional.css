@@ -8898,6 +8898,26 @@ a {
 .cid-tfPXZQ5xcv .mbr-section-subtitle {
   color: #ffffff;
 }
+.cid-toZbbPJ8sg {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  background-color: #580004;
+}
+.cid-toZbbPJ8sg .mbr-fallback-image.disabled {
+  display: none;
+}
+.cid-toZbbPJ8sg .mbr-fallback-image {
+  display: block;
+  background-size: cover;
+  background-position: center center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+}
+.cid-toZbbPJ8sg .mbr-section-title {
+  color: #ffffff;
+}
 .cid-B3j0DoqDcQ {
   padding-top: 0px;
   padding-bottom: 0px;

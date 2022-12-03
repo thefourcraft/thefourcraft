@@ -1,3 +1,9 @@
+# Version 2.2
+- Updated Nav Bar
+- Integrated Website Blog
+- Improved CSS
+
+
 # Version 2.1
 - Updated Page [resume.html](resume.html)
 - Updated Page [projects.html](projects.html)

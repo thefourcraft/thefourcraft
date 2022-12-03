@@ -10,4 +10,4 @@ V2 OUT 🎉
 ALL The Rights Are Reserved To @thefourcraft, you are not allowed to share/copy information form my website.\
 [LICENSED BY CC BY-NC-ND 4.0](LICENSE.md)\
 Contact Me For DMCA:\
-me@thefourcraft.com
+legal@thefourcraft.com

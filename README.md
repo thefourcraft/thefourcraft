@@ -40,7 +40,9 @@ alt="Typing SVG" />
     src="photos/Email-icon.svg"/>
     </a>
 </p>
-<b>Note:</b> Icons by <a target="_blank" href="https://icons8.com">Icons8</a>
+
+> **Note**
+Icons by <a target="_blank" href="https://icons8.com">Icons8</a>
 
 <div align="center">
 <h3>Frontend</h3> 
@@ -143,7 +145,7 @@ If anyone that will find his own music in our video should check the description
         height="192px"/>
         </a>
         <a href="https://github.com/anuraghazra/github-readme-stats">
-        <img alt="DenverCoder1's Top Languages" 
+        <img alt="thefourCraft's Top Languages" 
         src="https://github-readme-stats.vercel.app/api/top-langs/?username=thefourcraft&theme=dark&hide_border=true&include_all_commits=true&count_private=true" 
         height="192px"/>
         </a>
@@ -151,7 +153,11 @@ If anyone that will find his own music in our video should check the description
         src="https://github-readme-stats.vercel.app/api/wakatime?username=thefourCraft&layout=compact&theme=dark&hide_border=true" />
     </div>
   <br/>
-<b>Note:</b> Top languages are only a metric of the languages my public code consists of and doesn't reflect experience or skill level.
+  
+> **Note**\
+Top languages are only a metric of the languages my public code consists of and doesn't reflect experience or skill level.\
+Wakatime stats are a new addtion sicne Nov 20 2022 [Learn More](https://wakatime.com/@thefourCraft)
+
 <br><br>
 <div align="center">
 <h2>📕 Top projects I've contributed to</h2></div>

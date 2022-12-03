@@ -1,3 +1,8 @@
+# Version 2.2 HotFix
+- Blog Moved https://blog.thefourcraft.com
+- Workflow for website deployment improved
+- Fixed Nav Bar Issues
+
 # Version 2.2
 - Updated Nav Bar
 - Integrated Website Blog

@@ -1,3 +1,0 @@
-User-agent: *
-Disallow:
-Sitemap: https://www.thefourcraft.com/blog/index.html/sitemap.xml

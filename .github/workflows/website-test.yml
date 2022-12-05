@@ -1,0 +1,24 @@
+name: HTML & CSS Test
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: |
+        apt-get update
+        apt-get install -y nodejs
+        npm install -g html-validator
+        npm install -g eslint
+    - name: Run HTML validation
+      run: html-validator --file index.html
+    - name: Run CSS validation
+      run: |
+        apt-get install -y ruby-full
+        gem install css_parser
+        ruby -e "require 'css_parser'; parser = CssParser::Parser.new; parser.add_block!(File.read('styles.css')); puts parser.errors"
+    - name: Scan for JavaScript variabilities
+      run: eslint js/

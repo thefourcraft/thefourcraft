@@ -9,14 +9,14 @@ jobs:
     - uses: actions/checkout@v3
     - name: Install dependencies
       run: |
-        apt-get install -y nodejs
+        apt-get install nodejs
         npm install -g html-validator
         npm install -g eslint
     - name: Run HTML validation
       run: html-validator --file index.html
     - name: Run CSS validation
       run: |
-        apt-get install -y ruby-full
+        apt-get install ruby-full
         gem install css_parser
         ruby -e "require 'css_parser'; parser = CssParser::Parser.new; parser.add_block!(File.read('styles.css')); puts parser.errors"
     - name: Scan for JavaScript variabilities

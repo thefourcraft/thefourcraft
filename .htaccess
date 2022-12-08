@@ -1,10 +1,15 @@
 # Disable the Apache MultiViews option
 Options -MultiViews
 
-# Rewrite URLs without the .html extension
-RewriteEngine On
+# Rewrite URLs with the .html extension
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^([^\.]+)$ $1.html [NC,L]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+)$ $1.html [L,QSA]
+
+# 301 redirect from example.com/page.html to example.com/page
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /.*\.html\ HTTP/
+RewriteRule ^(.*)\.html$ /$1 [R=301,L]
 
 # Set the default index file for directories
 DirectoryIndex index.html

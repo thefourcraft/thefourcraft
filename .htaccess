@@ -1,13 +1,23 @@
+# Disable the Apache MultiViews option
+Options -MultiViews
+
+# Rewrite URLs without the .html extension
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^([^\.]+)$ $1.html [NC,L]
+
+# Set the default index file for directories
+DirectoryIndex index.html
+
+# Set the default error page
+ErrorDocument 404 /404.html
 
 # Enable Gzip compression
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/plain text/css application/json application/javascript
 </IfModule>
 
-# Expire headers
+# Set expire headers
 <IfModule mod_expires.c>
   ExpiresActive on
   ExpiresDefault "access plus 1 month"
@@ -21,7 +31,7 @@ RewriteRule ^([^\.]+)$ $1.html [NC,L]
   ExpiresByType application/x-shockwave-flash "access plus 1 month"
 </IfModule>
 
-# Cache headers
+# Set cache headers
 <ifModule mod_headers.c>
   <filesMatch "\.(ico|jpe?g|png|gif|swf)$">
     Header set Cache-Control "public"

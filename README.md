@@ -111,7 +111,8 @@ Icons by <a target="_blank" href="https://icons8.com">Icons8</a>
   
 > **Note**\
 Top languages are only a metric of the languages my public code consists of and doesn't reflect experience or skill level.\
-Wakatime stats are a new addition since Nov 20 2022 [Learn More](https://wakatime.com/@thefourCraft)
+Wakatime stats are a new addition since Nov 20 2022 [Learn More](https://wakatime.com/@thefourCraft)\
+[![wakatime](https://wakatime.com/badge/user/2d4f1aae-0715-4418-a6f3-e6d05c70dffd.svg)](https://wakatime.com/@2d4f1aae-0715-4418-a6f3-e6d05c70dffd)
 
 <br><br>
 <div align="center">

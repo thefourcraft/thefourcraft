@@ -1,3 +1,8 @@
+# Version 2.3
+- Multiple Pages Improved
+- CSS Fix
+- Links Fix
+
 # Version 2.2 HotFix
 - Blog Moved https://blog.thefourcraft.com
 - Workflow for website deployment improved

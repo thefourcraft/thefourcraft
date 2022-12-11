@@ -21,8 +21,8 @@
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-reboot.min.css">
   <link rel="stylesheet" href="assets/web/assets/gdpr-plugin/gdpr-styles.css">
   <link rel="stylesheet" href="assets/animatecss/animate.css">
-  <link rel="stylesheet" href="assets/popup-overlay-plugin/style.css">
-    <link rel="stylesheet" href="assets/dropdown/css/style.css">
+    <link rel="stylesheet" href="assets/popup-overlay-plugin/style.css">
+  <link rel="stylesheet" href="assets/dropdown/css/style.css">
   <link rel="stylesheet" href="assets/socicon/css/styles.css">
   <link rel="stylesheet" href="assets/theme/css/style.css">
   <link href="assets/fonts/style.css" rel="stylesheet">
@@ -104,8 +104,7 @@
                 
                 <h4 class="mbr-section-subtitle mbr-fonts-style mb-4 display-5">
                     What Is A Zero Trust System?</h4>
-                <p class="mbr-text mbr-fonts-style display-7">
-                    Zero Trust is a strategic approach to cybersecurity that secures an organization by eliminating implicit trust and continuously validating every stage of digital interaction. <br><br>Zero Trust is designed to protect modern environments and enable digital transformation by using strong authentication methods, leveraging network segmentation, preventing lateral movement, <br>providing Layer 7 threat prevention, and simplifying granular, “least access” policies.<br><br>Like the old saying&nbsp;<em> “</em>never trust, always verify<em>”</em></p>
+                <p class="mbr-text mbr-fonts-style display-7">A zero-trust system is a cybersecurity strategy that eliminates implicit trust and continuously verifies every stage of digital interactions. <br>This approach is designed to protect modern environments and enable digital transformation by using strong authentication methods, network segmentation, lateral movement prevention, and granular, "least access" policies. In other words, a zero trust system follows the adage "never trust, always verify." By continuously verifying and authenticating interactions, a zero-trust system ensures that an organization's networks and systems are secure and protected against potential threats.<br><br>The goal of a zero-trust system is to create a secure and trusted environment for digital interactions, without relying on implicit trust or shared security assumptions. <br>By continuously verifying and authenticating users, devices, and networks, a zero trust system can help to prevent breaches, protect against potential threats, and enable organizations to confidently embrace digital transformation.<br></p>
             </div>
         </div>
     </div>
@@ -119,9 +118,15 @@
                 
                 <h4 class="mbr-section-subtitle mbr-fonts-style mb-4 display-5">
                     Understanding Zero Trust Architecture</h4>
-                <p class="mbr-text mbr-fonts-style display-7">In Zero Trust, one of the first steps is the identification of the network’s most critical and valuable data, assets, applications, and services everything that you would call sensitive: dashboards, control panels, etc.<br><br>This helps prioritize where to start and also enables the creation of Zero Trust security policies. <br><br>By identifying the most critical assets, organizations can focus efforts on prioritizing and protecting those assets as part of their Zero Trust journey.
+                <p class="mbr-text mbr-fonts-style display-7">Zero Trust is a security model that assumes that an attacker is already present on the network. Instead of assuming that all network assets are trusted and can be accessed freely, a Zero Trust system treats all assets as untrusted and enforces strict access controls.
 <br>
-<br>Making all the network assets zero trust doesn't make any sense, this is why step 0 is the most important one.<br><br>The next step is understanding who the users are, which applications they are using and how they are connecting to determine and enforce a policy that ensures secure access to your critical assets, in a zero trust system you can't give everyone access, policies will be based by each user group (developers, clients, workers).</p>
+<br>The first step in implementing a Zero Trust system is to identify the most critical and valuable assets on the network. This can include sensitive data, such as personally identifiable information (PII) or intellectual property, as well as critical applications and services, such as a database or a web server. By prioritizing these assets, organizations can focus their efforts on protecting them.
+<br>
+<br>The next step is to understand who the users are and how they are accessing the network. This can include information such as the devices they are using, the applications they are running, and the networks they are connecting from. This information is used to create and enforce access policies that grant users access to the assets they need, while restricting access to other assets.
+<br>
+<br>In a Zero Trust system, access is granted on a per-user and per-asset basis. This means that even if an attacker manages to compromise a user's device or credentials, they will only be able to access the assets that the user is authorized to access. This can help prevent the attacker from moving laterally across the network and accessing other assets.
+<br>
+<br>The goal of a Zero Trust system is to create a highly secure network by assuming that an attacker is already present and limiting their ability to access critical assets. By implementing strict access controls and constantly monitoring user activity, organizations can protect their most valuable assets and reduce their risk of a breach.</p>
             </div>
         </div>
     </div>
@@ -151,10 +156,10 @@
                         <span class="step-number mbr-fonts-style display-5">1</span>
                     </div>
                     <div class="text-box">
-                        <h4 class="icon-title card-title mbr-black mbr-fonts-style display-7">
+                        <h4 class="icon-title card-title mbr-black mbr-fonts-style display-5">
                             <strong>Users</strong>
                         </h4>
-                        <h5 class="icon-text mbr-black mbr-fonts-style display-7">Step one of any Zero Trust effort requires strong authentication of user identity, application of “least access” policies, and verification of user device integrity</h5>
+                        <h5 class="icon-text mbr-black mbr-fonts-style display-7">The first step in implementing a Zero Trust system is to ensure strong authentication of user identity. <br>This typically involves using multi-factor authentication (MFA) to verify the user's identity before granting them access to network assets. <br>Additionally, "least access" policies should be applied to limit the access that users have to sensitive assets. <br>This means that users should only be granted access to the assets they need to perform their job, and no more. <br>Finally, the integrity of the user's device should be verified to ensure that it is not compromised and does not pose a threat to the network. <br>By implementing these measures, organizations can create a secure foundation for their Zero Trust system.</h5>
                     </div>
                 </div>
                 <div class="item mbr-flex">
@@ -162,9 +167,11 @@
                         <span class="step-number mbr-fonts-style display-5">2</span>
                     </div>
                     <div class="text-box">
-                        <h4 class="icon-title card-title mbr-black mbr-fonts-style display-7"><strong>Applications</strong>
+                        <h4 class="icon-title card-title mbr-black mbr-fonts-style display-5"><strong>Applications</strong>
                         </h4>
-                        <h5 class="icon-text mbr-black mbr-fonts-style display-7">Applying Zero Trust to applications removes implicit trust with various components of applications when they talk to each other.<br><br>A fundamental concept of Zero Trust is that applications cannot be trusted and continuous monitoring at runtime is necessary to validate their behavior.</h5>
+                        <h5 class="icon-text mbr-black mbr-fonts-style display-7">In a Zero Trust system, applications are treated as untrusted and are not allowed to communicate with each other freely. <br>This removes the implicit trust that is often present in traditional network architectures, where applications are assumed to be secure and can access each other without restriction.
+<br><br><div>
+</div><div>A fundamental principle of Zero Trust is that applications cannot be trusted and must be continuously monitored at runtime to validate their behavior. <br>This means that access to sensitive assets should be granted on a per-application basis, and access should be revoked if the application behaves in a suspicious or malicious manner. <br>Organizations can continuously monitor applications and enforce strict access controls to prevent attackers from using applications to gain unauthorized access to sensitive assets.</div></h5>
                     </div>
                 </div>
                 <div class="item mbr-flex last">
@@ -172,10 +179,10 @@
                         <span class="step-number mbr-fonts-style display-5">3</span>
                     </div>
                     <div class="text-box">
-                        <h4 class="icon-title card-title mbr-black mbr-fonts-style display-7">
+                        <h4 class="icon-title card-title mbr-black mbr-fonts-style display-5">
                             <strong>Infrastructure</strong>
                         </h4>
-                        <h5 class="icon-text mbr-black mbr-fonts-style display-7">Everything infrastructure-related routers, switches, cloud, IoT,<br>and supply chain must be addressed with a Zero Trust approach <br>to ensure the highest level of security.</h5>
+                        <h5 class="icon-text mbr-black mbr-fonts-style display-7">In a comprehensive Zero Trust system, all infrastructure-related components must be secured using a Zero Trust approach. <br>This includes routers, switches, cloud services, Internet of Things (IoT) devices, and the supply chain. <br>By applying Zero Trust principles to these components, organizations can ensure that they are protected against potential threats and maintain the highest level of security. <br>This can help prevent attackers from gaining access to sensitive assets and moving laterally across the network. <br>By securing all infrastructure-related components, organizations can create a secure and resilient network that is resistant to attacks.</h5>
                     </div>
                 </div>
                 
@@ -222,8 +229,13 @@
                 <div class="card-wrapper">
                     <div class="card-box align-center">
                         <h4 class="card-title mbr-fonts-style align-center mb-4 display-5"><strong>My Zero Trust Network</strong></h4>
-                        <p class="mbr-text mbr-fonts-style mb-4 display-7">On, IMS - Network I created a full Zero Trust Network to provide secure access for our team to dashboards and management panels.
-<br>Using Cloudflare tunnels &amp; access policies I was able to secure our network<br>I have also created a demo for this website, and you can learn more about how it works on my blog</p>
+                        <p class="mbr-text mbr-fonts-style mb-4 display-7">At IMS - Network, we were facing a number of security challenges that required a more robust approach. To address these challenges, I implemented a Zero Trust Network using Cloudflare tunnels and access policies. <br>This system allows us to secure access to our dashboards and management panels, ensuring that only authorized users can access these assets.
+<br>
+<br>To create the Zero Trust Network, I first identified our most critical and valuable assets, including sensitive data, applications, and services. <br>I then created access policies that specify which users are allowed to access which assets and implemented multi-factor authentication (MFA) to verify the identity of users before granting them access.
+<br>
+<br>To secure the network, I used Cloudflare tunnels to establish secure connections between users and the assets they need to access. This ensures that all traffic is encrypted and cannot be intercepted by an attacker. <br>I also used access policies to enforce the least access principle, which means that users are only granted access to the assets they need to perform their job and no more.
+<br>
+<br>Overall, our Zero Trust Network has been a success and has greatly improved our security posture. We have been able to secure access to our most valuable assets, prevent unauthorized access, and reduce our risk of a breach. <br>If you would like to learn more about how our Zero Trust Network works, I have created a demo that you can try out on my website. <br>You can also read about our experience on my blog.</p>
                         <div class="mbr-section-btn mt-3"><a class="btn btn-black display-4" href="secrate-file.html"><span class="mobi-mbri mobi-mbri-preview mbr-iconfont mbr-iconfont-btn"></span>Click To See Demo</a></div>
                     </div>
                 </div>

@@ -22,8 +22,8 @@
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-reboot.min.css">
   <link rel="stylesheet" href="assets/web/assets/gdpr-plugin/gdpr-styles.css">
   <link rel="stylesheet" href="assets/animatecss/animate.css">
-  <link rel="stylesheet" href="assets/popup-overlay-plugin/style.css">
-    <link rel="stylesheet" href="assets/dropdown/css/style.css">
+    <link rel="stylesheet" href="assets/popup-overlay-plugin/style.css">
+  <link rel="stylesheet" href="assets/dropdown/css/style.css">
   <link rel="stylesheet" href="assets/socicon/css/styles.css">
   <link rel="stylesheet" href="assets/theme/css/style.css">
   <link href="assets/fonts/style.css" rel="stylesheet">
@@ -110,8 +110,11 @@
                     CI
                 </h1>
                 <h3 class="mbr-section-subtitle align-center mbr-light pb-3 mbr-fonts-style display-2">Continuous Integration</h3>
-                <p class="mbr-text pb-3 mbr-fonts-style display-7">
-                    Continuous integration is a coding philosophy and set of practices that drive development teams to frequently implement small code <br>changes and check them into a version control repository. <br><br>Most modern applications require developing <br>code using a variety of platforms and tools, <br>so teams need a consistent mechanism <br>to integrate and validate changes.<br><br>&nbsp;Continuous integration establishes an automated <br>way to build, package, and test their applications. <br>Having a consistent integration process encourages <br>developers to commit code changes more frequently, <br>which leads to better collaboration and code quality.</p>
+                <p class="mbr-text pb-3 mbr-fonts-style display-7">Continuous integration is a software development practice in which developers frequently integrate their code changes into a shared repository, such as a version control system. <br>This practice allows teams to detect and resolve conflicts early on in the development process, ensuring that the codebase remains stable and consistent.
+<br>
+<br>To enable continuous integration, developers typically use automation tools to build, package, and test their code changes. <br>These tools can automatically compile the code, run unit tests, and perform other tasks to ensure that the code changes are consistent with the existing codebase. This automated process helps to prevent errors and bugs from being introduced into the codebase, and it allows developers to quickly identify and resolve any issues that may arise.
+<br>
+<br>By implementing continuous integration, development teams are able to collaborate more effectively and ensure that the code they are working on is of high quality. This practice helps teams to build applications more quickly and efficiently, and it allows them to deliver better software to their users.</p>
                 
             </div>
         </div>
@@ -123,8 +126,11 @@
                     CD
                 </h1>
                 <h3 class="mbr-section-subtitle align-center mbr-light pb-3 mbr-fonts-style display-2">Continuous Delivery</h3>
-                <p class="mbr-text pb-3 mbr-fonts-style display-7">
-                    Continuous delivery picks up where continuous integration ends,<br>&nbsp;and automates application delivery to selected environments, <br>including production, development, and testing environments. <br><br>Continuous delivery is an automated way <br>to push code changes to these environments.</p>
+                <p class="mbr-text pb-3 mbr-fonts-style display-7">Continuous delivery is a software development practice that builds on the principles of continuous integration. Whereas continuous integration focuses on integrating code changes into a shared repository, continuous delivery takes this a step further by automating the process of delivering these code changes to different environments, such as production, development, and testing environments.
+<br>
+<br>To enable continuous delivery, developers typically use automation tools to push code changes to selected environments. These tools can automatically compile the code, run unit tests, and perform other tasks to ensure that the code changes are ready to be deployed. This automated process helps to prevent errors and bugs from being introduced into the codebase, and it allows teams to quickly and easily deploy new code changes to different environments.
+<br>
+<br>By implementing continuous delivery, development teams are able to deliver new code changes to their users more quickly and efficiently. This practice helps teams to build and deploy applications more quickly, and it allows them to respond to user feedback and iterate on their products more rapidly. Continuous delivery can help teams to improve the quality of their software, and it can help them to better meet the needs of their users.</p>
                 
             </div>
         </div>
@@ -140,7 +146,13 @@
             <div class="col-md-12 col-lg-10">
                 
                 <h4 class="mbr-section-subtitle mbr-fonts-style mb-4 display-5">What is the difference between CI and CD?</h4>
-                <p class="mbr-text mbr-fonts-style display-7">Continuous integration (CI) is a practice that involves developers making small changes and checks to their code. <br><br>Due to the scale of requirements and the number of steps involved, this process is automated to ensure that teams can build, test, and package their applications in a reliable and repeatable way. <br><br>CI helps streamline code changes, thereby increasing the time for developers to make changes and contribute to improved software.<br><br>Continuous deployment ("CD") can refer to automatically releasing a developer’s changes from the repository to production, where it is usable by customers.<br>It addresses the problem of overloading operations teams with manual processes that slow down app delivery.<br></p>
+                <p class="mbr-text mbr-fonts-style display-7">Continuous integration (CI) and continuous delivery (CD) are two closely related software development practices. CI focuses on the practice of frequently integrating code changes into a shared repository, whereas CD focuses on the practice of automating the process of delivering code changes to different environments.
+<br>
+<br>In terms of the technical differences between CI and CD, CI typically involves using automation tools to compile and test code changes as they are being integrated into the codebase. This allows teams to detect and resolve conflicts early on in the development process, and it helps to ensure that the codebase remains stable and consistent.
+<br>
+<br>On the other hand, CD involves using automation tools to build, package, and deploy code changes to different environments. This allows teams to deliver new code changes to their users more quickly and efficiently, and it helps to prevent errors and bugs from being introduced into the codebase.
+<br>
+<br>The main difference between CI and CD is that CI focuses on integrating code changes into a shared repository, whereas CD focuses on automating the process of delivering code changes to different environments. Both practices can help teams to build and deploy high-quality software more quickly and efficiently.<br></p>
             </div>
         </div>
     </div>
@@ -153,7 +165,9 @@
             <div class="col-md-12 col-lg-10">
                 
                 <h4 class="mbr-section-subtitle mbr-fonts-style mb-4 display-5">How I Use CI\CD In My Projects</h4>
-                <p class="mbr-text mbr-fonts-style display-7">When working on websites or developing scripts/plugins for games/servers I need to ensure compatibility and stability<br>Also, the testing needs to stay compatible or not brake older vibrations of the game/server<br>Using integration/GitHub actions helps me save time, improve efficiency, ensure player satisfaction<br></p>
+                <p class="mbr-text mbr-fonts-style display-7">I use GitHub actions when working on websites or developing scripts and plugins for games and servers. <br>These tools help me to ensure compatibility and stability, which can be challenging when dealing with complex systems that require frequent updates and changes. <br>By using integration tools, I can automatically compile and test code changes as they are being integrated into the codebase. <br>This allows me to detect and resolve conflicts early on in the development process, which helps to ensure that the codebase remains stable and consistent.
+<br>
+<br>GitHub actions, on the other hand, can automate the process of building, packaging, and deploying code changes to different environments.<br>This helps me to quickly and easily deliver new code changes to my users, and it helps to prevent errors and bugs from being introduced into the codebase. <br>Using GitHub actions allows me to save time and improve efficiency, and it helps me to deliver high-quality code changes in a timely manner.<br></p>
             </div>
         </div>
     </div>

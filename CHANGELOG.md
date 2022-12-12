@@ -1,3 +1,6 @@
+# Version 2.3.1
+- Fix Content On Website Pages
+
 # Version 2.3
 - Multiple Pages Improved
 - CSS Fix

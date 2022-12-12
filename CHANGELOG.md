@@ -1,3 +1,6 @@
+# Version 2.3.2
+- Fix MC Typos
+
 # Version 2.3.1
 - Fix Content On Website Pages
 

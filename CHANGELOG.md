@@ -1,3 +1,11 @@
+# Version 2.3.3
+- Update Information On The Website
+- Impvoe CSS Hnandiling
+- Switch To Cloudflare Pages #No-More-Workflows
+- Accessibility Integration Across All Pages
+- Improved Load Handling And JS Loading
+- Improved Anti Spam-Security 
+
 # Version 2.3.2
 - Fix MC Typos
 

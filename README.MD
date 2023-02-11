@@ -7,7 +7,7 @@ All The Information Is Avilible In The [CHANGELOG.md](CHANGELOG.md)\
 V2 OUT 🎉
 
 ## Legal
-ALL The Rights Are Reserved To @thefourcraft, you are not allowed to share/copy information form my website.\
+ALL The Rights Are Reserved To @thefourcraft, It is prohibited to distribute or reproduce information taken from my website.\
 [LICENSED BY CC BY-NC-ND 4.0](LICENSE.md)\
 Contact Me For DMCA:\
 legal@thefourcraft.com

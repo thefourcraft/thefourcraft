@@ -155,7 +155,7 @@ Wakatime stats are a new addition since Nov 20 2022 [Learn More](https://wakatim
 
 <a href="https://github.com/ashutosh00710/github-readme-activity-graph">
 <img alt="My Activity Graph" 
-src="https://activity-graph.herokuapp.com/graph?username=thefourcraft&bg_color=161616&color=d3d3d3&line=e8eaea&point=5b5959&hide_border=true"/></a>
+src="https://github-readme-activity-graph.cyclic.app/graph?username=thefourcraft&bg_color=161616&color=d3d3d3&line=e8eaea&point=5b5959&hide_border=true"/></a>
 
 <div align="center">
 <h2>Read It in your Language</h2>

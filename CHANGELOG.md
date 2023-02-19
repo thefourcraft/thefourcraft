@@ -1,3 +1,8 @@
+# Version 2.3.4
+- Updated Pages
+- Typos Fix
+- Live Analytics
+
 # Version 2.3.3
 - Update Information On The Website
 - Impvoe CSS Hnandiling

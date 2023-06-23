@@ -44,43 +44,9 @@ alt="Typing SVG" />
 > **Note**
 Icons by <a target="_blank" href="https://icons8.com">Icons8</a>
 
-<div align="center">
-<h3>Frontend</h3> 
-<a href="https://getbootstrap.com/docs/3.4/javascript/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/bootstrap-plain.svg" alt="Bootstrap" height="50" /></a>  
-<a href="https://en.wikipedia.org/wiki/HTML5" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/html5-original-wordmark.svg" alt="HTML5" height="50" /></a>  
-<a href="https://docs.microsoft.com/en-us/dotnet/csharp/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/csharp-original.svg" alt="C#" height="50" /></a>  
-<a href="https://go.dev/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/go-original.svg" alt="Go" height="50" /></a>  
-<a href="https://www.w3schools.com/css/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/css3-original-wordmark.svg" alt="CSS3" height="50" /></a>  
-<a href="https://www.php.net/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/php-original.svg" alt="PHP" height="50" /></a>  
-<a href="https://laravel.com/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/laravel-plain-wordmark.svg" alt="Laravel" height="50" /></a>  
-<a href="https://www.javascript.com/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/javascript-original.svg" alt="JavaScript" height="50" /></a>  
-</div>
 
 </td><td valign="top" width="33%">
 
-
-<div align="center">
-<h3>Backend</h3>
-<a href="https://www.php.net/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/php-original.svg" alt="PHP" height="50" /></a>  
-<a href="https://www.mongodb.com/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/mongodb-original-wordmark.svg" alt="MongoDB" height="50" /></a>  
-<a href="https://www.nginx.com/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/nginx-original.svg" alt="Nginx" height="50" /></a>   
-<a href="https://github.com/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/git-scm-icon.svg" alt="Git" height="50" /></a>  
-<a href="https://nodejs.org/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/nodejs-original-wordmark.svg" alt="Node.js" height="50" /></a>  
-<a href="https://go.dev/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/go-original.svg" alt="Go" height="50" /></a>  
-<a href="https://www.mysql.com/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/mysql-original-wordmark.svg" alt="MySQL" height="50" /></a>  
-<a href="https://www.postgresql.org/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/postgresql-original-wordmark.svg" alt="PostgreSQL" height="50" /></a>  
-</div>
-
-</td><td valign="top" width="33%">
-
-
-<div align="center"> 
-<h3>DevOps</h3>  
-<a href="https://www.linux.org/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/linux-original.svg" alt="Linux" height="50" /></a>
-<a href="https://www.docker.com/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/docker-original-wordmark.svg" alt="Docker" height="50" /></a>  
-</div>
-
-</td></tr></table>
 
 <!-- https://github.com/anuraghazra/github-readme-stats -->
 <div align="center">
@@ -114,42 +80,6 @@ Top languages are only a metric of the languages my public code consists of and 
 Wakatime stats are a new addition since Nov 20 2022 [Learn More](https://wakatime.com/@thefourCraft)\
 [![wakatime](https://wakatime.com/badge/user/2d4f1aae-0715-4418-a6f3-e6d05c70dffd.svg)](https://wakatime.com/@2d4f1aae-0715-4418-a6f3-e6d05c70dffd)
 
-<br><br>
-<div align="center">
-<h2>📕 Top projects I've contributed to</h2>
-</div>
-<p align="center">
-    <a href="https://github.com/anuraghazra/github-readme-stats">
-    <img width="278" 
-    src="https://denvercoder1-github-readme-stats.vercel.app/api/pin/?username=ims-network&repo=Playit.gg-Docs&&theme=dark&hide_border=true" 
-    alt="Github-readme-stats">
-    </a>
-    <a href="https://github.com/anuraghazra/github-readme-stats">
-    <img width="278" 
-    src="https://denvercoder1-github-readme-stats.vercel.app/api/pin/?username=ims-network&repo=ims-jobs&&theme=dark&hide_border=true" 
-    alt="Github-readme-stats">
-    </a>
-    <a href="https://github.com/anuraghazra/github-readme-stats">
-    <img width="278" 
-    src="https://denvercoder1-github-readme-stats.vercel.app/api/pin/?username=ims-network&repo=Alfine&&theme=dark&hide_border=true" 
-    alt="Github-readme-stats">
-    </a>
-    <a href="https://github.com/anuraghazra/github-readme-stats">
-    <img width="278" 
-    src="https://denvercoder1-github-readme-stats.vercel.app/api/pin/?username=ims-network&repo=Andrada-City&&theme=dark&hide_border=true" 
-    alt="Github-readme-stats">
-    </a>
-    <a href="https://github.com/anuraghazra/github-readme-stats">
-    <img width="278" 
-    src="https://denvercoder1-github-readme-stats.vercel.app/api/pin/?username=ims-network&repo=ims-legal&&theme=dark&hide_border=true" 
-    alt="Github-readme-stats">
-    </a>
-    <a href="https://github.com/anuraghazra/github-readme-stats">
-    <img width="278" 
-    src="https://denvercoder1-github-readme-stats.vercel.app/api/pin/?username=LoneDev6&repo=Wiki-ItemsAdder&&theme=dark&hide_border=true" 
-    alt="Github-readme-stats">
-    </a>
-</p>
 
 <!-- https://github.com/ashutosh00710/github-readme-activity-graph -->
 

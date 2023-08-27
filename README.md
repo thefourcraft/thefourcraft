@@ -3,13 +3,6 @@
 <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="28">
 </h1>
 
-<!-- Typing SVG by DenverCoder1 - https://github.com/DenverCoder1/readme-typing-svg -->
-<a href="https://git.io/typing-svg">
-<img src="https://readme-typing-svg.herokuapp.com?font=M+PLUS+Rounded+1c&pause=2000&color=F7F7F7&center=true&vCenter=true&width=435&lines=Self+Thought+DevOps+And+QA+Engineer;Open+Source+Advocate;Considered+Entrepreneur;Zero+Trust+Network+Architecture+Fan;Past+Music+Producer;OSS+Contributor;Community+Manager;Israeli;Photographer;Local+Guides+Contributor;Translator" 
-alt="Typing SVG" />
-</a>
-</div>
-
 <!-- Contact Me -->
 <p align="center">
     <a href="https://twitter.com/thefourcraft">

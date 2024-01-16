@@ -49,7 +49,7 @@ Icons by <a target="_blank" href="https://icons8.com">Icons8</a>
   <br/>
     <a href="https://github.com/anuraghazra/github-readme-stats">
     <img alt="thefourcraft Github Stats" 
-    src="https://streak-stats.demolab.com?user=thefourcraft&theme=dark&hide_border=true&date_format=j%2Fn%5B%2FY%5D&fire=DD2727" 
+    src="https://github-readme-stats.vercel.app?user=thefourcraft&theme=dark&hide_border=true&date_format=j%2Fn%5B%2FY%5D&fire=DD2727" 
     height="192px" width= "3000px"/>
     </a>
     <div align="center">

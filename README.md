@@ -55,7 +55,7 @@ Icons by <a target="_blank" href="https://icons8.com">Icons8</a>
     <div align="center">
         <a href="https://github.com/anuraghazra/github-readme-stats">
         <img alt="thefourcraft Score" 
-        src="https://github-readme-stats.vercel.app/api?username=thefourCraft&theme=dark&hide_border=true&include_all_commits=true&count_private=true" 
+        src="https://github-readme-stats.vercel.app/api?username=thefourCraft&show_icons=true\&show=reviews,discussions_started,discussions_answered,prs_merged,prs_merged_percentage&theme=dark&hide_border=true&include_all_commits=true&count_private=true" 
         height="192px"/>
         </a>
         <a href="https://github.com/anuraghazra/github-readme-stats">

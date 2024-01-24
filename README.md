@@ -49,7 +49,7 @@ Icons by <a target="_blank" href="https://icons8.com">Icons8</a>
   <br/>
     <a href="https://github.com/anuraghazra/github-readme-stats">
     <img alt="thefourcraft Github Stats" 
-    src="https://github-readme-stats.vercel.app?user=thefourcraft&theme=dark&hide_border=true&date_format=j%2Fn%5B%2FY%5D&fire=DD2727" 
+    src="https://streak-stats.demolab.com/?user=thefourcraft&theme=dark&hide_border=true&date_format=j%2Fn%5B%2FY%5D&fire=DD2727" 
     height="192px" width= "3000px"/>
     </a>
     <div align="center">
@@ -57,11 +57,7 @@ Icons by <a target="_blank" href="https://icons8.com">Icons8</a>
         <img alt="thefourcraft Score" 
         src="https://github-readme-stats.vercel.app/api?username=thefourCraft&show_icons=true\&show=reviews,discussions_started,discussions_answered,prs_merged,prs_merged_percentage&theme=dark&hide_border=true&include_all_commits=true&count_private=true" />
         </a>
-        <a href="https://github.com/anuraghazra/github-readme-stats">
-        <img alt="thefourCraft's Top Languages" 
-        src="https://github-readme-stats.vercel.app/api/top-langs/?username=thefourcraft&theme=dark&hide_border=true&include_all_commits=true&count_private=true" 
-        height="192px"/>
-        </a>
+        <br/>
         <img
         src="https://github-readme-stats.vercel.app/api/wakatime?username=thefourCraft&layout=compact&theme=dark&hide_border=true" />
     </div>

@@ -156,3 +156,72 @@
     transform: translate3d(0, 0, 0);
   }
 }
+
+/* ─── Accessibility widget hooks ─────────────────────────────────────────── */
+/* All prefs toggle a class on <html>; rules below react without touching
+   component code. Applied via src/components/AccessibilityControl.astro. */
+html {
+  --a11y-font-scale: 1;
+  font-size: calc(100% * var(--a11y-font-scale));
+}
+
+html.a11y-contrast {
+  --color-ink: #000000;
+  --color-ink-soft: #0a0a0a;
+  --color-paper: #ffffff;
+  --color-stone: #1a1a1a;
+  --color-cyan: #00a3a3;
+}
+html.a11y-contrast body,
+html.a11y-contrast .bg-paper { background: #ffffff !important; }
+html.a11y-contrast .bg-night { background: #000000 !important; }
+html.a11y-contrast img,
+html.a11y-contrast video { filter: contrast(1.1); }
+
+html.a11y-links main a:not(.btn):not(.nav-link):not(.nav-cta):not(.lang-item) {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 2px;
+}
+
+html.a11y-motion *,
+html.a11y-motion *::before,
+html.a11y-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+html.a11y-motion .reveal { opacity: 1 !important; transition: none !important; }
+
+html.a11y-pause *,
+html.a11y-pause *::before,
+html.a11y-pause *::after {
+  animation-play-state: paused !important;
+}
+html.a11y-pause [style*='background-attachment: fixed'],
+html.a11y-pause .parallax { background-attachment: scroll !important; }
+
+html.a11y-readable,
+html.a11y-readable body,
+html.a11y-readable h1, html.a11y-readable h2, html.a11y-readable h3,
+html.a11y-readable h4, html.a11y-readable h5, html.a11y-readable h6,
+html.a11y-readable p, html.a11y-readable li, html.a11y-readable a,
+html.a11y-readable button, html.a11y-readable input, html.a11y-readable textarea {
+  font-family: Verdana, 'Trebuchet MS', sans-serif !important;
+  letter-spacing: 0.02em;
+  word-spacing: 0.05em;
+  line-height: 1.6;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

@@ -26,11 +26,6 @@ interface SiteConfig {
   footerLinks: readonly FooterLink[];
   socials: readonly Social[];
   analytics: { umamiSrc: string; umamiWebsiteId: string };
-  thirdParty: {
-    enableAccessibilityScript: string;
-    hostagesTickerScript: string;
-    hostagesTickerIntegrity: string;
-  };
 }
 
 export const SITE: SiteConfig = {
@@ -66,12 +61,5 @@ export const SITE: SiteConfig = {
   analytics: {
     umamiSrc: 'https://analytics.ims-network.net/script.js',
     umamiWebsiteId: 'eb95aa07-0a06-4aa6-931d-22ef79ee78cb',
-  },
-  thirdParty: {
-    enableAccessibilityScript:
-      'https://cdn.enable.co.il/licenses/enable-L14970n18edgjtql-1022-37091/init.js',
-    hostagesTickerScript: 'https://bringthemhomenow.net/1.0.8/hostages-ticker.js',
-    hostagesTickerIntegrity:
-      'sha384-jQVW0E+wZK5Rv1fyN+b89m7cYY8txH4s3uShzHf1T51hdBTPo7yKL6Yizgr+Gp8C',
   },
 } as const satisfies SiteConfig;

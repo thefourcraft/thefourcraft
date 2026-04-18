@@ -1,0 +1,380 @@
+---
+/**
+ * Persistent side-pinned accessibility control.
+ *
+ * Renders a round icon button anchored to the viewport edge. Clicking
+ * it opens a floating panel with toggles for text size, contrast, link
+ * underlining, motion, and a readable font. All preferences persist in
+ * `localStorage` under `df-a11y` and are applied by toggling classes on
+ * `<html>` so any stylesheet can react via `html.a11y-*` selectors.
+ *
+ * Respects `dir="rtl"` — the button flips to the left edge automatically.
+ */
+import { Icon } from 'astro-icon/components';
+---
+
+<div class="a11y-root" data-state="closed">
+  <button
+    type="button"
+    class="a11y-fab"
+    aria-label="Open accessibility menu"
+    aria-expanded="false"
+    aria-controls="df-a11y-panel"
+  >
+    <Icon name="lucide:accessibility" class="a11y-fab-icon" aria-hidden="true" />
+  </button>
+
+  <aside
+    id="df-a11y-panel"
+    class="a11y-panel"
+    role="dialog"
+    aria-modal="false"
+    aria-labelledby="df-a11y-title"
+    hidden
+  >
+    <header class="a11y-head">
+      <h2 id="df-a11y-title" class="a11y-title">Accessibility</h2>
+      <button type="button" class="a11y-close" aria-label="Close accessibility menu">
+        <Icon name="lucide:x" aria-hidden="true" />
+      </button>
+    </header>
+
+    <section class="a11y-section">
+      <p class="a11y-label">Text size</p>
+      <div class="a11y-seg" role="group" aria-label="Text size">
+        <button type="button" data-a11y-size="90" aria-label="Smaller">A</button>
+        <button type="button" data-a11y-size="100" aria-pressed="true" aria-label="Default">A</button>
+        <button type="button" data-a11y-size="115" aria-label="Larger">A</button>
+      </div>
+    </section>
+
+    <ul class="a11y-list">
+      <li>
+        <label class="a11y-toggle">
+          <input type="checkbox" data-a11y-flag="contrast" />
+          <span>High contrast</span>
+        </label>
+      </li>
+      <li>
+        <label class="a11y-toggle">
+          <input type="checkbox" data-a11y-flag="links" />
+          <span>Underline links</span>
+        </label>
+      </li>
+      <li>
+        <label class="a11y-toggle">
+          <input type="checkbox" data-a11y-flag="motion" />
+          <span>Reduce motion</span>
+        </label>
+      </li>
+      <li>
+        <label class="a11y-toggle">
+          <input type="checkbox" data-a11y-flag="pause" />
+          <span>Pause animations</span>
+        </label>
+      </li>
+      <li>
+        <label class="a11y-toggle">
+          <input type="checkbox" data-a11y-flag="readable" />
+          <span>Readable font</span>
+        </label>
+      </li>
+    </ul>
+
+    <footer class="a11y-foot">
+      <button type="button" class="a11y-action a11y-action--ghost" data-a11y-action="cookie">
+        <Icon name="lucide:cookie" aria-hidden="true" />
+        <span>Cookie settings</span>
+      </button>
+      <button type="button" class="a11y-action a11y-action--reset" data-a11y-action="reset">
+        <Icon name="lucide:rotate-ccw" aria-hidden="true" />
+        <span>Reset all</span>
+      </button>
+    </footer>
+  </aside>
+</div>
+
+<style>
+  .a11y-root {
+    position: fixed;
+    top: 50%;
+    right: 0.75rem;
+    transform: translateY(-50%);
+    z-index: 1035;
+  }
+  [dir='rtl'] .a11y-root { right: auto; left: 0.75rem; }
+
+  .a11y-fab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 9999px;
+    background: var(--color-ink);
+    color: var(--color-paper);
+    border: 2px solid var(--color-paper);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    transition: transform 200ms var(--ease-out-expo), background 200ms;
+  }
+  .a11y-fab:hover,
+  .a11y-fab:focus-visible {
+    transform: scale(1.06);
+    background: var(--color-cyan);
+    color: var(--color-ink);
+    outline: none;
+  }
+  .a11y-fab-icon { width: 1.35rem; height: 1.35rem; }
+
+  .a11y-panel {
+    position: absolute;
+    top: 50%;
+    right: calc(100% + 0.75rem);
+    transform: translateY(-50%);
+    width: 280px;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    border-radius: 1.25rem;
+    padding: 1rem 1.1rem 0.9rem;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+  }
+  [dir='rtl'] .a11y-panel { right: auto; left: calc(100% + 0.75rem); }
+  .a11y-root[data-state='closed'] .a11y-panel { display: none; }
+
+  .a11y-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.6rem;
+  }
+  .a11y-title {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 500;
+    margin: 0;
+  }
+  .a11y-close {
+    background: transparent;
+    border: 0;
+    width: 1.8rem;
+    height: 1.8rem;
+    border-radius: 9999px;
+    cursor: pointer;
+    color: var(--color-ink);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .a11y-close:hover { background: rgba(0, 0, 0, 0.06); }
+
+  .a11y-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-stone);
+    margin: 0.25rem 0 0.4rem;
+  }
+
+  .a11y-seg {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.3rem;
+    margin-bottom: 0.75rem;
+  }
+  .a11y-seg button {
+    background: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 0.6rem;
+    padding: 0.4rem 0;
+    cursor: pointer;
+    font-family: var(--font-display);
+    color: var(--color-ink);
+    transition: background 160ms, border-color 160ms;
+  }
+  .a11y-seg button[data-a11y-size='90'] { font-size: 0.85rem; }
+  .a11y-seg button[data-a11y-size='100'] { font-size: 1rem; }
+  .a11y-seg button[data-a11y-size='115'] { font-size: 1.2rem; }
+  .a11y-seg button[aria-pressed='true'] {
+    background: var(--color-ink);
+    color: var(--color-paper);
+    border-color: var(--color-ink);
+  }
+
+  .a11y-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0.75rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+  }
+  .a11y-list li { border-bottom: 1px solid rgba(0, 0, 0, 0.06); }
+
+  .a11y-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.55rem 0;
+    cursor: pointer;
+    font-size: 0.925rem;
+  }
+  .a11y-toggle input {
+    width: 1rem;
+    height: 1rem;
+    accent-color: var(--color-ink);
+  }
+
+  .a11y-foot {
+    display: flex;
+    gap: 0.4rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+  }
+  .a11y-action {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    background: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 0.6rem;
+    padding: 0.45rem 0.6rem;
+    font-size: 0.8rem;
+    font-family: var(--font-display);
+    color: var(--color-ink);
+    cursor: pointer;
+    transition: background 160ms;
+  }
+  .a11y-action svg { width: 0.9rem; height: 0.9rem; }
+  .a11y-action:hover { background: rgba(0, 0, 0, 0.04); }
+  .a11y-action--reset { color: var(--color-crimson); border-color: rgba(141, 22, 43, 0.35); }
+  .a11y-action--reset:hover { background: rgba(141, 22, 43, 0.06); }
+
+  @media (max-width: 640px) {
+    .a11y-root { top: auto; bottom: 1rem; transform: none; }
+    .a11y-panel {
+      position: fixed;
+      right: 0.75rem;
+      left: 0.75rem;
+      top: auto;
+      bottom: 5rem;
+      transform: none;
+      width: auto;
+    }
+    [dir='rtl'] .a11y-panel { left: 0.75rem; right: 0.75rem; }
+  }
+</style>
+
+<script>
+  const STORAGE_KEY = 'df-a11y';
+  const FLAGS = ['contrast', 'links', 'motion', 'pause', 'readable'] as const;
+  type Flag = (typeof FLAGS)[number];
+  interface State {
+    size: number;
+    flags: Record<Flag, boolean>;
+  }
+  const DEFAULT_STATE: State = {
+    size: 100,
+    flags: { contrast: false, links: false, motion: false, pause: false, readable: false },
+  };
+
+  const root = document.querySelector<HTMLElement>('.a11y-root');
+  const fab = root?.querySelector<HTMLButtonElement>('.a11y-fab');
+  const panel = root?.querySelector<HTMLElement>('#df-a11y-panel');
+  const closeBtn = root?.querySelector<HTMLButtonElement>('.a11y-close');
+  const sizeBtns = root?.querySelectorAll<HTMLButtonElement>('[data-a11y-size]');
+  const flagInputs = root?.querySelectorAll<HTMLInputElement>('[data-a11y-flag]');
+
+  const load = (): State => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return { ...DEFAULT_STATE, flags: { ...DEFAULT_STATE.flags } };
+      const parsed = JSON.parse(raw) as Partial<State>;
+      return {
+        size: typeof parsed.size === 'number' ? parsed.size : 100,
+        flags: { ...DEFAULT_STATE.flags, ...(parsed.flags ?? {}) },
+      };
+    } catch {
+      return { ...DEFAULT_STATE, flags: { ...DEFAULT_STATE.flags } };
+    }
+  };
+  const persist = (s: State) => {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(s)); } catch {}
+  };
+
+  const apply = (s: State) => {
+    document.documentElement.style.setProperty('--a11y-font-scale', String(s.size / 100));
+    for (const flag of FLAGS) {
+      document.documentElement.classList.toggle(`a11y-${flag}`, s.flags[flag]);
+    }
+    if (sizeBtns) sizeBtns.forEach((b) => {
+      const on = Number(b.dataset.a11ySize) === s.size;
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    if (flagInputs) flagInputs.forEach((i) => {
+      const flag = i.dataset.a11yFlag as Flag;
+      i.checked = !!s.flags[flag];
+    });
+  };
+
+  let state = load();
+  apply(state);
+
+  const openPanel = () => {
+    if (!root || !panel || !fab) return;
+    root.dataset.state = 'open';
+    panel.hidden = false;
+    fab.setAttribute('aria-expanded', 'true');
+  };
+  const closePanel = () => {
+    if (!root || !panel || !fab) return;
+    root.dataset.state = 'closed';
+    panel.hidden = true;
+    fab.setAttribute('aria-expanded', 'false');
+  };
+
+  fab?.addEventListener('click', () => {
+    (root?.dataset.state === 'open' ? closePanel : openPanel)();
+  });
+  closeBtn?.addEventListener('click', closePanel);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && root?.dataset.state === 'open') closePanel();
+  });
+  document.addEventListener('click', (e) => {
+    if (root?.dataset.state !== 'open') return;
+    if (root.contains(e.target as Node)) return;
+    closePanel();
+  });
+
+  sizeBtns?.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      state = { ...state, size: Number(btn.dataset.a11ySize) };
+      apply(state);
+      persist(state);
+    });
+  });
+
+  flagInputs?.forEach((input) => {
+    input.addEventListener('change', () => {
+      const flag = input.dataset.a11yFlag as Flag;
+      state = { ...state, flags: { ...state.flags, [flag]: input.checked } };
+      apply(state);
+      persist(state);
+    });
+  });
+
+  root?.querySelectorAll<HTMLButtonElement>('[data-a11y-action]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const action = btn.dataset.a11yAction;
+      if (action === 'reset') {
+        state = { ...DEFAULT_STATE, flags: { ...DEFAULT_STATE.flags } };
+        apply(state);
+        persist(state);
+      } else if (action === 'cookie') {
+        document.dispatchEvent(new CustomEvent('df:open-consent'));
+        closePanel();
+      }
+    });
+  });
+</script>

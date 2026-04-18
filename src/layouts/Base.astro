@@ -4,6 +4,8 @@ import { SITE } from '../config/site';
 import SEO from '../components/SEO.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import CookieConsent from '../components/CookieConsent.astro';
+import AccessibilityControl from '../components/AccessibilityControl.astro';
 
 interface Props {
   title: string;
@@ -26,11 +28,25 @@ const { title, description, image, noindex } = Astro.props;
 
     <SEO title={title} description={description} image={image} noindex={noindex} />
 
-    <script
-      is:inline
-      defer
-      src={SITE.analytics.umamiSrc}
-      data-website-id={SITE.analytics.umamiWebsiteId}></script>
+    <!--
+      Restore persisted accessibility prefs before first paint so toggled
+      classes (font-scale, high-contrast, etc.) don't flash off.
+    -->
+    <script is:inline>
+      (function () {
+        try {
+          var raw = localStorage.getItem('df-a11y');
+          if (!raw) return;
+          var s = JSON.parse(raw);
+          if (typeof s.size === 'number') {
+            document.documentElement.style.setProperty('--a11y-font-scale', String(s.size / 100));
+          }
+          ['contrast', 'links', 'motion', 'pause', 'readable'].forEach(function (f) {
+            if (s.flags && s.flags[f]) document.documentElement.classList.add('a11y-' + f);
+          });
+        } catch (_) {}
+      })();
+    </script>
   </head>
 
   <body class="min-h-dvh bg-paper text-ink antialiased">
@@ -47,16 +63,37 @@ const { title, description, image, noindex } = Astro.props;
 
     <Footer />
 
-    <!-- BringThemHomeNow ticker -->
-    <div id="bthn" lang="en"></div>
+    <CookieConsent />
+    <AccessibilityControl />
+
+    <!--
+      Analytics loads only after the visitor grants consent via the
+      CookieConsent banner. The `df:consent-changed` event fires on
+      page load with stored prefs and on every user action.
+    -->
     <script
       is:inline
-      src={SITE.thirdParty.hostagesTickerScript}
-      integrity={SITE.thirdParty.hostagesTickerIntegrity}
-      crossorigin="anonymous"></script>
-
-    <!-- Enable.co.il accessibility widget -->
-    <script is:inline src={SITE.thirdParty.enableAccessibilityScript}></script>
+      define:vars={{
+        umamiSrc: SITE.analytics.umamiSrc,
+        umamiWebsiteId: SITE.analytics.umamiWebsiteId,
+      }}
+    >
+      (function () {
+        var loaded = false;
+        function load() {
+          if (loaded) return;
+          loaded = true;
+          var s = document.createElement('script');
+          s.defer = true;
+          s.src = umamiSrc;
+          s.setAttribute('data-website-id', umamiWebsiteId);
+          document.head.appendChild(s);
+        }
+        document.addEventListener('df:consent-changed', function (e) {
+          if (e && e.detail && e.detail.analytics) load();
+        });
+      })();
+    </script>
 
     <!-- Scroll-reveal observer -->
     <script>

@@ -1,0 +1,34 @@
+{
+  "$schema": "./schema.json",
+  "cookie": {
+    "title": "Cookies & privacy",
+    "body": "This site uses a single first-party analytics cookie to understand how visitors use the pages. No ads, no cross-site tracking, no data sold. You can change your choice any time from the accessibility panel.",
+    "accept": "Accept",
+    "reject": "Reject",
+    "manage": "Manage preferences",
+    "analytics_label": "Anonymous analytics",
+    "analytics_help": "Helps us improve the site. Uses a privacy-preserving first-party tracker.",
+    "save": "Save choices",
+    "learn_more": "Privacy policy"
+  },
+  "a11y": {
+    "open": "Open accessibility menu",
+    "close": "Close accessibility menu",
+    "title": "Accessibility",
+    "text_size": "Text size",
+    "text_smaller": "Smaller",
+    "text_default": "Default",
+    "text_larger": "Larger",
+    "high_contrast": "High contrast",
+    "underline_links": "Underline links",
+    "reduce_motion": "Reduce motion",
+    "pause_animations": "Pause animations",
+    "dyslexia_font": "Readable font",
+    "reset": "Reset all",
+    "cookie_settings": "Cookie settings"
+  },
+  "language": {
+    "switcher_label": "Language",
+    "coming_soon": "Coming soon"
+  }
+}

@@ -1,0 +1,27 @@
+---
+import { SITE } from '../config/site';
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-night py-12 text-paper">
+  <div class="container-app flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+    <p class="text-center font-display text-sm md:text-left md:text-base">
+      Copyright © {year} {SITE.name} — All Rights Reserved
+    </p>
+
+    <ul class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 font-display text-sm md:justify-end md:text-base">
+      {SITE.footerLinks.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            target={link.href.startsWith('http') ? '_blank' : undefined}
+            rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+            class="text-paper transition-colors hover:text-cyan-soft"
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</footer>

@@ -1,0 +1,84 @@
+---
+import Base from '../layouts/Base.astro';
+import SimpleHero from '../components/SimpleHero.astro';
+import OrgGrid from '../components/OrgGrid.astro';
+import ProjectSection from '../components/ProjectSection.astro';
+import { Icon } from 'astro-icon/components';
+
+const orgs = [
+  { label: 'IMS - Network', href: '#ims-network', image: '/images/ims-network-logo.webp' },
+  { label: 'AiDock', href: '#aidock', image: '/images/aidock-logo-light-rounded-424x424.png' },
+  { label: 'Hasbara', href: '#hasbara', image: '/images/wings-of-freedom-icon-upscaled-424x440.png' },
+  { label: 'TeGriAi', href: '#article02-1s', image: '/images/tegriai-white-clear-background-400x400.png' },
+] as const;
+---
+
+<Base
+  title="Work"
+  description="Explore my professional journey and experience in the world of technology and innovation. You'll find a comprehensive list of my work experiences on this page."
+  image="/images/work-meta.png"
+>
+  <SimpleHero title="My Work">
+    <p class="font-sans text-display-7 text-paper">
+      As a minority, Jews must work four times as hard<br />
+      not just to succeed but to change the world.
+    </p>
+  </SimpleHero>
+
+  <OrgGrid
+    title="Organisations"
+    subtitle="Companies I Lead & Work With"
+    description="Click on the images below to explore each company and learn more."
+    orgs={orgs}
+  />
+
+  <ProjectSection
+    id="ims-network"
+    title="IMS - Network"
+    body="I founded IMS Network in 2023 as a simple Minecraft server. Today, the company has evolved into a sophisticated, secure cloud platform that provides developers and small to medium-sized businesses with cloud computing services."
+    image="/images/ims-network-logo.webp"
+    imageAlt="IMS Network logo"
+  >
+    <a class="btn btn-ghost" href="https://ims-network.net" target="_blank" rel="noopener noreferrer">Learn More</a>
+    <a class="btn btn-ghost" href="https://cloud.ims-network.net" target="_blank" rel="noopener noreferrer">
+      <Icon name="lucide:server" class="h-4 w-4" aria-hidden="true" /> Buy
+    </a>
+  </ProjectSection>
+
+  <ProjectSection
+    id="aidock"
+    title="AiDock"
+    body="AiDock is a logistics AI company specializing in automating customs clearance and trade compliance processes. By leveraging artificial intelligence, it streamlines document processing, reduces delays, and enhances supply chain efficiency. AiDock assists freight forwarders, customs brokers, and logistics companies in optimizing operations, minimizing errors, and improving compliance with international trade regulations."
+    image="/images/aidock-logo-light-rounded-424x424.png"
+    imageAlt="AiDock logo"
+  >
+    <a class="btn btn-amber" href="https://aidock.net" target="_blank" rel="noopener noreferrer">Learn More</a>
+  </ProjectSection>
+
+  <ProjectSection
+    id="hasbara"
+    title="Hasbara"
+    body={`Since the October 7th massacre, Jews around the globe have encountered an unprecedented rise in antisemitism and acts of violence.
+As misinformation continues to spread, the battle for truth has never been more pressing.
+I have taken this mission into my own hands, investing over $100,000 to expose falsehoods, counter-propaganda, and defend Israel on all fronts.
+
+This is more than a fight for truth — it's a fight for our future.`}
+    image="/images/wings-of-freedom-icon-upscaled-424x440.png"
+    imageAlt="Wings of Freedom"
+  >
+    <a class="btn btn-crimson" href="https://hasbara.co.il" target="_blank" rel="noopener noreferrer">Stand With Us</a>
+  </ProjectSection>
+
+  <ProjectSection
+    id="article02-1s"
+    title="TeGriAi"
+    body="At TeGriAi, I serve as the CTO of the gaming community, where we build products aimed at enhancing the Israeli gaming sector. My mission is to connect over 250,000 passionate gamers from every corner of Israel and beyond, creating a space where we can share our love for gaming, compete with one another, and spark innovative ideas that drive our beloved hobby forward."
+    image="/images/tegriai-white-clear-background-400x400.png"
+    imageAlt="TeGriAi logo"
+  >
+    <a class="btn btn-ghost" href="https://tegriai.com" target="_blank" rel="noopener noreferrer">Learn More</a>
+    <a class="btn btn-ghost" href="https://discord.gg/tgi" target="_blank" rel="noopener noreferrer">
+      <Icon name="simple-icons:discord" class="h-4 w-4" aria-hidden="true" /> Join
+    </a>
+  </ProjectSection>
+</Base>

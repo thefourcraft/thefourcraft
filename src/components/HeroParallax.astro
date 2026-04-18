@@ -1,0 +1,54 @@
+---
+interface Props {
+  title: string;
+  image: string;
+  overlayOpacity?: number;
+  contentAlign?: 'bottom' | 'center';
+  contentWidth?: 'narrow' | 'default' | 'wide';
+}
+const {
+  title,
+  image,
+  overlayOpacity = 0.5,
+  contentAlign = 'center',
+  contentWidth = 'default',
+} = Astro.props;
+---
+
+<section
+  class:list={[
+    'parallax-hero relative isolate flex min-h-[100svh] w-full overflow-hidden text-paper',
+    contentAlign === 'bottom' ? 'items-end' : 'items-center',
+  ]}
+>
+  <div class="parallax-bg absolute inset-0 -z-20" style={`background-image: url(${image});`}></div>
+  <div class="absolute inset-0 -z-10 bg-night" style={`opacity: ${overlayOpacity};`}></div>
+
+  <div class="container-app relative z-10 py-20 md:py-24">
+    <div
+      class:list={[
+        'mx-auto flex flex-col items-center gap-5 text-center',
+        contentWidth === 'narrow' && 'max-w-[640px]',
+        contentWidth === 'default' && 'max-w-[800px]',
+        contentWidth === 'wide' && 'max-w-[1100px]',
+      ]}
+    >
+      <h1 class="reveal font-display text-display-1 font-normal leading-[1.1] text-paper">
+        <strong>{title}</strong>
+      </h1>
+      <div class="reveal w-full"><slot /></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .parallax-bg {
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    will-change: transform;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .parallax-bg { background-attachment: scroll; }
+  }
+</style>

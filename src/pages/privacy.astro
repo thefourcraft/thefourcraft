@@ -1,0 +1,85 @@
+---
+import Base from '../layouts/Base.astro';
+
+const sections = [
+  {
+    title: 'Information I Collect',
+    body: `I collect personal information from you in the following ways:
+
+Information you provide directly to me
+This includes information you provide when you contact us, sign up for our email list, or create an account on our website.
+
+Information I collect automatically
+This includes information such as your IP address, browser type, and referring website.
+I also collect information about your use of our website, such as the pages you visit and the links you click.`,
+  },
+  {
+    title: 'How I Use Your Information',
+    body: `I use your personal information for the following purposes:
+
+- To provide you with the services you request.
+- To send you marketing communications, if you have agreed to receive them.
+- To improve my website and services.
+- To protect my website and services from fraud and abuse.`,
+  },
+  {
+    title: 'How We Share Your Information',
+    body: `We share your personal information with the following third parties:
+
+Cloudflare
+I use Cloudflare for Cloudflare Analytics and CDN and website protection.
+Cloudflare may collect personal information from you when you visit our website.
+
+IMS - Analytics
+We use IMS - Analytics for tracking.
+IMS - Analytics may collect personal information from you when you visit our website.
+
+I may also share your personal information with other third parties if I am required to do so by law or if I believe it is necessary to protect our rights or the rights of others.`,
+  },
+  {
+    title: 'Your Rights',
+    body: `You have the following rights regarding your personal information:
+
+- The right to rectify your personal information.
+- The right to restrict the processing of your personal information.
+- The right to object to the processing of your personal information.
+- The right to data portability.
+
+You can exercise these rights by contacting me at legal@david-furman.com`,
+  },
+  {
+    title: 'Security',
+    body: `I take reasonable measures to protect your personal information from unauthorized access, use, disclosure, alteration, or destruction.
+However, no security method is perfect, and I cannot guarantee the security of your personal information.`,
+  },
+  {
+    title: 'Changes to This Privacy Policy',
+    body: `I may update this Privacy Policy from time to time. If we make any material changes, I will notify you by email or by posting a notice on our website.`,
+  },
+];
+---
+
+<Base
+  title="Privacy Policy"
+  description=""
+>
+  <section class="relative isolate overflow-hidden bg-night section-pad pt-36">
+    <div class="container-app">
+      <article class="card mx-auto max-w-5xl bg-paper p-8 text-ink md:p-16" data-reveal>
+        <h1 class="font-display text-display-2 font-normal">
+          <strong>Privacy Policy</strong>
+        </h1>
+        <div class="mt-10 flex flex-col gap-10">
+          {sections.map((s) => (
+            <section>
+              <h2 class="font-display text-display-5 font-normal">
+                <strong>{s.title}</strong>
+              </h2>
+              <p class="mt-3 whitespace-pre-line font-sans text-display-7 text-ink-soft">{s.body}</p>
+            </section>
+          ))}
+        </div>
+      </article>
+    </div>
+  </section>
+</Base>

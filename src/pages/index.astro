@@ -1,0 +1,49 @@
+---
+import Base from '../layouts/Base.astro';
+import HeroParallax from '../components/HeroParallax.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import FeatureSplit from '../components/FeatureSplit.astro';
+
+const aboutBody = `Life is pretty hectic for me with all the different roles I juggle. I'm always on the go!
+
+By day, I serve in the Israel Defense Forces (IDF).
+By evening, I step into my role as CISO at AiDock, securing and optimizing digital operations.
+By night, I lead as CTO at IMS - Network, shaping the future of gaming and technology.
+
+Beyond my professional work, I'm deeply involved in open-source projects and growing my brand, DF. I also serve as Chairman of the Israeli Gaming Association, driving the expansion of Israel's gaming industry. Additionally, I volunteer as CTO at TeGriAi, Israel's largest gaming community, which has grown to over 260,000 members.
+
+Since the start of the Iron Swords War, I've been committed to the digital front, using my expertise to defend Israel and amplify its presence in the online sphere.`;
+---
+
+<Base
+  title="Home"
+  description="Welcome to David Furman's Personal Website, where I document my professional journey, creative endeavors, and technological insights. Explore my world of innovation and passion for technology and gaming. Join me in uncovering the latest in DevOps, cybersecurity, and gaming adventures."
+  image="/images/index-meta.png"
+>
+  <HeroParallax
+    title="Welcome"
+    image="/images/artboard-2000x1125.webp"
+    overlayOpacity={0.5}
+    contentAlign="bottom"
+    contentWidth="default"
+  >
+    <h2 class="font-display text-display-2 font-normal leading-[1.2] text-paper">
+      <strong>David's Place</strong>
+    </h2>
+    <p class="mt-2 font-sans text-display-7 text-paper">
+      It's My Official Website To Document My Creations
+    </p>
+  </HeroParallax>
+
+  <ArticleCard
+    title="ABOUT ME"
+    body={aboutBody}
+    image="/images/20210923-1417430-1-2000x1269.webp"
+  />
+
+  <FeatureSplit
+    heading="What Is DF?"
+    subheading="DF"
+    body="It's a nickname derived from my name, David Furman. This is my personal brand for showcasing my creations and documenting my projects and the different aspects of my life."
+  />
+</Base>

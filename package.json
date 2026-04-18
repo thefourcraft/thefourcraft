@@ -1,0 +1,37 @@
+{
+  "name": "df-website",
+  "type": "module",
+  "version": "2.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "wrangler dev",
+    "deploy": "astro build && wrangler deploy",
+    "astro": "astro",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.8",
+    "@astrojs/cloudflare": "^13.1.10",
+    "@astrojs/sitemap": "^3.7.2",
+    "@fontsource-variable/inter-tight": "^5.2.7",
+    "@fontsource/m-plus-rounded-1c": "^5.2.10",
+    "@iconify-json/lucide": "^1.2.102",
+    "@iconify-json/simple-icons": "^1.2.78",
+    "@tailwindcss/vite": "^4.2.2",
+    "astro": "^6.1.8",
+    "astro-icon": "^1.1.5",
+    "embla-carousel": "^8.6.0",
+    "motion": "^12.38.0",
+    "sharp": "^0.34.5",
+    "tailwindcss": "^4.2.2",
+    "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "wrangler": "^4.83.0"
+  },
+  "overrides": {
+    "vite": "^7.3.1"
+  }
+}

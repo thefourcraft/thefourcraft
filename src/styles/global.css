@@ -1,0 +1,158 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/inter-tight';
+@import '@fontsource/m-plus-rounded-1c/300.css';
+@import '@fontsource/m-plus-rounded-1c/400.css';
+@import '@fontsource/m-plus-rounded-1c/500.css';
+@import '@fontsource/m-plus-rounded-1c/700.css';
+@import '@fontsource/m-plus-rounded-1c/800.css';
+@import '@fontsource/m-plus-rounded-1c/900.css';
+
+/* ─── Design tokens ──────────────────────────────────────────────────────── */
+@theme {
+  --font-sans: 'Inter Tight Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'M PLUS Rounded 1c', 'Inter Tight Variable', ui-sans-serif, sans-serif;
+
+  /* Brand palette */
+  --color-ink: #232323;
+  --color-ink-soft: #3d3d3d;
+  --color-mist: #c7c7c7;
+  --color-fog: #cfcfcf;
+  --color-stone: #7a7a7a;
+  --color-paper: #ffffff;
+  --color-night: #000000;
+
+  --color-cyan: #22d5d5;
+  --color-cyan-soft: #48e2e2;
+  --color-amber: #ef9306;
+  --color-amber-soft: #faa92e;
+  --color-crimson: #8d162b;
+  --color-crimson-soft: #b91d38;
+  --color-moss: #3b7a13;
+  --color-moss-soft: #50a61a;
+
+  /* Shape language */
+  --radius-card: 2rem;
+  --radius-button: 0.25rem;
+
+  /* Fluid display scale (clamp(min, fluid, max)) */
+  --text-display-1: clamp(2.4rem, 1.857rem + 2.714vw, 5rem);
+  --text-display-1--line-height: 1.1;
+  --text-display-2: clamp(2.05rem, 1.643rem + 2.036vw, 4rem);
+  --text-display-2--line-height: 1.2;
+  --text-display-5: clamp(1.525rem, 1.321rem + 1.018vw, 2.5rem);
+  --text-display-5--line-height: 1.4;
+  --text-display-6: clamp(1.525rem, 1.321rem + 1.018vw, 2.5rem);
+  --text-display-6--line-height: 1.4;
+  --text-display-7: clamp(1.14rem, 1.085rem + 0.272vw, 1.4rem);
+  --text-display-7--line-height: 1.4;
+
+  /* Animations */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 200ms;
+  --duration-base: 400ms;
+  --duration-slow: 800ms;
+
+  --animate-fade-up: fade-up var(--duration-slow) var(--ease-out-expo) both;
+  --animate-fade-in: fade-in var(--duration-base) var(--ease-out-expo) both;
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translate3d(0, 24px, 0); }
+    to { opacity: 1; transform: translate3d(0, 0, 0); }
+  }
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+}
+
+/* ─── Base ───────────────────────────────────────────────────────────────── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-feature-settings: 'cv11', 'ss01', 'ss03';
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    line-height: 1.1;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-cyan);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ─── Reusable component classes ─────────────────────────────────────────── */
+@layer components {
+  .btn {
+    @apply inline-flex items-center gap-2 rounded-button border-2 px-8 py-5 font-display text-base
+           font-medium uppercase tracking-wide transition-colors duration-200;
+  }
+  .btn-primary {
+    @apply rounded-full border-paper bg-transparent text-paper hover:bg-paper hover:text-ink;
+  }
+  .btn-secondary {
+    @apply border-cyan bg-cyan text-paper hover:border-cyan-soft hover:bg-cyan-soft;
+  }
+  .btn-amber {
+    @apply border-amber bg-amber text-paper hover:border-amber-soft hover:bg-amber-soft;
+  }
+  .btn-crimson {
+    @apply border-crimson bg-crimson text-paper hover:border-crimson-soft hover:bg-crimson-soft;
+  }
+  .btn-ghost {
+    @apply border-paper bg-transparent text-paper hover:bg-paper hover:text-ink;
+  }
+  .card {
+    @apply overflow-hidden rounded-card bg-paper shadow-sm transition-transform duration-300;
+  }
+  .card-lift {
+    @apply hover:-translate-y-2 hover:shadow-xl;
+  }
+  .container-app {
+    @apply mx-auto w-full max-w-7xl px-6 lg:px-10;
+  }
+  .section-pad {
+    @apply py-24 md:py-32;
+  }
+
+  /* Scroll-reveal — uniform simple fadeIn (matches original animate.css behavior).
+     Elements start at opacity:0 and fade in over 1s with 1s delay once intersected. */
+  .reveal {
+    opacity: 0;
+    transition: opacity 1000ms var(--ease-out-expo);
+    transition-delay: 200ms;
+    will-change: opacity;
+  }
+  .reveal.is-visible { opacity: 1; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transition: none; }
+  }
+
+  /* Legacy data-reveal hook kept for any remaining markup */
+  [data-reveal] {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+    transition: opacity var(--duration-slow) var(--ease-out-expo),
+                transform var(--duration-slow) var(--ease-out-expo);
+  }
+  [data-reveal].is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}

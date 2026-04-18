@@ -1,0 +1,100 @@
+---
+import Base from '../layouts/Base.astro';
+import { Icon } from 'astro-icon/components';
+
+const socials = [
+  {
+    label: 'Facebook',
+    href: 'https://www.facebook.com/david2004furman/',
+    icon: 'simple-icons:facebook',
+    color: '#3b5998',
+  },
+  {
+    label: 'Instagram',
+    href: 'https://www.instagram.com/david_furman/',
+    icon: 'simple-icons:instagram',
+    color: '#e4405f',
+  },
+  {
+    label: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/david-furman/',
+    icon: 'simple-icons:linkedin',
+    color: '#0077b5',
+  },
+];
+---
+
+<Base
+  title="Contact Me"
+  description="Stay in touch and connect with me. The Contact Me page is the gateway to reaching out. Whether you have questions, opportunities."
+  image="/images/contact-me-meta.png"
+>
+  <section class="bg-night px-6 pb-36 pt-36 text-paper md:px-16">
+    <div class="container-app">
+      <h2 class="reveal mb-12 text-center font-display text-display-2 font-normal">
+        <strong>Follow Me</strong>
+      </h2>
+      <ul class="flex flex-wrap justify-center gap-6">
+        {socials.map((s) => (
+          <li class="reveal">
+            <a
+              href={s.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={s.label}
+              class="social-circle"
+              style={`background-color: ${s.color};`}
+            >
+              <Icon name={s.icon} class="h-8 w-8" aria-hidden="true" />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="bg-night px-6 pb-24 pt-24 text-paper md:px-16">
+    <div class="container-app">
+      <h2 class="reveal mb-12 text-center font-display text-display-2 font-normal">
+        <strong>All The Ways To Contact</strong>
+      </h2>
+      <div class="grid grid-cols-1 gap-12 md:grid-cols-2">
+        <article class="reveal">
+          <h3 class="font-display text-display-5 font-normal">
+            <strong>Contact Policy</strong>
+          </h3>
+          <p class="mt-4 font-sans text-display-7">
+            By reaching out, you affirm your support for Israel's right to defend itself and agree not to send spam or unsolicited marketing messages.
+          </p>
+        </article>
+        <article class="reveal">
+          <h3 class="font-display text-display-5 font-normal">
+            <strong>Email</strong>
+          </h3>
+          <p class="mt-4 font-sans text-display-7">
+            <a href="mailto:me@david-furman.com" class="text-paper hover:underline">me@david-furman.com</a>
+            <br /><br />
+            <a href="mailto:davidf@team.ims-network.net" class="text-paper hover:underline">david@team.ims-network.net</a>
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .social-circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 9999px;
+    color: var(--color-paper);
+    transition: transform 250ms var(--ease-out-expo), filter 250ms;
+  }
+  .social-circle:hover {
+    transform: translateY(-4px);
+    filter: brightness(1.1);
+  }
+</style>

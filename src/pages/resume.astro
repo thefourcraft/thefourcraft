@@ -1,0 +1,56 @@
+---
+import Base from '../layouts/Base.astro';
+import HeroParallax from '../components/HeroParallax.astro';
+import { Icon } from 'astro-icon/components';
+
+const bioParagraphs = [
+  'I am a multidisciplinary technology leader with extensive experience across cybersecurity, defense systems, digital strategy, and gaming infrastructure. My work spans both public and private sectors, where I apply a systems-level approach to building secure, scalable, and innovative platforms.',
+  'I currently serve in the Israel Defense Forces (IDF).',
+  "In the private sector, I serve as Chief Information Security Officer (CISO) at AiDock Ltd., where I lead the company's cybersecurity strategy and operations. My responsibilities include risk management, incident response, compliance, and the implementation of enterprise-grade security infrastructure. I work closely with development, DevOps, and executive leadership to ensure security is seamlessly embedded into every layer of our digital ecosystem.",
+  "In parallel, I serve as CEO of IMS Network, a company providing a cloud platform designed to support developers and small to medium-sized businesses. We focus on delivering scalable and reliable cloud computing services that enable teams to deploy and manage their applications efficiently. My role involves overseeing the company's strategic direction, product development, and operational growth as we build accessible solutions tailored to the evolving needs of modern developers.",
+  "Beyond my core roles, I am the Founder & Chairman of the Israeli Gaming Association, a national body advancing the gaming ecosystem in Israel through advocacy, policy engagement, and developer support. I also volunteer as CTO at TeGriAi, Israel's largest gaming community with over 255,000 members. My focus is on delivering sustainable growth, improving community tools, and creating long-term infrastructure that supports the Israeli gaming industry at scale.",
+  'In addition to my organizational responsibilities, I actively contribute to open-source projects and develop independent tools and systems under my personal brand, DF. These efforts reflect my commitment to continuous learning, community engagement, and advancing the broader tech landscape in Israel and beyond.',
+  "Since the October 7 Massacre & Iron Swords War, I have also taken an active role in Israel's digital advocacy space. I lead initiatives to protect the national narrative online, counter misinformation, and ensure Israel's voice is represented accurately and powerfully in digital spaces. This work combines my technical expertise with strategic communication and cyber resilience.",
+  'My career is defined by a clear focus: using technology as a force multiplier — for defense, for innovation, and for shaping the digital future of Israel.',
+];
+---
+
+<Base
+  title="Resume"
+  description="Get a quick overview of my skills, qualifications, and achievements in the fields of DevOps, cybersecurity, and gaming"
+  image="/images/resume-meta.png"
+>
+  <HeroParallax
+    title="I'm David Furman"
+    image="/images/whatsapp-image-2025-03-22-at-16.49.54-2000x1125.jpg"
+    overlayOpacity={0.7}
+    contentAlign="bottom"
+    contentWidth="wide"
+  >
+    <p class="font-sans text-display-7 text-paper">
+      CEO <a href="https://ims-network.org" target="_blank" rel="noopener noreferrer" class="text-cyan hover:underline">@IMS-Network</a>
+      &nbsp;| CTO <a href="https://discord.gg/tgi" target="_blank" rel="noopener noreferrer" class="text-cyan hover:underline">@TeGriAi</a>
+      &nbsp;| CISO <a href="https://aidock.net" target="_blank" rel="noopener noreferrer" class="text-cyan hover:underline">@AiDock</a>
+      <br /><br />
+      Founder &amp; Chairman
+      <a href="https://xn--4dbgajb0c9a6b.xn--4dbrk0ce" target="_blank" rel="noopener noreferrer" class="text-cyan hover:underline">@Israeli Gaming Association</a>
+    </p>
+    <div class="mt-8 flex justify-center">
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/david-furman/" target="_blank" rel="noopener noreferrer">
+        <Icon name="simple-icons:linkedin" class="h-4 w-4" aria-hidden="true" /> Follow
+      </a>
+    </div>
+  </HeroParallax>
+
+  <HeroParallax
+    title="Welcome To My World"
+    image="/images/backround-right-2000x1125.webp"
+    overlayOpacity={0.7}
+    contentAlign="center"
+    contentWidth="wide"
+  >
+    <div class="flex flex-col gap-5 text-left font-sans text-display-7 text-paper">
+      {bioParagraphs.map((p) => <p>{p}</p>)}
+    </div>
+  </HeroParallax>
+</Base>

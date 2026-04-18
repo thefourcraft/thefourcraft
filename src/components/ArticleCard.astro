@@ -1,0 +1,39 @@
+---
+interface Props {
+  title: string;
+  body?: string;
+  image: string;
+}
+const { title, body, image } = Astro.props;
+---
+
+<section class="relative isolate overflow-hidden bg-paper py-20 md:py-32">
+  <div class="about-bg absolute inset-0 -z-10" style={`background-image: url(${image});`}></div>
+
+  <div class="container-app">
+    <div
+      class="reveal relative mx-auto max-w-[1100px] rounded-[2rem] bg-paper px-6 py-12 text-center text-ink shadow-xl md:px-16 md:py-16"
+    >
+      <h2 class="font-display text-display-2 font-normal leading-[1.1] text-night">
+        <strong>{title}</strong>
+      </h2>
+      {body && (
+        <p class="mt-6 whitespace-pre-line font-sans text-display-7 text-night">
+          {body}
+        </p>
+      )}
+      <slot />
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-bg {
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .about-bg { background-attachment: scroll; }
+  }
+</style>

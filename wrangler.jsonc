@@ -1,0 +1,16 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "df-website",
+  "compatibility_date": "2026-04-18",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "observability": {
+    "enabled": true
+  }
+  // The Astro Cloudflare adapter auto-generates `main` and `assets`
+  // bindings at build time. Do NOT add them here manually.
+  //
+  // Secrets are not declared here — set with:
+  //   npx wrangler secret put GOOGLE_CHAT_WEBHOOK_URL
+  // For local dev, copy .dev.vars.example -> .dev.vars (gitignored).
+}

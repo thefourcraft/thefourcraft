@@ -23,28 +23,53 @@
 <!-- Contact -->
 <p align="center">
   <a href="https://www.linkedin.com/in/david-furman/" title="LinkedIn">
-    <img src="https://cdn.simpleicons.org/linkedin/0a66c2" alt="LinkedIn" height="28" />
+    <img src="https://api.iconify.design/mdi:linkedin.svg?color=white&height=32" alt="LinkedIn" height="32" />
   </a>
-  &nbsp;
+  &nbsp;&nbsp;
   <a href="https://www.instagram.com/david_furman/" title="Instagram">
-    <img src="https://cdn.simpleicons.org/instagram/e4405f" alt="Instagram" height="28" />
+    <img src="https://api.iconify.design/mdi:instagram.svg?color=white&height=32" alt="Instagram" height="32" />
   </a>
-  &nbsp;
+  &nbsp;&nbsp;
   <a href="https://www.facebook.com/david2004furman" title="Facebook">
-    <img src="https://cdn.simpleicons.org/facebook/1877f2" alt="Facebook" height="28" />
+    <img src="https://api.iconify.design/mdi:facebook.svg?color=white&height=32" alt="Facebook" height="32" />
   </a>
-  &nbsp;
+  &nbsp;&nbsp;
   <a href="https://github.com/thefourcraft" title="GitHub">
-    <img src="https://cdn.simpleicons.org/github/ffffff" alt="GitHub" height="28" />
+    <img src="https://api.iconify.design/mdi:github.svg?color=white&height=32" alt="GitHub" height="32" />
   </a>
-  &nbsp;
+  &nbsp;&nbsp;
   <a href="https://david-furman.com" title="Website">
-    <img src="https://cdn.simpleicons.org/googlechrome/4285f4" alt="Website" height="28" />
+    <img src="https://api.iconify.design/mdi:web.svg?color=white&height=32" alt="Website" height="32" />
   </a>
-  &nbsp;
+  &nbsp;&nbsp;
   <a href="mailto:me@david-furman.com?subject=[GitHub]" title="Email">
-    <img src="https://cdn.simpleicons.org/gmail/ea4335" alt="Email" height="28" />
+    <img src="https://api.iconify.design/mdi:email-outline.svg?color=white&height=32" alt="Email" height="32" />
   </a>
 </p>
 
-<p align="center"><sub>Brand icons from <a href="https://simpleicons.org">Simple Icons</a> (CC0).</sub></p>
+<p align="center"><sub>Icons: <a href="https://pictogrammers.com/library/mdi/">Material Design Icons</a> via the <a href="https://iconify.design">Iconify</a> API.</sub></p>
+
+<!-- GitHub stats — self-hosted on Cloudflare Workers (source: github.com/thefourcraft/thefourcraft/tree/production/stats) -->
+
+<h2 align="center">📊 GitHub Stats</h2>
+
+<p align="center">
+  <a href="https://github.com/thefourcraft">
+    <img alt="Streak" src="https://stats.david-furman.com/streak" />
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/thefourcraft">
+    <img alt="Stats" src="https://stats.david-furman.com/stats" />
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/thefourcraft">
+    <img alt="Contribution graph" src="https://stats.david-furman.com/graph" />
+  </a>
+</p>
+
+<p align="center"><sub>Cards generated live by <a href="https://github.com/thefourcraft/thefourcraft/tree/production/stats">dfstats</a>, a Cloudflare Worker I run at <code>stats.david-furman.com</code>. No third-party services.</sub></p>
+

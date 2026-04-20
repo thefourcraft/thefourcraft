@@ -1,0 +1,50 @@
+# Build the Astro site and deploy it to the single dfwebsite Cloudflare
+# Worker. Triggered on every push to the default branch, including the
+# automated commits from metrics.yml — so fresh profile cards go live
+# within a couple of minutes of being regenerated.
+
+name: Deploy (dfwebsite Worker)
+
+on:
+  push:
+    branches: [production]
+    paths:
+      - 'website/**'
+      - 'statsitis/**'
+      - '.github/workflows/deploy.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-dfwebsite
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Build & deploy
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: website
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: website/package-lock.json
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy to Cloudflare (single dfwebsite Worker)
+        env:
+          CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
+          CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
+        run: npx wrangler deploy

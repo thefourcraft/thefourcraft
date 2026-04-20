@@ -145,7 +145,7 @@ jobs:
           plugin_habits_from: 200
           plugin_habits_days: 14
           plugin_habits_facts: yes
-          plugin_habits_charts: yes
+          plugin_habits_charts: no
 
       # ── 7. Lines of code: total additions / deletions ───────────────────
       - name: lines
@@ -161,7 +161,8 @@ jobs:
           config_animations: no
           output_action: commit
           plugin_lines: yes
-          plugin_lines_sections: base
+          plugin_lines_sections: base, history
+          plugin_lines_repositories_limit: 0
 
       # ── 8. Stargazers: star count chart over time ────────────────────────
       - name: stargazers

@@ -35,7 +35,7 @@ jobs:
     steps:
       # ── 1. Isocalendar: full-year 3D contribution calendar ──────────────
       - name: isocalendar
-        uses: lowlighter/metrics@latest
+        uses: lowlighter/metrics@v3.34
         with:
           filename: website/public/metrics/isocalendar.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -52,7 +52,7 @@ jobs:
 
       # ── 2. Notable: contributions to external orgs/repos ────────────────
       - name: notable
-        uses: lowlighter/metrics@latest
+        uses: lowlighter/metrics@v3.34
         with:
           filename: website/public/metrics/notable.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -64,15 +64,14 @@ jobs:
           committer_branch: ${{ env.COMMIT_BRANCH }}
           committer_message: 'metrics: refresh notable'
           plugin_notable: yes
-          plugin_notable_from: all
-          plugin_notable_types: commit, pull_request, issue
+          plugin_notable_from: organization
+          plugin_notable_types: commit
           plugin_notable_repositories: yes
-          plugin_notable_indepth: yes
           plugin_notable_self: yes
 
       # ── 3. Languages: git-log indepth (includes private repos) ──────────
       - name: languages
-        uses: lowlighter/metrics@latest
+        uses: lowlighter/metrics@v3.34
         with:
           filename: website/public/metrics/languages.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -84,15 +83,12 @@ jobs:
           committer_branch: ${{ env.COMMIT_BRANCH }}
           committer_message: 'metrics: refresh languages'
           plugin_languages: yes
-          plugin_languages_indepth: yes
-          plugin_languages_details: percentage, bytes-size, lines
           plugin_languages_sections: most-used, recently-used
-          plugin_languages_analysis_timeout: 15
           plugin_languages_limit: 12
 
       # ── 4. Followup: PR lifecycle (opened / merged / still-open) ────────
       - name: followup
-        uses: lowlighter/metrics@latest
+        uses: lowlighter/metrics@v3.34
         with:
           filename: website/public/metrics/followup.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -109,7 +105,7 @@ jobs:
 
       # ── 5. Achievements: trophy row ─────────────────────────────────────
       - name: achievements
-        uses: lowlighter/metrics@latest
+        uses: lowlighter/metrics@v3.34
         with:
           filename: website/public/metrics/achievements.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -128,7 +124,7 @@ jobs:
 
       # ── 6. Habits: "when I code" chart + fun facts ──────────────────────
       - name: habits
-        uses: lowlighter/metrics@latest
+        uses: lowlighter/metrics@v3.34
         with:
           filename: website/public/metrics/habits.svg
           token: ${{ secrets.METRICS_TOKEN }}

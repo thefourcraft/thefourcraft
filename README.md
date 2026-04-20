@@ -74,23 +74,3 @@ Wakatime stats are a new addition since Nov 20 2022 [Learn More](https://wakatim
 <a href="https://github.com/ashutosh00710/github-readme-activity-graph">
 <img alt="My Activity Graph" 
 src="https://github-readme-activity-graph.vercel.app/graph?username=thefourcraft&bg_color=161616&color=d3d3d3&line=e8eaea&point=5b5959&hide_border=true"/></a>
-
-<div align="center">
-<h2>Read It in your Language</h2>
-    <a href="README_he.md">
-    <img alt="Hebrew" title="Hebrew" 
-    src="photos/Israel.svg"/>
-    </a>
-    <a href="README_ar.md">
-    <img alt="Arbic" title="Arbic" 
-    src="photos/uae.svg"/>
-    </a>
-    <a href="README_ru.md">
-    <img alt="Russian" title="Russian #StopTheWar" 
-    src="photos/russia.svg"/>
-    </a>
-    <a href="README_au.md">
-    <img alt="Ukraine" title="Ukraine" 
-    src="photos/Ukraine.svg"/>
-    </a>
-</div>

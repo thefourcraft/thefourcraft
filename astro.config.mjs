@@ -18,13 +18,14 @@ export default defineConfig({
   redirects: {
     '/index.html': '/',
     '/work.html': '/work',
-    '/resume.html': '/resume',
+    '/resume.html': '/opinions',
+    '/resume': '/opinions',
     '/contact-me.html': '/contact',
     '/privacy-policy.html': '/privacy',
     // Production's "Investment" CTA linked to Investments.html; point
     // the legacy URL at the closest equivalent content block.
-    '/Investments.html': '/work#ims-network',
-    '/investments': '/work#ims-network',
+    '/Investments.html': '/work',
+    '/investments': '/work',
   },
   integrations: [
     icon({

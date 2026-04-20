@@ -1,0 +1,107 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import SimpleHero from '../../components/SimpleHero.astro';
+import { Icon } from 'astro-icon/components';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('opinions', ({ data }) => !data.draft);
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const dateFmt = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<Base
+  title={entry.data.title}
+  description={entry.data.summary}
+  image="/images/index-meta.png"
+>
+  <SimpleHero title={entry.data.title}>
+    <p class="font-sans text-sm uppercase tracking-[0.14em] text-paper/60">
+      {dateFmt.format(entry.data.publishDate)}
+    </p>
+    <p class="mt-4 font-sans text-display-7 text-paper">{entry.data.summary}</p>
+  </SimpleHero>
+
+  <article class="bg-night py-20 text-paper md:py-28">
+    <div class="container-app">
+      <div class="prose-opinion mx-auto max-w-[820px] text-left font-sans text-display-7 text-paper/90">
+        <Content />
+      </div>
+      <div class="mx-auto mt-14 max-w-[820px]">
+        <a
+          href="/opinions"
+          class="inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-2.5 font-display text-base text-paper transition hover:border-white/60 hover:bg-paper hover:text-ink"
+        >
+          <Icon name="lucide:arrow-left" class="h-4 w-4" aria-hidden="true" />
+          Back to Opinions
+        </a>
+      </div>
+    </div>
+  </article>
+</Base>
+
+<style is:global>
+  .prose-opinion p { margin: 0 0 1.25em; }
+  .prose-opinion h2 {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin: 2em 0 0.6em;
+    line-height: 1.2;
+  }
+  .prose-opinion h3 {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 600;
+    margin: 1.6em 0 0.5em;
+    line-height: 1.25;
+  }
+  .prose-opinion ul,
+  .prose-opinion ol { margin: 0 0 1.25em 1.25em; }
+  .prose-opinion li { margin: 0.25em 0; }
+  .prose-opinion a {
+    color: var(--color-paper);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .prose-opinion a:hover { color: var(--color-paper); }
+  .prose-opinion blockquote {
+    border-left: 3px solid rgba(255, 255, 255, 0.25);
+    padding-left: 1.25em;
+    margin: 1.5em 0;
+    color: rgba(245, 245, 245, 0.8);
+    font-style: italic;
+  }
+  .prose-opinion code {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 0.1em 0.35em;
+    border-radius: 4px;
+    font-size: 0.92em;
+  }
+  .prose-opinion pre {
+    background: rgba(0, 0, 0, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 1rem 1.1rem;
+    border-radius: 0.75rem;
+    overflow-x: auto;
+    margin: 1.25em 0;
+  }
+  .prose-opinion pre code { background: transparent; padding: 0; }
+  .prose-opinion hr {
+    border: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    margin: 2em 0;
+  }
+</style>

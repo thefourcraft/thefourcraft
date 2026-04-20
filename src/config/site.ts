@@ -4,10 +4,6 @@ interface NavLink {
   icon: string;
   external?: boolean;
 }
-interface FooterLink {
-  label: string;
-  href: string;
-}
 interface Social {
   label: string;
   href: string;
@@ -23,7 +19,6 @@ interface SiteConfig {
   locale: string;
   navLinks: readonly NavLink[];
   ctaButton: { label: string; href: string; icon: string };
-  footerLinks: readonly FooterLink[];
   socials: readonly Social[];
   analytics: { umamiSrc: string; umamiWebsiteId: string };
 }
@@ -33,14 +28,14 @@ export const SITE: SiteConfig = {
   shortName: 'DF',
   url: 'https://david-furman.com',
   description:
-    "David Furman's personal site — documenting work, projects, and contributions across cybersecurity, DevOps, gaming, and open source.",
+    "David Furman's personal site, documenting work, projects, and contributions across cybersecurity, DevOps, gaming, and open source.",
   defaultOgImage: '/images/index-meta.png',
   locale: 'en',
   navLinks: [
     { label: 'Home', href: '/', icon: 'lucide:home' },
     { label: 'My Work', href: '/work', icon: 'lucide:briefcase' },
     { label: 'My Blog', href: 'https://blog.thefourcraft.com', icon: 'lucide:quote', external: true },
-    { label: 'Resume', href: '/resume', icon: 'lucide:paperclip' },
+    { label: 'Opinions', href: '/opinions', icon: 'lucide:message-square-quote' },
     { label: 'Contact Me', href: '/contact', icon: 'lucide:phone' },
   ],
   ctaButton: {
@@ -48,11 +43,6 @@ export const SITE: SiteConfig = {
     href: '/investments',
     icon: 'lucide:heart',
   },
-  footerLinks: [
-    { label: 'Tools Platform', href: 'https://tools.david-furman.com' },
-    { label: 'Blog', href: 'https://blog.david-furman.com' },
-    { label: 'My Work', href: '/work' },
-  ],
   socials: [
     { label: 'GitHub', href: 'https://github.com/thefourcraft', icon: 'simple-icons:github' },
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/davidfurman', icon: 'simple-icons:linkedin' },

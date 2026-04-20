@@ -1,7 +1,7 @@
 /**
  * i18n infrastructure.
  *
- * Translations are NOT implemented yet — this file defines the locale
+ * Translations are NOT implemented yet, this file defines the locale
  * contract so the rest of the app (layout, language switcher, routing)
  * can be wired up now and content populated later.
  */

@@ -12,17 +12,24 @@
   --font-sans: 'Inter Tight Variable', ui-sans-serif, system-ui, sans-serif;
   --font-display: 'M PLUS Rounded 1c', 'Inter Tight Variable', ui-sans-serif, sans-serif;
 
-  /* Brand palette */
-  --color-ink: #232323;
-  --color-ink-soft: #3d3d3d;
-  --color-mist: #c7c7c7;
-  --color-fog: #cfcfcf;
-  --color-stone: #7a7a7a;
-  --color-paper: #ffffff;
-  --color-night: #000000;
+  /* Brand palette — tinted neutrals, no pure black/white */
+  --color-ink: oklch(0.18 0.008 260);
+  --color-ink-soft: oklch(0.28 0.008 260);
+  --color-mist: oklch(0.82 0.004 260);
+  --color-fog: oklch(0.86 0.004 260);
+  --color-stone: oklch(0.55 0.008 260);
+  --color-paper: oklch(0.985 0.004 85);
+  --color-night: oklch(0.14 0.008 260);
 
-  --color-cyan: #22d5d5;
-  --color-cyan-soft: #48e2e2;
+  /* Body-on-dark opacity tokens */
+  --color-paper-body: rgba(248, 247, 243, 0.85);
+  --color-paper-muted: rgba(248, 247, 243, 0.55);
+  --color-paper-faint: rgba(248, 247, 243, 0.35);
+
+  /* Accents retained for system surfaces (high-contrast mode, crimson
+     warnings, amber highlights). Cyan is NOT used as a general accent. */
+  --color-cyan: oklch(0.74 0.12 200);
+  --color-cyan-soft: oklch(0.82 0.1 200);
   --color-amber: #ef9306;
   --color-amber-soft: #faa92e;
   --color-crimson: #8d162b;
@@ -30,8 +37,13 @@
   --color-moss: #3b7a13;
   --color-moss-soft: #50a61a;
 
-  /* Shape language */
+  /* Shape language — hierarchical radius scale */
+  --radius-sm: 0.5rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.25rem;
+  --radius-xl: 1.75rem;
   --radius-card: 2rem;
+  --radius-pill: 9999px;
   --radius-button: 0.25rem;
 
   /* Fluid display scale (clamp(min, fluid, max)) */
@@ -83,10 +95,16 @@
     line-height: 1.1;
   }
   :focus-visible {
-    outline: 2px solid var(--color-cyan);
+    outline: 2px solid var(--color-paper);
     outline-offset: 3px;
     border-radius: 4px;
   }
+  /* On paper backgrounds we need an ink outline instead */
+  .bg-paper :focus-visible,
+  body.bg-paper :focus-visible {
+    outline-color: var(--color-ink);
+  }
+  h1, h2, h3, h4, h5, h6 { font-weight: 600; }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
       animation-duration: 0.01ms !important;
@@ -131,7 +149,7 @@
     @apply py-24 md:py-32;
   }
 
-  /* Scroll-reveal — uniform simple fadeIn (matches original animate.css behavior).
+  /* Scroll-reveal, uniform simple fadeIn (matches original animate.css behavior).
      Elements start at opacity:0 and fade in over 1s with 1s delay once intersected. */
   .reveal {
     opacity: 0;

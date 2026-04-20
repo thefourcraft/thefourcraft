@@ -10,15 +10,15 @@ const { heading, subheading, body } = Astro.props;
 <section class="bg-night py-20 text-paper md:py-24">
   <div class="container-app grid grid-cols-1 gap-10 md:grid-cols-2 md:items-start md:gap-16">
     <div class="reveal">
-      <h2 class="feature-chip font-display text-display-2 font-normal leading-[1.1]">
-        <strong>{heading}</strong>
+      <h2 class="feature-chip font-display text-display-2 font-semibold leading-[1.1]">
+        {heading}
       </h2>
     </div>
     <div class="reveal flex flex-col gap-4">
       {subheading && (
-        <h3 class="font-display text-display-5 font-normal text-paper">
-          <strong>{subheading}</strong>
-        </h3>
+        <h3 class="font-display text-display-5 font-semibold text-paper">
+        {subheading}
+      </h3>
       )}
       <p class="font-sans text-display-7 text-paper">{body}</p>
       <slot />

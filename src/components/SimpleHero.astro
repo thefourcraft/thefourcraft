@@ -2,22 +2,24 @@
 interface Props {
   title: string;
   contentWidth?: 'narrow' | 'default' | 'wide';
+  align?: 'left' | 'center';
 }
-const { title, contentWidth = 'default' } = Astro.props;
+const { title, contentWidth = 'default', align = 'left' } = Astro.props;
 ---
 
 <section class="simple-hero relative w-full bg-ink text-paper">
-  <div class="container-app relative pb-48 pt-48">
+  <div class="container-app relative pb-40 pt-40 md:pb-48 md:pt-48">
     <div
       class:list={[
-        'relative z-10 mx-auto flex flex-col items-center gap-5 text-center',
+        'relative z-10 flex flex-col gap-5',
+        align === 'center' ? 'mx-auto items-center text-center' : 'items-start text-left',
         contentWidth === 'narrow' && 'max-w-[640px]',
         contentWidth === 'default' && 'max-w-[900px]',
         contentWidth === 'wide' && 'max-w-[1100px]',
       ]}
     >
-      <h1 class="reveal font-display text-display-2 font-normal leading-[1.1] text-paper">
-        <strong>{title}</strong>
+      <h1 class="reveal font-display text-display-2 font-semibold leading-[1.05] text-paper">
+        {title}
       </h1>
       <div class="reveal w-full"><slot /></div>
     </div>

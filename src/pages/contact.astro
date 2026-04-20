@@ -29,14 +29,14 @@ const socials = [
   description="Stay in touch and connect with me. The Contact Me page is the gateway to reaching out. Whether you have questions, opportunities."
   image="/images/contact-me-meta.png"
 >
-  <section class="bg-night px-6 pb-36 pt-36 text-paper md:px-16">
-    <div class="container-app">
-      <h2 class="reveal mb-12 text-center font-display text-display-2 font-normal">
-        <strong>Follow Me</strong>
-      </h2>
-      <ul class="flex flex-wrap justify-center gap-6">
+  <section class="bg-night px-6 pb-24 pt-32 text-paper md:px-16 md:pt-40">
+    <div class="container-app max-w-[1100px]">
+      <p class="reveal font-sans text-sm uppercase tracking-[0.18em] text-paper/50">
+        § Social
+      </p>
+      <ul class="reveal mt-6 flex flex-wrap gap-4">
         {socials.map((s) => (
-          <li class="reveal">
+          <li>
             <a
               href={s.href}
               target="_blank"
@@ -45,7 +45,7 @@ const socials = [
               class="social-circle"
               style={`background-color: ${s.color};`}
             >
-              <Icon name={s.icon} class="h-8 w-8" aria-hidden="true" />
+              <Icon name={s.icon} class="h-7 w-7" aria-hidden="true" />
             </a>
           </li>
         ))}
@@ -53,30 +53,74 @@ const socials = [
     </div>
   </section>
 
-  <section class="bg-night px-6 pb-24 pt-24 text-paper md:px-16">
-    <div class="container-app">
-      <h2 class="reveal mb-12 text-center font-display text-display-2 font-normal">
-        <strong>All The Ways To Contact</strong>
-      </h2>
-      <div class="grid grid-cols-1 gap-12 md:grid-cols-2">
-        <article class="reveal">
-          <h3 class="font-display text-display-5 font-normal">
-            <strong>Contact Policy</strong>
-          </h3>
-          <p class="mt-4 font-sans text-display-7">
-            By reaching out, you affirm your support for Israel's right to defend itself and agree not to send spam or unsolicited marketing messages.
+  <section class="bg-night px-6 pb-28 pt-8 text-paper md:px-16 md:pb-32">
+    <div class="container-app max-w-[1100px]">
+      <p class="reveal font-sans text-sm uppercase tracking-[0.18em] text-paper/50">
+        § Email
+      </p>
+
+      <div class="reveal mt-6 max-w-[720px]" data-contact-flow data-state="policy">
+        <!-- Step 1: Contact policy gate -->
+        <div class="contact-card" data-step="policy">
+          <h3 class="font-display text-display-5 font-semibold">
+        Contact Policy
+      </h3>
+          <p class="mt-4 font-sans text-display-7 text-paper/85">
+            Before I share my email, please read and accept my contact policy.
           </p>
-        </article>
-        <article class="reveal">
-          <h3 class="font-display text-display-5 font-normal">
-            <strong>Email</strong>
-          </h3>
-          <p class="mt-4 font-sans text-display-7">
-            <a href="mailto:me@david-furman.com" class="text-paper hover:underline">me@david-furman.com</a>
-            <br /><br />
-            <a href="mailto:davidf@team.ims-network.net" class="text-paper hover:underline">david@team.ims-network.net</a>
+          <blockquote class="contact-policy mt-6">
+            By reaching out, you affirm your support for Israel's right to defend
+            itself and agree not to send spam or unsolicited marketing messages.
+          </blockquote>
+
+          <label class="contact-check mt-6">
+            <input type="checkbox" data-contact-accept />
+            <span>I read and accept the contact policy.</span>
+          </label>
+
+          <button
+            type="button"
+            class="contact-btn mt-6"
+            data-contact-reveal
+            disabled
+            aria-controls="contact-emails"
+          >
+            <span>Show my email addresses</span>
+            <Icon name="lucide:arrow-right" class="h-4 w-4" aria-hidden="true" />
+          </button>
+        </div>
+
+        <!-- Step 2: Revealed emails -->
+        <div class="contact-card" data-step="emails" id="contact-emails" hidden>
+          <h3 class="font-display text-display-5 font-semibold">
+        Email
+      </h3>
+          <p class="mt-4 font-sans text-display-7 text-paper/85">
+            Thanks. Use whichever address fits best.
           </p>
-        </article>
+
+          <ul class="contact-email-list mt-6">
+            <li>
+              <a href="mailto:me@david-furman.com" class="contact-email">
+                <span class="contact-email-label">Personal</span>
+                <span class="contact-email-value">me@david-furman.com</span>
+                <Icon name="lucide:mail" class="contact-email-icon" aria-hidden="true" />
+              </a>
+            </li>
+            <li>
+              <a href="mailto:david@arcusis.com" class="contact-email">
+                <span class="contact-email-label">Arcusis</span>
+                <span class="contact-email-value">david@arcusis.com</span>
+                <Icon name="lucide:mail" class="contact-email-icon" aria-hidden="true" />
+              </a>
+            </li>
+          </ul>
+
+          <button type="button" class="contact-link mt-6" data-contact-back>
+            <Icon name="lucide:arrow-left" class="h-4 w-4" aria-hidden="true" />
+            <span>Back to contact policy</span>
+          </button>
+        </div>
       </div>
     </div>
   </section>
@@ -97,4 +141,146 @@ const socials = [
     transform: translateY(-4px);
     filter: brightness(1.1);
   }
+
+  .contact-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1.75rem;
+    padding: 2rem 2rem 2.1rem;
+  }
+  @media (min-width: 768px) {
+    .contact-card { padding: 2.5rem 2.75rem 2.6rem; }
+  }
+
+  .contact-policy {
+    border-left: 3px solid rgba(255, 255, 255, 0.25);
+    padding: 0.25rem 0 0.25rem 1.1rem;
+    margin: 0;
+    font-style: italic;
+    color: var(--color-paper-body);
+    line-height: 1.55;
+  }
+
+  .contact-check {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-size: 0.95rem;
+    color: var(--color-paper);
+    cursor: pointer;
+    user-select: none;
+  }
+  .contact-check input {
+    width: 1.1rem;
+    height: 1.1rem;
+    accent-color: var(--color-paper);
+  }
+
+  .contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    border: 1px solid var(--color-paper);
+    border-radius: 9999px;
+    padding: 0.7rem 1.35rem;
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background 200ms, color 200ms, transform 200ms var(--ease-out-expo);
+  }
+  .contact-btn:hover:not(:disabled) { transform: translateY(-1px); }
+  .contact-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    background: transparent;
+    color: var(--color-paper);
+  }
+
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    border: 0;
+    color: var(--color-paper);
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    cursor: pointer;
+    opacity: 0.8;
+  }
+  .contact-link:hover { opacity: 1; text-decoration: underline; text-underline-offset: 4px; }
+
+  .contact-email-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.75rem;
+  }
+  .contact-email {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.2rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.02);
+    color: var(--color-paper);
+    text-decoration: none;
+    transition: border-color 200ms, background 200ms, transform 200ms var(--ease-out-expo);
+  }
+  .contact-email:hover {
+    border-color: rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-1px);
+  }
+  .contact-email-label {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgba(245, 245, 245, 0.6);
+  }
+  .contact-email-value {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    word-break: break-all;
+  }
+  .contact-email-icon { width: 1.1rem; height: 1.1rem; opacity: 0.7; }
+
+  /* Step transitions */
+  [data-contact-flow][data-state='policy'] [data-step='emails'] { display: none; }
+  [data-contact-flow][data-state='emails'] [data-step='policy'] { display: none; }
 </style>
+
+<script>
+  const flow = document.querySelector<HTMLElement>('[data-contact-flow]');
+  if (flow) {
+    const accept = flow.querySelector<HTMLInputElement>('[data-contact-accept]');
+    const revealBtn = flow.querySelector<HTMLButtonElement>('[data-contact-reveal]');
+    const backBtn = flow.querySelector<HTMLButtonElement>('[data-contact-back]');
+    const emailsPanel = flow.querySelector<HTMLElement>('[data-step="emails"]');
+
+    accept?.addEventListener('change', () => {
+      if (revealBtn) revealBtn.disabled = !accept.checked;
+    });
+
+    revealBtn?.addEventListener('click', () => {
+      if (!accept?.checked) return;
+      flow.dataset.state = 'emails';
+      if (emailsPanel) emailsPanel.hidden = false;
+      const firstLink = emailsPanel?.querySelector<HTMLAnchorElement>('a.contact-email');
+      firstLink?.focus();
+    });
+
+    backBtn?.addEventListener('click', () => {
+      flow.dataset.state = 'policy';
+      if (emailsPanel) emailsPanel.hidden = true;
+      const policyBtn = flow.querySelector<HTMLButtonElement>('[data-contact-reveal]');
+      policyBtn?.focus();
+    });
+  }
+</script>

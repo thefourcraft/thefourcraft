@@ -1,0 +1,505 @@
+---
+/**
+ * Persistent side-pinned accessibility control.
+ *
+ * Renders a round icon button anchored to the viewport edge. Clicking
+ * it opens a floating panel with toggles for text size, contrast, link
+ * underlining, motion, and a readable font. All preferences persist in
+ * `localStorage` under `df-a11y` and are applied by toggling classes on
+ * `<html>` so any stylesheet can react via `html.a11y-*` selectors.
+ *
+ * Respects `dir="rtl"`, the button flips to the left edge automatically.
+ */
+import { Icon } from 'astro-icon/components';
+---
+
+<div class="side-controls" data-a11y-state="closed" data-lang-state="closed">
+  <div class="side-stack">
+    <button
+      type="button"
+      class="side-fab"
+      aria-label="Open accessibility menu"
+      aria-expanded="false"
+      aria-controls="df-a11y-panel"
+      data-side-action="a11y"
+    >
+      <Icon name="lucide:accessibility" class="side-fab-icon" aria-hidden="true" />
+    </button>
+
+    <button
+      type="button"
+      class="side-fab"
+      aria-label="Cookie settings"
+      data-side-action="cookie"
+    >
+      <Icon name="lucide:cookie" class="side-fab-icon" aria-hidden="true" />
+    </button>
+
+    <button
+      type="button"
+      class="side-fab"
+      aria-label="Language"
+      aria-expanded="false"
+      aria-controls="df-lang-panel"
+      data-side-action="lang"
+    >
+      <Icon name="lucide:languages" class="side-fab-icon" aria-hidden="true" />
+    </button>
+  </div>
+
+  <aside
+    id="df-lang-panel"
+    class="lang-panel"
+    role="dialog"
+    aria-modal="false"
+    aria-labelledby="df-lang-title"
+    hidden
+  >
+    <header class="lang-head">
+      <h2 id="df-lang-title" class="lang-title">Language</h2>
+      <button type="button" class="lang-close" aria-label="Close language menu" data-side-action="lang-close">
+        <Icon name="lucide:x" aria-hidden="true" />
+      </button>
+    </header>
+    <ul class="lang-list">
+      <li><button type="button" class="lang-item is-active" aria-current="true" disabled>English</button></li>
+      <li><button type="button" class="lang-item" disabled aria-disabled="true"><span>עברית</span><span class="lang-soon">Coming soon</span></button></li>
+      <li><button type="button" class="lang-item" disabled aria-disabled="true"><span>Русский</span><span class="lang-soon">Coming soon</span></button></li>
+    </ul>
+  </aside>
+
+  <aside
+    id="df-a11y-panel"
+    class="a11y-panel"
+    role="dialog"
+    aria-modal="false"
+    aria-labelledby="df-a11y-title"
+    hidden
+  >
+    <header class="a11y-head">
+      <h2 id="df-a11y-title" class="a11y-title">Accessibility</h2>
+      <button type="button" class="a11y-close" aria-label="Close accessibility menu">
+        <Icon name="lucide:x" aria-hidden="true" />
+      </button>
+    </header>
+
+    <section class="a11y-section">
+      <p class="a11y-label">Text size</p>
+      <div class="a11y-seg" role="group" aria-label="Text size">
+        <button type="button" data-a11y-size="90" aria-label="Smaller">A</button>
+        <button type="button" data-a11y-size="100" aria-pressed="true" aria-label="Default">A</button>
+        <button type="button" data-a11y-size="115" aria-label="Larger">A</button>
+      </div>
+    </section>
+
+    <ul class="a11y-list">
+      <li>
+        <label class="a11y-toggle">
+          <input type="checkbox" data-a11y-flag="contrast" />
+          <span>High contrast</span>
+        </label>
+      </li>
+      <li>
+        <label class="a11y-toggle">
+          <input type="checkbox" data-a11y-flag="links" />
+          <span>Underline links</span>
+        </label>
+      </li>
+      <li>
+        <label class="a11y-toggle">
+          <input type="checkbox" data-a11y-flag="motion" />
+          <span>Reduce motion</span>
+        </label>
+      </li>
+      <li>
+        <label class="a11y-toggle">
+          <input type="checkbox" data-a11y-flag="pause" />
+          <span>Pause animations</span>
+        </label>
+      </li>
+      <li>
+        <label class="a11y-toggle">
+          <input type="checkbox" data-a11y-flag="readable" />
+          <span>Readable font</span>
+        </label>
+      </li>
+    </ul>
+
+    <footer class="a11y-foot">
+      <button type="button" class="a11y-action a11y-action--ghost" data-a11y-action="cookie">
+        <Icon name="lucide:cookie" aria-hidden="true" />
+        <span>Cookie settings</span>
+      </button>
+      <button type="button" class="a11y-action a11y-action--reset" data-a11y-action="reset">
+        <Icon name="lucide:rotate-ccw" aria-hidden="true" />
+        <span>Reset all</span>
+      </button>
+    </footer>
+  </aside>
+</div>
+
+<style>
+  .side-controls {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 1035;
+  }
+  [dir='rtl'] .side-controls { right: auto; left: 1rem; }
+
+  .side-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  .side-fab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 9999px;
+    background: var(--color-ink);
+    color: var(--color-paper);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    cursor: pointer;
+    transition: transform 200ms var(--ease-out-expo), background 200ms, border-color 200ms;
+  }
+  .side-fab:hover,
+  .side-fab:focus-visible {
+    transform: scale(1.06);
+    background: #111;
+    border-color: rgba(255, 255, 255, 0.4);
+    color: var(--color-paper);
+  }
+  .side-fab:focus-visible {
+    outline: 2px solid var(--color-paper);
+    outline-offset: 3px;
+  }
+  .side-fab-icon { width: 1.25rem; height: 1.25rem; }
+
+  /* Back-compat alias so older rules/selectors keep working */
+  .a11y-fab { }
+  .a11y-fab-icon { }
+
+  .a11y-panel,
+  .lang-panel {
+    position: absolute;
+    right: calc(100% + 0.75rem);
+    bottom: 0;
+    width: 280px;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    border-radius: 1.25rem;
+    padding: 1rem 1.1rem 0.9rem;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+  }
+  [dir='rtl'] .a11y-panel,
+  [dir='rtl'] .lang-panel { right: auto; left: calc(100% + 0.75rem); }
+  .side-controls[data-a11y-state='closed'] .a11y-panel { display: none; }
+  .side-controls[data-lang-state='closed'] .lang-panel { display: none; }
+
+  .a11y-head,
+  .lang-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.6rem;
+  }
+  .a11y-title,
+  .lang-title {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 500;
+    margin: 0;
+  }
+  .a11y-close,
+  .lang-close {
+    background: transparent;
+    border: 0;
+    width: 1.8rem;
+    height: 1.8rem;
+    border-radius: 9999px;
+    cursor: pointer;
+    color: var(--color-ink);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .a11y-close:hover,
+  .lang-close:hover { background: rgba(0, 0, 0, 0.06); }
+
+  .a11y-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-stone);
+    margin: 0.25rem 0 0.4rem;
+  }
+
+  .a11y-seg {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.3rem;
+    margin-bottom: 0.75rem;
+  }
+  .a11y-seg button {
+    background: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 0.6rem;
+    padding: 0.4rem 0;
+    cursor: pointer;
+    font-family: var(--font-display);
+    color: var(--color-ink);
+    transition: background 160ms, border-color 160ms;
+  }
+  .a11y-seg button[data-a11y-size='90'] { font-size: 0.85rem; }
+  .a11y-seg button[data-a11y-size='100'] { font-size: 1rem; }
+  .a11y-seg button[data-a11y-size='115'] { font-size: 1.2rem; }
+  .a11y-seg button[aria-pressed='true'] {
+    background: var(--color-ink);
+    color: var(--color-paper);
+    border-color: var(--color-ink);
+  }
+
+  .a11y-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0.75rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+  }
+  .a11y-list li { border-bottom: 1px solid rgba(0, 0, 0, 0.06); }
+
+  .a11y-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.55rem 0;
+    cursor: pointer;
+    font-size: 0.925rem;
+  }
+  .a11y-toggle input {
+    width: 1rem;
+    height: 1rem;
+    accent-color: var(--color-ink);
+  }
+
+  .a11y-foot {
+    display: flex;
+    gap: 0.4rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+  }
+  .a11y-action {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    background: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 0.6rem;
+    padding: 0.45rem 0.6rem;
+    font-size: 0.8rem;
+    font-family: var(--font-display);
+    color: var(--color-ink);
+    cursor: pointer;
+    transition: background 160ms;
+  }
+  .a11y-action svg { width: 0.9rem; height: 0.9rem; }
+  .a11y-action:hover { background: rgba(0, 0, 0, 0.04); }
+  .a11y-action--reset { color: var(--color-crimson); border-color: rgba(141, 22, 43, 0.35); }
+  .a11y-action--reset:hover { background: rgba(141, 22, 43, 0.06); }
+
+  .lang-list { list-style: none; padding: 0; margin: 0; }
+  .lang-item {
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 0.6rem;
+    padding: 0.55rem 0.75rem;
+    font-family: var(--font-display);
+    color: var(--color-ink);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+  .lang-item.is-active {
+    background: var(--color-ink);
+    color: var(--color-paper);
+    cursor: default;
+  }
+  .lang-item[disabled]:not(.is-active) {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+  .lang-soon {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-stone);
+  }
+
+  @media (max-width: 640px) {
+    .a11y-panel,
+    .lang-panel {
+      position: fixed;
+      right: 0.75rem;
+      left: 0.75rem;
+      bottom: 5rem;
+      width: auto;
+    }
+    [dir='rtl'] .a11y-panel,
+    [dir='rtl'] .lang-panel { left: 0.75rem; right: 0.75rem; }
+  }
+</style>
+
+<script>
+  const STORAGE_KEY = 'df-a11y';
+  const FLAGS = ['contrast', 'links', 'motion', 'pause', 'readable'] as const;
+  type Flag = (typeof FLAGS)[number];
+  interface State {
+    size: number;
+    flags: Record<Flag, boolean>;
+  }
+  const DEFAULT_STATE: State = {
+    size: 100,
+    flags: { contrast: false, links: false, motion: false, pause: false, readable: false },
+  };
+
+  const root = document.querySelector<HTMLElement>('.side-controls');
+  const a11yFab = root?.querySelector<HTMLButtonElement>('[data-side-action="a11y"]');
+  const cookieFab = root?.querySelector<HTMLButtonElement>('[data-side-action="cookie"]');
+  const langFab = root?.querySelector<HTMLButtonElement>('[data-side-action="lang"]');
+  const langClose = root?.querySelector<HTMLButtonElement>('[data-side-action="lang-close"]');
+  const panel = root?.querySelector<HTMLElement>('#df-a11y-panel');
+  const langPanel = root?.querySelector<HTMLElement>('#df-lang-panel');
+  const closeBtn = root?.querySelector<HTMLButtonElement>('.a11y-close');
+  const sizeBtns = root?.querySelectorAll<HTMLButtonElement>('[data-a11y-size]');
+  const flagInputs = root?.querySelectorAll<HTMLInputElement>('[data-a11y-flag]');
+
+  const load = (): State => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return { ...DEFAULT_STATE, flags: { ...DEFAULT_STATE.flags } };
+      const parsed = JSON.parse(raw) as Partial<State>;
+      return {
+        size: typeof parsed.size === 'number' ? parsed.size : 100,
+        flags: { ...DEFAULT_STATE.flags, ...(parsed.flags ?? {}) },
+      };
+    } catch {
+      return { ...DEFAULT_STATE, flags: { ...DEFAULT_STATE.flags } };
+    }
+  };
+  const persist = (s: State) => {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(s)); } catch {}
+  };
+
+  const apply = (s: State) => {
+    document.documentElement.style.setProperty('--a11y-font-scale', String(s.size / 100));
+    for (const flag of FLAGS) {
+      document.documentElement.classList.toggle(`a11y-${flag}`, s.flags[flag]);
+    }
+    if (sizeBtns) sizeBtns.forEach((b) => {
+      const on = Number(b.dataset.a11ySize) === s.size;
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    if (flagInputs) flagInputs.forEach((i) => {
+      const flag = i.dataset.a11yFlag as Flag;
+      i.checked = !!s.flags[flag];
+    });
+  };
+
+  let state = load();
+  apply(state);
+
+  const openPanel = () => {
+    if (!root || !panel || !a11yFab) return;
+    root.dataset.a11yState = 'open';
+    panel.hidden = false;
+    a11yFab.setAttribute('aria-expanded', 'true');
+    closeLang();
+  };
+  const closePanel = () => {
+    if (!root || !panel || !a11yFab) return;
+    root.dataset.a11yState = 'closed';
+    panel.hidden = true;
+    a11yFab.setAttribute('aria-expanded', 'false');
+  };
+  const openLang = () => {
+    if (!root || !langPanel || !langFab) return;
+    root.dataset.langState = 'open';
+    langPanel.hidden = false;
+    langFab.setAttribute('aria-expanded', 'true');
+    closePanel();
+  };
+  const closeLang = () => {
+    if (!root || !langPanel || !langFab) return;
+    root.dataset.langState = 'closed';
+    langPanel.hidden = true;
+    langFab.setAttribute('aria-expanded', 'false');
+  };
+
+  a11yFab?.addEventListener('click', () => {
+    (root?.dataset.a11yState === 'open' ? closePanel : openPanel)();
+  });
+  cookieFab?.addEventListener('click', () => {
+    document.dispatchEvent(new CustomEvent('df:open-consent'));
+    closePanel();
+    closeLang();
+  });
+  langFab?.addEventListener('click', () => {
+    (root?.dataset.langState === 'open' ? closeLang : openLang)();
+  });
+  langClose?.addEventListener('click', closeLang);
+  closeBtn?.addEventListener('click', closePanel);
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    if (root?.dataset.a11yState === 'open') closePanel();
+    if (root?.dataset.langState === 'open') closeLang();
+  });
+  document.addEventListener('click', (e) => {
+    if (!root) return;
+    if (root.contains(e.target as Node)) return;
+    if (root.dataset.a11yState === 'open') closePanel();
+    if (root.dataset.langState === 'open') closeLang();
+  });
+
+  sizeBtns?.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      state = { ...state, size: Number(btn.dataset.a11ySize) };
+      apply(state);
+      persist(state);
+    });
+  });
+
+  flagInputs?.forEach((input) => {
+    input.addEventListener('change', () => {
+      const flag = input.dataset.a11yFlag as Flag;
+      state = { ...state, flags: { ...state.flags, [flag]: input.checked } };
+      apply(state);
+      persist(state);
+    });
+  });
+
+  root?.querySelectorAll<HTMLButtonElement>('[data-a11y-action]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const action = btn.dataset.a11yAction;
+      if (action === 'reset') {
+        state = { ...DEFAULT_STATE, flags: { ...DEFAULT_STATE.flags } };
+        apply(state);
+        persist(state);
+      } else if (action === 'cookie') {
+        document.dispatchEvent(new CustomEvent('df:open-consent'));
+        closePanel();
+      }
+    });
+  });
+</script>

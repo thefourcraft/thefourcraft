@@ -1,0 +1,123 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import SimpleHero from '../../components/SimpleHero.astro';
+import { Icon } from 'astro-icon/components';
+
+const entries = (await getCollection('opinions', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
+);
+
+const dateFmt = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<Base
+  title="Opinions"
+  description="A personal log of opinions on technology, society, and the world."
+  image="/images/index-meta.png"
+>
+  <SimpleHero title="Opinions" align="left">
+    <p class="font-sans text-display-7 text-paper/80">
+      Notes and arguments. Written plainly.
+    </p>
+  </SimpleHero>
+
+  <section class="bg-night py-16 text-paper md:py-24">
+    <div class="container-app">
+      {entries.length === 0 ? (
+        <p class="mx-auto max-w-[720px] font-sans text-display-7 text-paper/60">
+          No opinions published yet. Check back soon.
+        </p>
+      ) : (
+        <ul class="opinion-list mx-auto max-w-[880px]">
+          {entries.map((entry) => (
+            <li>
+              <a href={`/opinions/${entry.id}`} class="opinion-row group">
+                <span class="opinion-date">
+                  {dateFmt.format(entry.data.publishDate)}
+                </span>
+                <div class="opinion-content">
+                  <h2 class="opinion-title">{entry.data.title}</h2>
+                  <p class="opinion-summary">{entry.data.summary}</p>
+                </div>
+                <Icon name="lucide:arrow-up-right" class="opinion-arrow" aria-hidden="true" />
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .opinion-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .opinion-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas: 'date arrow' 'content arrow';
+    gap: 0.5rem 1rem;
+    padding: 2rem 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--color-paper);
+    text-decoration: none;
+    transition: padding-left 220ms var(--ease-out-expo), background 200ms;
+  }
+  @media (min-width: 768px) {
+    .opinion-row {
+      grid-template-columns: 150px 1fr auto;
+      grid-template-areas: 'date content arrow';
+      align-items: start;
+      gap: 2.5rem;
+      padding: 2.25rem 0.75rem;
+    }
+  }
+  .opinion-row:hover { background: rgba(255,255,255,0.025); padding-left: 1rem; }
+  .opinion-date {
+    grid-area: date;
+    font-family: var(--font-sans);
+    font-size: 0.76rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-paper-muted);
+    padding-top: 0.3rem;
+  }
+  .opinion-content { grid-area: content; min-width: 0; }
+  .opinion-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.35rem, 2.2vw, 1.8rem);
+    line-height: 1.2;
+    font-weight: 600;
+  }
+  .opinion-summary {
+    margin: 0.6rem 0 0;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--color-paper-body);
+    max-width: 62ch;
+  }
+  .opinion-arrow {
+    grid-area: arrow;
+    width: 1.15rem;
+    height: 1.15rem;
+    color: var(--color-paper-muted);
+    align-self: center;
+    transition: transform 200ms var(--ease-out-expo), color 200ms;
+  }
+  .opinion-row:hover .opinion-arrow {
+    color: var(--color-paper);
+    transform: translate(3px, -3px);
+  }
+  [dir='rtl'] .opinion-arrow { transform: scaleX(-1); }
+</style>

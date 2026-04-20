@@ -1,0 +1,54 @@
+---
+import Base from '../layouts/Base.astro';
+
+const sections = [
+  {
+    title: 'What I Collect',
+    body: 'This site collects basic analytics (page views, referrer, approximate location, browser type) only if you accept analytics cookies. If you email me, I keep that email thread. That is it.',
+  },
+  {
+    title: 'How I Use It',
+    body: 'Analytics help me understand which pages are read and whether the site is healthy. Your email is used only to reply to you. I do not sell or share your data.',
+  },
+  {
+    title: 'Who Sees It',
+    body: 'Cloudflare hosts the site and sees the same request metadata every web host sees. If you opt in, Umami Analytics processes visit stats. No other third parties.',
+  },
+  {
+    title: 'Your Rights',
+    body: 'You can ask me what I have about you, ask me to delete it, or withdraw analytics consent any time from the cookie settings. Write to legal@david-furman.com.',
+  },
+  {
+    title: 'Changes',
+    body: 'If this policy changes, the updated version is posted here. The date at the top of the page tells you when it was last updated.',
+  },
+];
+
+const updated = 'April 20, 2026';
+---
+
+<Base title="Privacy Policy" description="A plain-language summary of what this site collects and how it is used.">
+  <section class="bg-night section-pad pt-36 text-paper">
+    <div class="container-app">
+      <article class="mx-auto max-w-3xl" data-reveal>
+        <h1 class="font-display text-display-2 font-semibold">
+        Privacy Policy
+      </h1>
+        <p class="mt-3 font-sans text-sm uppercase tracking-[0.14em] text-paper/50">
+          Last updated: {updated}
+        </p>
+
+        <div class="mt-10 flex flex-col gap-8">
+          {sections.map((s) => (
+            <section>
+              <h2 class="font-display text-display-5 font-semibold">
+        {s.title}
+      </h2>
+              <p class="mt-2 font-sans text-display-7 text-paper/85">{s.body}</p>
+            </section>
+          ))}
+        </div>
+      </article>
+    </div>
+  </section>
+</Base>

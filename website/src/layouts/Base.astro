@@ -1,0 +1,130 @@
+---
+import '../styles/global.css';
+import { SITE } from '../config/site';
+import SEO from '../components/SEO.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import CookieConsent from '../components/CookieConsent.astro';
+import AccessibilityControl from '../components/AccessibilityControl.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  noindex?: boolean;
+}
+const { title, description, image, noindex } = Astro.props;
+---
+
+<!doctype html>
+<html lang={SITE.locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="theme-color" content="#232323" />
+    <meta name="generator" content={Astro.generator} />
+
+    <SEO title={title} description={description} image={image} noindex={noindex} />
+
+    <!--
+      Restore persisted accessibility prefs before first paint so toggled
+      classes (font-scale, high-contrast, etc.) don't flash off.
+    -->
+    <script is:inline>
+      (function () {
+        try {
+          var raw = localStorage.getItem('df-a11y');
+          if (!raw) return;
+          var s = JSON.parse(raw);
+          if (typeof s.size === 'number') {
+            document.documentElement.style.setProperty('--a11y-font-scale', String(s.size / 100));
+          }
+          ['contrast', 'links', 'motion', 'pause', 'readable'].forEach(function (f) {
+            if (s.flags && s.flags[f]) document.documentElement.classList.add('a11y-' + f);
+          });
+        } catch (_) {}
+      })();
+    </script>
+  </head>
+
+  <body class="min-h-dvh bg-night text-paper antialiased">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-ink focus:px-4 focus:py-2 focus:text-paper"
+    >Skip to content</a>
+
+    <Nav />
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <Footer />
+
+    <CookieConsent />
+    <AccessibilityControl />
+
+    <!--
+      Analytics loads only after the visitor grants consent via the
+      CookieConsent banner. The `df:consent-changed` event fires on
+      page load with stored prefs and on every user action.
+    -->
+    <script
+      is:inline
+      define:vars={{
+        umamiSrc: SITE.analytics.umamiSrc,
+        umamiWebsiteId: SITE.analytics.umamiWebsiteId,
+      }}
+    >
+      (function () {
+        var loaded = false;
+        function load() {
+          if (loaded) return;
+          loaded = true;
+          var s = document.createElement('script');
+          s.defer = true;
+          s.src = umamiSrc;
+          s.setAttribute('data-website-id', umamiWebsiteId);
+          document.head.appendChild(s);
+        }
+        document.addEventListener('df:consent-changed', function (e) {
+          if (e && e.detail && e.detail.analytics) load();
+        });
+      })();
+    </script>
+
+    <!-- Scroll-reveal observer -->
+    <script>
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const explicit = document.querySelectorAll<HTMLElement>('[data-reveal], .reveal');
+      const auto = document.querySelectorAll<HTMLElement>(
+        'main h1, main h2, main h3, main h4, main p, main li, main img, main figure, main blockquote, main .auto-reveal',
+      );
+      const all = new Set<HTMLElement>([...explicit, ...auto]);
+      // Strip elements inside nav/footer or already explicitly opted-out
+      all.forEach((el) => {
+        if (el.closest('header, footer, [data-no-reveal]')) all.delete(el);
+      });
+
+      if (reduceMotion || !('IntersectionObserver' in window)) {
+        all.forEach((el) => el.classList.add('is-visible', 'reveal'));
+      } else {
+        all.forEach((el) => el.classList.add('reveal'));
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const e of entries) {
+              if (e.isIntersecting) {
+                e.target.classList.add('is-visible');
+                io.unobserve(e.target);
+              }
+            }
+          },
+          { threshold: 0.1, rootMargin: '0px 0px -5% 0px' },
+        );
+        all.forEach((el) => io.observe(el));
+      }
+    </script>
+  </body>
+</html>

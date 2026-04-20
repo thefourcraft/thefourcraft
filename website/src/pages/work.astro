@@ -1,0 +1,750 @@
+---
+import Base from '../layouts/Base.astro';
+import SimpleHero from '../components/SimpleHero.astro';
+import ProjectSection from '../components/ProjectSection.astro';
+import { Icon } from 'astro-icon/components';
+
+const companyBody = `I am the CTO and Co-founder of Arcusis, founded on October 9, 2025.
+
+Our mission is to build enterprise-grade advanced software solutions for customers who demand high-quality systems to power the core of their businesses.
+
+Arcusis serves as my toolbox to invest in the passions that matter most, like fueling Israel's booming gaming industry and pioneering other game-changing projects.`;
+
+const communityBody = `I also manage Israel's largest gaming community, the go-to hub for hundreds of thousands of teens after school!
+
+With over 300,000 members representing 3% of Israel's population, this powerhouse platform is where Israeli youth hang out, connect, and level up. As part of Arcusis, we're pouring massive resources into programs and infrastructure to empower these teens to become the absolute best they can be.`;
+
+const countryBody = `Since the barbaric October 7th massacre by Hamas savages, Jews worldwide have faced an explosion of antisemitism and violent attacks from the unholy alliance of Islamists, leftists, and their useful idiots. As an entrepreneur, I refuse to stand by, and I fight back.
+
+Starting October 8, 2023, I've worked relentlessly, day and night, to build technologies that help us crush antisemitism and safeguard Jewish lives across the globe. I've poured over $100,000 of my own savings into this war effort, forging alliances with truth warriors united in one sacred mission: defending the West, Israel, and the Jewish people from the jihadist cancer and its enablers.`;
+
+// Timeline entries. Each company is a block; sub-roles are nested when
+// a single company has multiple positions.
+const experience = [
+  {
+    company: 'Arcusis',
+    location: 'Rishon LeZion, Israel · On-site',
+    duration: 'Sep 2025 to Present',
+    roles: [
+      { title: 'Director, Co-Founder & CTO', type: 'Full-time', period: 'Sep 2025 to Present', length: '8 mos' },
+    ],
+  },
+  {
+    company: 'Israel Defense Forces',
+    location: 'Israel',
+    duration: 'Apr 2023 to Present · 2 yrs 9 mos',
+    roles: [
+      { title: 'Soldier at War', type: null, period: 'Oct 2023 to Dec 2025', length: '2 yrs 3 mos' },
+      { title: 'October 7th', type: null, period: 'Oct 2023', length: '1 mo' },
+      { title: 'Soldier', type: 'Hybrid', period: 'Apr 2023 to Oct 2023', length: '7 mos' },
+    ],
+    skills: ['Army'],
+  },
+  {
+    company: 'AiDock Ltd.',
+    location: 'Rehovot, Israel',
+    duration: '3 yrs 1 mo',
+    roles: [
+      { title: 'CISO', type: 'Part-time · Hybrid', period: 'Nov 2023 to Dec 2025', length: '2 yrs 2 mos' },
+      { title: 'Webmaster', type: 'Full-time · On-site', period: 'Dec 2022 to Nov 2023', length: '1 yr' },
+    ],
+  },
+  {
+    company: 'Lonardo Matteo',
+    location: 'Asti, Piedmont, Italy · Remote',
+    duration: 'Contract · 1 yr 11 mos',
+    roles: [
+      { title: 'Business Consultant', type: null, period: 'Feb 2023 to Mar 2023', length: '2 mos' },
+      { title: 'Customer Service Specialist', type: null, period: 'May 2021 to Feb 2023', length: '1 yr 10 mos' },
+    ],
+  },
+  {
+    company: 'Donatelo Promotional Display',
+    location: 'Rishon LeTsiyon, Israel · On-site',
+    duration: 'Contract · 3 mos',
+    roles: [
+      { title: 'SAP Project Manager', type: null, period: 'Nov 2022 to Jan 2023', length: '3 mos' },
+    ],
+    skills: ['SAP ERP', 'SAP Business One', '+4 more'],
+  },
+  {
+    company: 'Self-employed',
+    location: 'Israel · Hybrid',
+    duration: 'Freelance · 6 yrs 10 mos',
+    roles: [
+      {
+        title: 'Webmaster, websites for clients',
+        type: 'Freelance',
+        period: 'Jan 2016 to Oct 2022',
+        length: '6 yrs 10 mos',
+        note: 'End-to-end website building and customization for diverse clients. Managed the full project lifecycle from design to deployment.',
+      },
+    ],
+    skills: ['Web Development', 'Website Updating', '+5 more'],
+  },
+  {
+    company: 'YouTube, side_or_slide (SOS)',
+    location: 'Israel · Hybrid',
+    duration: 'Self-employed · 2 yrs',
+    roles: [
+      {
+        title: 'Music Producer',
+        type: null,
+        period: 'Aug 2019 to Jul 2021',
+        length: '2 yrs',
+        note: 'Original music and remixes for the "On the side_or_slide" channel. 100,000+ views. Handled production, sound design, and digital presence.',
+      },
+    ],
+  },
+  {
+    company: 'Rishon Le-Zion Municipality',
+    location: 'Rishon Lezion, Israel · On-site',
+    duration: 'Full-time · 2 mos',
+    roles: [
+      {
+        title: 'Kindergarten Teacher',
+        type: null,
+        period: 'Jul 2019 to Aug 2019',
+        length: '2 mos',
+        note: 'Ran activities and educational programs for young learners at a municipal summer camp.',
+      },
+    ],
+  },
+];
+
+const organizations = [
+  {
+    name: 'Israel Talking · ישראל מדברת',
+    role: null,
+    period: 'Oct 2023 to Present',
+    affiliation: 'Associated with Arcusis',
+    note: 'Research, documentation, and counter-disinformation work defending Jewish communities online since the October 7 massacre.',
+  },
+  {
+    name: 'The Israeli Gaming Association',
+    role: 'Founder & Investor',
+    period: 'Jan 2023 to Present',
+    affiliation: 'Associated with Arcusis',
+    note: 'Building a stronger, united gaming industry in Israel.',
+  },
+];
+
+const volunteer = [
+  { role: 'Translator', org: 'Minecraft', period: '2016, Nov 2022', length: '6 yrs 11 mos', cause: 'Science & Technology' },
+  { role: 'Independent Translator', org: 'Open Broadcaster Software', period: 'Mar 2021 to Jul 2022', length: '1 yr 5 mos', cause: 'Science & Technology' },
+  { role: 'Independent Translator', org: 'Icons8, Lunacy', period: '2022, Aug 2023', length: '1 yr 8 mos', cause: 'Poverty Alleviation' },
+  { role: 'Independent Translator', org: 'Be My Eyes', period: '2022', length: 'Less than a year', cause: 'Health' },
+  { role: 'Software Tester', org: 'ByteBox Media', period: 'Oct 2022 to Dec 2022', length: '3 mos', cause: 'Science & Technology' },
+];
+
+const articles = [
+  { title: 'The Hasbara AI Is Here', date: 'Apr 27, 2025', href: 'https://www.linkedin.com/pulse/hasbara-ai-here-david-furman-ex8ef' },
+  { title: 'Chinese AI Chatbot DeepSeek: A Dangerous AI Trojan Horse?', date: 'Jan 27, 2025', href: 'https://www.linkedin.com/pulse/chinese-ai-chatbot-deepseek-dangerous-trojan-horse-david-furman-dyszf' },
+  { title: 'Why is TikTok Still Allowed To Operate In Israel?', date: 'Jan 18, 2025', href: 'https://www.linkedin.com/pulse/why-tiktok-still-allowed-operate-israel-david-furman-av1bf' },
+  { title: 'I Could Have Bought A Car, But I Chose My Country First!', date: 'Dec 31, 2024', href: 'https://www.linkedin.com/pulse/i-could-have-bought-car-chose-my-country-first-david-furman-6dfif' },
+  { title: 'The Day That Never Ends, 7.10.2023', date: 'Oct 7, 2024', href: 'https://www.linkedin.com/pulse/day-never-ends-7102023-david-furman-efg0f' },
+  { title: 'CrowdStrike Down', date: 'Aug 24, 2024', href: 'https://www.linkedin.com/pulse/crowdstrike-down-david-furman-f7omf' },
+  { title: '1M Visitors Is Just the Beginning', date: 'Jun 4, 2024', href: 'https://www.linkedin.com/pulse/1m-visitors-just-beginning-david-furman-gqe1e' },
+  { title: "Lessons From NASA's Playbook For Spacecraft Software", date: 'May 30, 2024', href: 'https://www.linkedin.com/pulse/lessons-from-nasas-playbook-spacecraft-software-david-furman-he1if' },
+];
+
+const ironSwordsNote = `"Iron Swords Platform" launched on October 8, 2023, one day after the massacre. Over 30 volunteers worked in 24-hour shifts to build the most advanced volunteer-coordination platform of the war. It reached 11,000 users and 3,000 pages before we had to close it when cloud costs became unsustainable.`;
+---
+
+<Base
+  title="Work"
+  description="Professional background, projects, writing, and volunteer work."
+  image="/images/work-meta.png"
+>
+  <SimpleHero title="My Work" align="center">
+    <p class="mx-auto max-w-[620px] font-sans text-display-7 text-paper">
+      As a minority, Jews must work four times as hard,
+      not just to succeed but to change the world.
+    </p>
+  </SimpleHero>
+
+  <ProjectSection id="my-company" title="My Company" body={companyBody} />
+
+  <ProjectSection id="my-community" title="My Community" body={communityBody} />
+
+  <ProjectSection id="my-country" title="My Country" body={countryBody} />
+
+  <!-- Professional background -->
+  <section id="experience" class="bg-night pb-20 pt-4 text-paper md:pb-28 md:pt-6">
+    <div class="container-app">
+      <div class="mx-auto max-w-[1040px]">
+        <div class="showcase-intro reveal">
+          <span class="showcase-eyebrow">§ Résumé</span>
+          <h2 class="showcase-h2">
+        Professional background
+      </h2>
+          <p class="showcase-lead">
+            A longer-form timeline: the companies, roles, and dates. Pulled straight
+            from my LinkedIn so nothing goes stale.
+          </p>
+        </div>
+
+        <ol class="timeline mt-16">
+          {experience.map((entry) => (
+            <li class="timeline-entry reveal">
+              <div class="timeline-meta">
+                <span class="timeline-dot" aria-hidden="true"></span>
+                <p class="timeline-duration">{entry.duration}</p>
+                <p class="timeline-company">{entry.company}</p>
+                <p class="timeline-location">{entry.location}</p>
+              </div>
+
+              <div class="timeline-body">
+                <ul class="roles">
+                  {entry.roles.map((role) => (
+                    <li class={`role${entry.roles.length > 1 ? ' role--nested' : ''}`}>
+                      <p class="role-title">{role.title}</p>
+                      <p class="role-meta">
+                        <span>{role.period}</span>
+                        {role.length && <span class="role-dim"> · {role.length}</span>}
+                        {role.type && <span class="role-dim"> · {role.type}</span>}
+                      </p>
+                      {'note' in role && role.note && <p class="role-note">{role.note}</p>}
+                    </li>
+                  ))}
+                </ul>
+
+                {entry.skills && (
+                  <p class="role-skills">
+                    <Icon name="lucide:tag" class="inline-block h-3.5 w-3.5 -translate-y-px opacity-60" aria-hidden="true" />
+                    {' '}{entry.skills.join(' · ')}
+                  </p>
+                )}
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- Organizations & Projects -->
+  <section class="bg-night pb-20 pt-4 text-paper md:pb-28">
+    <div class="container-app">
+      <div class="mx-auto grid max-w-[1040px] gap-14 md:grid-cols-[1fr_1fr] md:gap-16">
+        <div class="reveal">
+          <span class="showcase-eyebrow">§ Organizations</span>
+          <h2 class="showcase-h3 mt-1">
+        Where else I show up
+      </h2>
+
+          <ul class="org-list mt-8">
+            {organizations.map((o) => (
+              <li class="org-item">
+                <p class="org-name">{o.name}</p>
+                {o.role && <p class="org-role">{o.role}</p>}
+                <p class="org-period">{o.period}</p>
+                <p class="org-affiliation">
+                  <Icon name="lucide:link-2" class="inline-block h-3.5 w-3.5 -translate-y-px opacity-60" aria-hidden="true" />
+                  {' '}{o.affiliation}
+                </p>
+                <p class="org-note">{o.note}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="reveal">
+          <span class="showcase-eyebrow">§ Past project</span>
+          <h2 class="showcase-h3 mt-1">
+        Iron Swords Platform
+      </h2>
+          <p class="project-tag">
+            <span class="project-badge">Closed</span>
+            <span>Oct, Dec 2023</span>
+          </p>
+          <p class="project-note">{ironSwordsNote}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Volunteering -->
+  <section class="bg-night pb-20 pt-4 text-paper md:pb-28">
+    <div class="container-app">
+      <div class="mx-auto max-w-[1040px]">
+        <div class="reveal">
+          <span class="showcase-eyebrow">§ Volunteering</span>
+          <h2 class="showcase-h3 mt-1">
+        Localization &amp; side work, done for free
+      </h2>
+          <p class="showcase-lead max-w-[720px]">
+            Years of unpaid translation and testing work so Hebrew-speaking users
+            could use the same tools as everyone else.
+          </p>
+        </div>
+
+        <ul class="volunteer-list mt-10">
+          {volunteer.map((v) => (
+            <li class="volunteer-row reveal">
+              <div class="volunteer-row-main">
+                <p class="volunteer-role">{v.role}</p>
+                <p class="volunteer-org">{v.org}</p>
+              </div>
+              <div class="volunteer-row-meta">
+                <p class="volunteer-period">{v.period}</p>
+                <p class="volunteer-length">{v.length} · {v.cause}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Writing -->
+  <section class="bg-night pb-24 pt-4 text-paper md:pb-32">
+    <div class="container-app">
+      <div class="mx-auto max-w-[1040px]">
+        <div class="reveal flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <span class="showcase-eyebrow">§ Writing</span>
+            <h2 class="showcase-h3 mt-1">
+        On LinkedIn Pulse
+      </h2>
+          </div>
+          <a
+            href="https://www.linkedin.com/newsletters/the-df-files-7062371340606930944/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="article-all"
+          >
+            All articles
+            <Icon name="lucide:arrow-up-right" class="h-4 w-4" aria-hidden="true" />
+          </a>
+        </div>
+
+        <ul class="article-list mt-8">
+          {articles.map((a) => (
+            <li class="reveal">
+              <a
+                href={a.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="article-row group"
+              >
+                <span class="article-date">{a.date}</span>
+                <span class="article-title">{a.title}</span>
+                <Icon name="lucide:arrow-up-right" class="article-arrow" aria-hidden="true" />
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        <div class="reveal mt-16 flex flex-col items-start gap-4">
+          <p class="font-sans text-display-7 text-paper/70">
+            The full profile, recommendations, and activity live on LinkedIn.
+          </p>
+          <a
+            href="https://www.linkedin.com/in/david-furman/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="showcase-linkedin"
+          >
+            <Icon name="simple-icons:linkedin" class="h-5 w-5" aria-hidden="true" />
+            <span>View full profile</span>
+            <Icon name="lucide:arrow-right" class="h-4 w-4" aria-hidden="true" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* Shared section chrome -------------------------------------------- */
+  .showcase-eyebrow {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245, 245, 245, 0.55);
+  }
+  .showcase-h2 {
+    margin-top: 0.4rem;
+    font-family: var(--font-display);
+    font-size: clamp(2.1rem, 4.2vw, 3.25rem);
+    line-height: 1.05;
+    font-weight: 400;
+  }
+  .showcase-h3 {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+    line-height: 1.1;
+    font-weight: 400;
+  }
+  .showcase-lead {
+    margin-top: 1rem;
+    font-family: var(--font-sans);
+    font-size: 1.02rem;
+    line-height: 1.55;
+    color: rgba(245, 245, 245, 0.78);
+    max-width: 640px;
+  }
+  .showcase-intro {
+    position: relative;
+    padding-top: 2.5rem;
+  }
+  .showcase-intro::before {
+    content: '';
+    display: block;
+    width: 56px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.2);
+    margin-bottom: 1.25rem;
+  }
+
+  /* Timeline --------------------------------------------------------- */
+  .timeline {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+  }
+  .timeline-entry {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    position: relative;
+  }
+  @media (min-width: 768px) {
+    .timeline-entry {
+      grid-template-columns: 220px 1fr;
+      gap: 3rem;
+    }
+  }
+
+  .timeline-meta { position: relative; }
+  .timeline-dot { display: none; }
+  @media (min-width: 768px) {
+    .timeline-meta { padding-left: 1.5rem; }
+    .timeline-dot {
+      display: block;
+      position: absolute;
+      top: 0.9rem;
+      left: 0;
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--color-paper);
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+    }
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: 3px;
+      top: 1.75rem;
+      bottom: -3.5rem;
+      width: 1px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .timeline-entry:last-child::before { display: none; }
+  }
+
+  .timeline-duration {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-paper-muted);
+  }
+  .timeline-company {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 600;
+    line-height: 1.2;
+    margin: 0.5rem 0 0;
+    color: var(--color-paper);
+  }
+  .timeline-location {
+    margin: 0.35rem 0 0;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: var(--color-paper-muted);
+    line-height: 1.4;
+  }
+
+  .timeline-body { min-width: 0; padding-top: 0.1rem; }
+
+  .roles {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .role { padding: 0.9rem 0; }
+  .role + .role { border-top: 1px solid rgba(255, 255, 255, 0.06); }
+  .role:first-child { padding-top: 0; }
+  .role:last-child { padding-bottom: 0; }
+
+  .role-title {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--color-paper);
+    line-height: 1.3;
+  }
+  .role-meta {
+    margin: 0.35rem 0 0;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: var(--color-paper-body);
+    line-height: 1.5;
+  }
+  .role-dim { color: var(--color-paper-muted); }
+  .role-note {
+    margin: 0.65rem 0 0;
+    font-family: var(--font-sans);
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--color-paper-body);
+    max-width: 58ch;
+  }
+  .role-skills {
+    margin: 1.1rem 0 0;
+    padding-top: 0.85rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    color: var(--color-paper-muted);
+    letter-spacing: 0.01em;
+  }
+
+  /* Organizations --------------------------------------------------- */
+  .org-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2.75rem;
+  }
+  .org-item {
+    padding-bottom: 2.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  }
+  .org-item:last-child { border-bottom: 0; padding-bottom: 0; }
+  .org-name {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-paper);
+  }
+  .org-role {
+    margin: 0.1rem 0 0;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    color: rgba(245, 245, 245, 0.75);
+  }
+  .org-period {
+    margin: 0.25rem 0 0;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(245, 245, 245, 0.5);
+  }
+  .org-affiliation {
+    margin: 0.4rem 0 0;
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    color: rgba(245, 245, 245, 0.55);
+  }
+  .org-note {
+    margin: 0.65rem 0 0;
+    font-family: var(--font-sans);
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: rgba(245, 245, 245, 0.8);
+  }
+
+  /* Project callout ------------------------------------------------- */
+  .project-tag {
+    margin: 0.75rem 0 0;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(245, 245, 245, 0.55);
+  }
+  .project-badge {
+    display: inline-block;
+    padding: 0.22rem 0.6rem;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 999px;
+    font-family: var(--font-display);
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    color: rgba(245, 245, 245, 0.85);
+  }
+  .project-note {
+    margin: 1rem 0 0;
+    font-family: var(--font-sans);
+    font-size: 0.97rem;
+    line-height: 1.6;
+    color: rgba(245, 245, 245, 0.85);
+  }
+
+  /* Volunteering table ---------------------------------------------- */
+  .volunteer-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .volunteer-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    transition: background 200ms;
+  }
+  @media (min-width: 768px) {
+    .volunteer-row {
+      grid-template-columns: 1fr auto;
+      align-items: baseline;
+      gap: 2rem;
+      padding: 1.25rem 0.5rem;
+    }
+  }
+  .volunteer-row:hover { background: rgba(255, 255, 255, 0.02); }
+  .volunteer-role {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.02rem;
+    font-weight: 500;
+    color: var(--color-paper);
+  }
+  .volunteer-org {
+    margin: 0.15rem 0 0;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    color: rgba(245, 245, 245, 0.7);
+  }
+  .volunteer-period {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: rgba(245, 245, 245, 0.8);
+  }
+  @media (min-width: 768px) {
+    .volunteer-row-meta { text-align: right; }
+  }
+  .volunteer-length {
+    margin: 0.15rem 0 0;
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(245, 245, 245, 0.45);
+  }
+
+  /* Articles list --------------------------------------------------- */
+  .article-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(245, 245, 245, 0.7);
+    text-decoration: none;
+    transition: color 200ms;
+  }
+  .article-all:hover { color: var(--color-paper); }
+
+  .article-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .article-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      'date arrow'
+      'title arrow';
+    gap: 0.25rem 1rem;
+    padding: 1.25rem 0.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--color-paper);
+    text-decoration: none;
+    transition: background 200ms, padding 200ms;
+  }
+  @media (min-width: 768px) {
+    .article-row {
+      grid-template-columns: 140px 1fr auto;
+      grid-template-areas: 'date title arrow';
+      align-items: center;
+      gap: 2rem;
+      padding: 1.4rem 0.5rem;
+    }
+  }
+  .article-row:hover {
+    background: rgba(255, 255, 255, 0.03);
+    padding-left: 0.75rem;
+  }
+  .article-date {
+    grid-area: date;
+    font-family: var(--font-sans);
+    font-size: 0.76rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(245, 245, 245, 0.5);
+  }
+  .article-title {
+    grid-area: title;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 500;
+    line-height: 1.35;
+  }
+  .article-arrow {
+    grid-area: arrow;
+    width: 1.1rem;
+    height: 1.1rem;
+    color: rgba(245, 245, 245, 0.5);
+    align-self: center;
+    transition: transform 200ms var(--ease-out-expo), color 200ms;
+  }
+  .article-row:hover .article-arrow {
+    color: var(--color-paper);
+    transform: translate(2px, -2px);
+  }
+
+  .showcase-linkedin {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    padding: 0.75rem 1.35rem;
+    border-radius: 9999px;
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: transform 200ms var(--ease-out-expo);
+  }
+  .showcase-linkedin:hover { transform: translateY(-2px); }
+
+  [dir='rtl'] .article-arrow { transform: scaleX(-1); }
+  [dir='rtl'] .article-row:hover .article-arrow { transform: scaleX(-1) translate(-2px, -2px); }
+</style>

@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+import HeroParallax from '../components/HeroParallax.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import FeatureSplit from '../components/FeatureSplit.astro';
+
+const aboutBody = `I'm currently CTO and Co-Founder at Arcusis, where I lead system architecture, cloud infrastructure, and AI-driven platforms used by large online communities and high-traffic digital products. My focus is on reliability, security, and long-term scalability, building systems that don't break when they matter most.
+
+Alongside this, I serve as Chairman of the Israeli Gaming Association, supporting the growth of Israel's gaming ecosystem through industry coordination, partnerships, and strategic positioning.
+
+A significant part of my work today focuses on developing technologies to fight antisemitism & defend the West. This work centers on infrastructure, data-driven systems, and automation that help societies withstand coordinated digital threats.
+
+I contribute to open-source projects and continue to develop my personal technology brand, DF, which reflects how I think about systems, engineering culture, and building technology that actually holds up in the real world.`;
+---
+
+<Base
+  title="Home"
+  description="Welcome to David Furman's Personal Website, where I document my professional journey, creative endeavors, and technological insights. Explore my world of innovation and passion for technology and gaming. Join me in uncovering the latest in DevOps, cybersecurity, and gaming adventures."
+  image="/images/index-meta.png"
+>
+  <HeroParallax
+    title="Welcome"
+    image="/images/artboard-2000x1125.webp"
+    overlayOpacity={0.5}
+    contentAlign="bottom"
+    contentWidth="default"
+  >
+    <h2 class="font-display text-display-2 font-semibold leading-[1.2] text-paper">
+        David's Place
+      </h2>
+    <p class="mt-2 font-sans text-display-7 text-paper">
+      It's My Official Website To Document My Creations
+    </p>
+  </HeroParallax>
+
+  <ArticleCard title="ABOUT ME" body={aboutBody} theme="night" align="left" />
+
+  <FeatureSplit
+    heading="What Is DF?"
+    subheading="DF"
+    body="It's a nickname derived from my name, David Furman. This is my personal brand for showcasing my creations and documenting my projects and the different aspects of my life."
+  />
+</Base>

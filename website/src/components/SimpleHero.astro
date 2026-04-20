@@ -1,0 +1,39 @@
+---
+interface Props {
+  title: string;
+  contentWidth?: 'narrow' | 'default' | 'wide';
+  align?: 'left' | 'center';
+}
+const { title, contentWidth = 'default', align = 'left' } = Astro.props;
+---
+
+<section class="simple-hero relative w-full bg-ink text-paper">
+  <div class="container-app relative pb-40 pt-40 md:pb-48 md:pt-48">
+    <div
+      class:list={[
+        'relative z-10 flex flex-col gap-5',
+        align === 'center' ? 'mx-auto items-center text-center' : 'items-start text-left',
+        contentWidth === 'narrow' && 'max-w-[640px]',
+        contentWidth === 'default' && 'max-w-[900px]',
+        contentWidth === 'wide' && 'max-w-[1100px]',
+      ]}
+    >
+      <h1 class="reveal font-display text-display-2 font-semibold leading-[1.05] text-paper">
+        {title}
+      </h1>
+      <div class="reveal w-full"><slot /></div>
+    </div>
+  </div>
+  <div class="simple-hero-topbg" aria-hidden="true"></div>
+</section>
+
+<style>
+  .simple-hero-topbg {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 30%;
+    background: var(--color-night);
+  }
+</style>

@@ -1,0 +1,231 @@
+---
+/**
+ * First-party cookie / analytics consent banner.
+ *
+ * Behaviour:
+ *   - Reads consent from localStorage (`df-consent` = "granted" | "denied").
+ *   - If absent, shows a bottom banner with Accept / Reject / Manage.
+ *   - On grant, dispatches `df:consent-changed` with detail.analytics=true
+ *     so analytics scripts can boot lazily (see Base.astro).
+ *   - Can be re-opened from the AccessibilityControl "cookie settings"
+ *     button by dispatching `df:open-consent`.
+ *
+ * Copy is inlined in English. When the i18n infrastructure lands these
+ * strings will be sourced from the locale dictionary.
+ */
+---
+
+<div
+  id="df-consent"
+  class="consent-root"
+  role="dialog"
+  aria-modal="false"
+  aria-live="polite"
+  aria-labelledby="df-consent-title"
+  data-state="hidden"
+>
+  <div class="consent-card">
+    <div class="consent-main">
+      <p id="df-consent-title" class="consent-title">Cookies &amp; privacy</p>
+      <p class="consent-body">This site uses a single first-party analytics cookie to understand how visitors use the pages. No ads, no cross-site tracking, no data sold. You can change your choice any time from the accessibility panel.</p>
+    </div>
+
+    <div class="consent-actions">
+      <button type="button" class="consent-btn consent-btn--ghost" data-consent-action="reject">
+        Reject
+      </button>
+      <button type="button" class="consent-btn consent-btn--ghost" data-consent-action="manage">
+        Manage preferences
+      </button>
+      <button type="button" class="consent-btn consent-btn--primary" data-consent-action="accept">
+        Accept
+      </button>
+    </div>
+
+    <details class="consent-details" data-consent-manage>
+      <summary class="sr-only">Manage preferences</summary>
+      <label class="consent-toggle">
+        <input type="checkbox" name="analytics" checked />
+        <span>
+          <strong class="consent-toggle-title">Anonymous analytics</strong>
+          <span class="consent-toggle-help">Helps us improve the site. Uses a privacy-preserving first-party tracker.</span>
+        </span>
+      </label>
+      <div class="consent-actions consent-actions--inline">
+        <a href="/privacy" class="consent-link">Privacy policy</a>
+        <button type="button" class="consent-btn consent-btn--primary" data-consent-action="save">
+          Save choices
+        </button>
+      </div>
+    </details>
+  </div>
+</div>
+
+<style>
+  .consent-root {
+    position: fixed;
+    inset: auto 1rem 1rem 1rem;
+    z-index: 1040;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+    transform: translateY(120%);
+    transition: transform 400ms var(--ease-out-expo);
+  }
+  .consent-root[data-state='visible'] { transform: translateY(0); }
+  .consent-root[data-state='hidden'] { visibility: hidden; }
+
+  .consent-card {
+    pointer-events: auto;
+    width: min(720px, 100%);
+    background: rgba(0, 0, 0, 0.88);
+    color: var(--color-paper);
+    border-radius: 1.5rem;
+    padding: 1.25rem 1.5rem;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+    backdrop-filter: saturate(140%) blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .consent-title {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 0 0 0.35rem;
+  }
+  .consent-body {
+    font-size: 0.925rem;
+    line-height: 1.5;
+    margin: 0 0 1rem;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .consent-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: flex-end;
+  }
+  .consent-actions--inline { margin-top: 0.75rem; }
+
+  .consent-btn {
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.55rem 1.15rem;
+    border-radius: 100vw;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background 160ms, border-color 160ms, color 160ms;
+  }
+  .consent-btn--ghost {
+    background: transparent;
+    color: var(--color-paper);
+    border-color: rgba(255, 255, 255, 0.35);
+  }
+  .consent-btn--ghost:hover { border-color: var(--color-paper); }
+  .consent-btn--primary {
+    background: var(--color-paper);
+    color: var(--color-ink);
+  }
+  .consent-btn--primary:hover { background: #e8e8e8; }
+
+  .consent-details {
+    margin-top: 0.75rem;
+    display: none;
+  }
+  .consent-details[open] { display: block; }
+  .consent-root[data-expanded='true'] .consent-details { display: block; }
+
+  .consent-toggle {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    padding: 0.75rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .consent-toggle input {
+    margin-top: 0.2rem;
+    width: 1rem;
+    height: 1rem;
+  }
+  .consent-toggle-title { display: block; font-weight: 500; font-size: 0.95rem; }
+  .consent-toggle-help { display: block; font-size: 0.825rem; color: rgba(255, 255, 255, 0.7); }
+
+  .consent-link {
+    align-self: center;
+    margin-right: auto;
+    font-size: 0.825rem;
+    color: rgba(255, 255, 255, 0.75);
+    text-decoration: underline;
+  }
+
+  @media (max-width: 640px) {
+    .consent-root { inset: auto 0.5rem 0.5rem 0.5rem; }
+    .consent-card { padding: 1rem 1.1rem; }
+    .consent-actions { justify-content: stretch; }
+    .consent-btn { flex: 1 1 auto; }
+  }
+</style>
+
+<script>
+  const KEY = 'df-consent';
+  const root = document.getElementById('df-consent');
+  if (root) {
+    const details = root.querySelector<HTMLDetailsElement>('[data-consent-manage]');
+    const checkbox = root.querySelector<HTMLInputElement>('input[name="analytics"]');
+
+    type Consent = { analytics: boolean; ts: number };
+    const load = (): Consent | null => {
+      try {
+        const raw = localStorage.getItem(KEY);
+        return raw ? (JSON.parse(raw) as Consent) : null;
+      } catch {
+        return null;
+      }
+    };
+    const save = (c: Consent) => {
+      try { localStorage.setItem(KEY, JSON.stringify(c)); } catch {}
+      document.dispatchEvent(
+        new CustomEvent('df:consent-changed', { detail: c }),
+      );
+    };
+
+    const show = (expanded = false) => {
+      root.dataset.state = 'visible';
+      root.dataset.expanded = expanded ? 'true' : 'false';
+      if (expanded && details) details.open = true;
+    };
+    const hide = () => { root.dataset.state = 'hidden'; };
+
+    // Initial state: open if no choice stored, otherwise notify listeners.
+    const existing = load();
+    if (!existing) {
+      requestAnimationFrame(() => show(false));
+    } else {
+      document.dispatchEvent(
+        new CustomEvent('df:consent-changed', { detail: existing }),
+      );
+    }
+
+    root.addEventListener('click', (e) => {
+      const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('[data-consent-action]');
+      if (!btn) return;
+      const action = btn.dataset.consentAction;
+      if (action === 'accept') {
+        save({ analytics: true, ts: Date.now() });
+        hide();
+      } else if (action === 'reject') {
+        save({ analytics: false, ts: Date.now() });
+        hide();
+      } else if (action === 'manage') {
+        show(true);
+      } else if (action === 'save') {
+        save({ analytics: !!checkbox?.checked, ts: Date.now() });
+        hide();
+      }
+    });
+
+    document.addEventListener('df:open-consent', () => show(true));
+  }
+</script>

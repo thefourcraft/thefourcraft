@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+import { Icon } from 'astro-icon/components';
+---
+
+<Base title="Page not found" noindex>
+  <section class="flex min-h-[80vh] items-center bg-ink text-paper">
+    <div class="container-app text-center">
+      <p class="font-display text-sm uppercase tracking-[0.4em] text-cyan" data-reveal>404</p>
+      <h1 class="mt-4 font-display text-display-1 font-semibold" data-reveal data-reveal-delay="1">
+        Lost in space
+      </h1>
+      <p class="mx-auto mt-6 max-w-xl text-display-7 text-mist" data-reveal data-reveal-delay="2">
+        The page you're looking for doesn't exist (anymore). Let's get you back home.
+      </p>
+      <div class="mt-10" data-reveal data-reveal-delay="3">
+        <a href="/" class="btn btn-secondary">
+          <Icon name="lucide:home" class="h-4 w-4" /> Back to home
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>

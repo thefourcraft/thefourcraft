@@ -1,0 +1,16 @@
+.DS_Store
+node_modules/
+dist/
+.astro/
+.wrangler/
+.dev.vars
+.env
+.env.*
+!.env.example
+
+*.log
+.vscode/
+.idea/
+
+# Legacy Mobirise project file (do not commit)
+project.mobirise

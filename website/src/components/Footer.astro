@@ -1,0 +1,31 @@
+---
+import { SITE } from '../config/site';
+const year = new Date().getFullYear();
+
+const legalLinks = [
+  { label: 'Privacy Policy', href: '/privacy' },
+  { label: 'Cookie Policy', href: '/cookie-policy' },
+  { label: 'Terms of Service', href: '/terms' },
+];
+---
+
+<footer class="bg-night py-12 text-paper">
+  <div class="container-app flex flex-col items-center gap-4 text-center">
+    <p class="font-display text-sm md:text-base">
+      Copyright © {year} {SITE.name}. All Rights Reserved
+    </p>
+
+    <ul class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-display text-xs md:text-sm">
+      {legalLinks.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class="text-paper/70 transition-colors hover:text-paper"
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</footer>

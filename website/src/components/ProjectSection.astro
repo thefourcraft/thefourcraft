@@ -1,0 +1,41 @@
+---
+interface Props {
+  id: string;
+  title: string;
+  body: string;
+  image?: string;
+  imageAlt?: string;
+}
+const { id, title, body, image, imageAlt = '' } = Astro.props;
+---
+
+<section id={id} class="bg-night py-20 text-paper md:py-32">
+  <div class="container-app">
+    {image ? (
+      <div class="grid grid-cols-1 gap-10 md:grid-cols-12 md:items-center">
+        <div class="reveal md:col-span-4">
+          <img src={image} alt={imageAlt} class="mx-auto w-full max-w-sm rounded-card" loading="lazy" decoding="async" />
+        </div>
+        <div class="reveal md:col-span-8">
+          <h2 class="font-display text-display-2 font-semibold leading-[1.1] text-paper">
+        {title}
+      </h2>
+          <p class="mt-5 whitespace-pre-line font-sans text-display-7 text-paper">{body}</p>
+          <div class="mt-8 flex flex-wrap gap-4">
+            <slot />
+          </div>
+        </div>
+      </div>
+    ) : (
+      <div class="reveal mx-auto max-w-[1100px]">
+        <h2 class="font-display text-display-2 font-semibold leading-[1.1] text-paper">
+        {title}
+      </h2>
+        <p class="mt-5 whitespace-pre-line font-sans text-display-7 text-paper">{body}</p>
+        <div class="mt-8 flex flex-wrap gap-4">
+          <slot />
+        </div>
+      </div>
+    )}
+  </div>
+</section>

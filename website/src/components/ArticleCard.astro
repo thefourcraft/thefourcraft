@@ -1,0 +1,64 @@
+---
+interface Props {
+  title: string;
+  body?: string;
+  image?: string;
+  theme?: 'paper' | 'night';
+  align?: 'left' | 'center';
+}
+const { title, body, image, theme = 'paper', align = 'left' } = Astro.props;
+const isDark = theme === 'night';
+const isLeft = align === 'left';
+---
+
+<section
+  class:list={[
+    'relative isolate overflow-hidden py-20 md:py-32',
+    isDark ? 'bg-night' : 'bg-paper',
+  ]}
+>
+  {image && (
+    <div class="about-bg absolute inset-0 -z-10" style={`background-image: url(${image});`}></div>
+  )}
+
+  <div class="container-app">
+    <div
+      class:list={[
+        'reveal relative mx-auto max-w-[1100px] rounded-[1.75rem] px-6 py-12 md:px-16 md:py-16',
+        isLeft ? 'text-left' : 'text-center',
+        isDark ? 'bg-night text-paper ring-1 ring-white/5' : 'bg-paper text-ink ring-1 ring-ink/8',
+      ]}
+    >
+      <h2
+        class:list={[
+          'font-display text-display-2 font-semibold leading-[1.1]',
+          isDark ? 'text-paper' : 'text-night',
+        ]}
+      >
+        {title}
+      </h2>
+      {body && (
+        <p
+          class:list={[
+            'mt-6 whitespace-pre-line font-sans text-display-7',
+            isDark ? 'text-paper/90' : 'text-night',
+          ]}
+        >
+          {body}
+        </p>
+      )}
+      <slot />
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-bg {
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .about-bg { background-attachment: scroll; }
+  }
+</style>

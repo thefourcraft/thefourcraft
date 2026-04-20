@@ -1,0 +1,51 @@
+---
+interface Org {
+  label: string;
+  href: string;
+  image: string;
+  external?: boolean;
+}
+interface Props {
+  title: string;
+  subtitle?: string;
+  description?: string;
+  orgs: readonly Org[];
+  theme?: 'dark' | 'light';
+}
+const { title, subtitle, description, orgs, theme = 'dark' } = Astro.props;
+---
+
+<section class:list={['py-20 md:py-24', theme === 'dark' ? 'bg-night text-paper' : 'bg-paper text-ink']}>
+  <div class="container-app">
+    <div class="reveal mx-auto mb-12 max-w-3xl text-center">
+      <h2 class="font-display text-display-2 font-semibold leading-[1.1]">
+        {title}
+      </h2>
+      {subtitle && (
+        <p class="mt-4 font-display text-display-7">
+          {subtitle}
+          {description && <><br />{description}</>}
+        </p>
+      )}
+    </div>
+    <div class="grid grid-cols-2 gap-6 md:grid-cols-4 md:gap-10">
+      {orgs.map((org) => (
+        <a
+          href={org.href}
+          target={org.external ? '_blank' : undefined}
+          rel={org.external ? 'noopener noreferrer' : undefined}
+          class="reveal group flex items-center justify-center p-4 transition-transform hover:-translate-y-2"
+          aria-label={org.label}
+        >
+          <img
+            src={org.image}
+            alt={org.label}
+            class="max-h-40 w-auto max-w-full object-contain transition-opacity group-hover:opacity-80"
+            loading="lazy"
+            decoding="async"
+          />
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

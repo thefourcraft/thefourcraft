@@ -654,14 +654,13 @@ async function renderStats(user: string, env: Env): Promise<Response> {
   const eyebrowY = 82;
   const rowY0 = 118;
   const rowDY = 32;
-  const valX = W - 220;
   const H = rowY0 + rows.length * rowDY + 36;
 
-  const circleCX = W - 96;
-  const circleCY = titleY + 8;
   const circleR = 24;
-  const circleC = 2 * Math.PI * circleR;
-  const gradeOffset = circleC * (1 - grade.percent);
+  const circleCX = W - padX - circleR;   // 656 — flush with right padding
+  const circleCY = 50;                    // vertically in the title zone
+  const gradeOffset = 2 * Math.PI * (circleR - 3) * (1 - grade.percent);
+  const valEndX = circleCX - circleR - 20; // 612 — clear of ring by 20px
 
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="GitHub stats for ${esc(user)}">
   <defs>
@@ -680,16 +679,16 @@ async function renderStats(user: string, env: Env): Promise<Response> {
   <text class="title" x="${padX}" y="${titleY}">${esc(name)}'s GitHub Activity</text>
   <text class="eyebrow" x="${padX}" y="${eyebrowY}">Lifetime · public &amp; private</text>
 
-  <!-- grade pill (top-right) -->
+  <!-- grade ring (top-right, flush with right padding) -->
   <g transform="translate(${circleCX}, ${circleCY})">
     <circle r="${circleR}" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
     <circle r="${circleR - 3}" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="2.5"/>
     <circle r="${circleR - 3}" fill="none" stroke="#ff9500" stroke-width="2.5"
-            stroke-dasharray="${2 * Math.PI * (circleR - 3)}" stroke-dashoffset="${2 * Math.PI * (circleR - 3) * (1 - grade.percent)}"
+            stroke-dasharray="${2 * Math.PI * (circleR - 3)}" stroke-dashoffset="${gradeOffset}"
             stroke-linecap="round" transform="rotate(-90)"/>
     <text class="grade" text-anchor="middle" dominant-baseline="central">${grade.letter}</text>
   </g>
-  <text class="eyebrow" x="${circleCX}" y="${circleCY + circleR + 16}" text-anchor="middle">GRADE</text>
+  <text class="eyebrow" x="${circleCX}" y="${circleCY + circleR + 15}" text-anchor="middle">GRADE</text>
 
   <!-- horizontal rule under title -->
   <line class="rule" x1="${padX}" y1="${eyebrowY + 18}" x2="${W - padX}" y2="${eyebrowY + 18}"/>
@@ -699,7 +698,7 @@ async function renderStats(user: string, env: Env): Promise<Response> {
       const y = rowY0 + i * rowDY;
       return `
     <text class="k" x="${padX}" y="${y}">${esc(k)}</text>
-    <text class="v" x="${W - padX}" y="${y}" text-anchor="end">${esc(v)}</text>
+    <text class="v" x="${valEndX}" y="${y}" text-anchor="end">${esc(v)}</text>
     ${i < rows.length - 1 ? `<line class="rule" x1="${padX}" y1="${y + 12}" x2="${W - padX}" y2="${y + 12}"/>` : ''}`;
     })
     .join('')}

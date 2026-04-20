@@ -65,5 +65,3 @@ This GitHub profile holds my open-source code, side projects, and the source for
   </a>
 </p>
 
-<p align="center"><sub>Cards generated live by <a href="https://github.com/thefourcraft/thefourcraft/tree/production/stats">dfstats</a>, a Cloudflare Worker I run at <code>stats.david-furman.com</code>. No third-party services.</sub></p>
-

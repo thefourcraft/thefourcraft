@@ -497,66 +497,53 @@ async function renderStreak(user: string, env: Env): Promise<Response> {
   const cx1 = 170;
   const cx2 = 360;
   const cx3 = 550;
-  const cy = 118;
+  const cy = 110;
 
   const ringR = 58;
-  const ringStroke = 6;
+  const ringStroke = 5;
 
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="GitHub streak for ${esc(user)}">
   <defs>
-    <linearGradient id="ember" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#ffb347"/>
-      <stop offset="55%" stop-color="#ff9500"/>
-      <stop offset="100%" stop-color="#ff6a00"/>
-    </linearGradient>
-    <radialGradient id="glow" cx="50%" cy="55%" r="55%">
-      <stop offset="0%" stop-color="#ff9500" stop-opacity="0.18"/>
-      <stop offset="70%" stop-color="#ff9500" stop-opacity="0"/>
-    </radialGradient>
     <style>
       .bg{fill:${COLORS.bg};stroke:rgba(255,255,255,0.08)}
       .num{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-weight:700;fill:${COLORS.fg};font-variant-numeric:tabular-nums;letter-spacing:-0.02em}
-      .label{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-weight:500;fill:${COLORS.fg};font-size:13px;letter-spacing:0.02em}
-      .eyebrow{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-weight:600;fill:${COLORS.dim};font-size:10px;letter-spacing:0.14em;text-transform:uppercase}
+      .label{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-weight:400;fill:${COLORS.fg};font-size:14px}
       .dim{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-weight:400;fill:${COLORS.dim};font-size:11px;font-variant-numeric:tabular-nums}
-      .accent{fill:#ff9500}
-      .sep{stroke:rgba(255,255,255,0.07)}
+      .accent{fill:#ff9500;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-weight:600;font-size:14px}
+      .sep{stroke:rgba(255,255,255,0.10)}
     </style>
   </defs>
 
-  <rect class="bg" x="0.5" y="0.5" width="${W - 1}" height="${H - 1}" rx="16" ry="16"/>
+  <rect class="bg" x="0.5" y="0.5" width="${W - 1}" height="${H - 1}" rx="14" ry="14"/>
 
   <!-- hairline separators -->
-  <line class="sep" x1="${(cx1 + cx2) / 2}" y1="44" x2="${(cx1 + cx2) / 2}" y2="${H - 44}"/>
-  <line class="sep" x1="${(cx2 + cx3) / 2}" y1="44" x2="${(cx2 + cx3) / 2}" y2="${H - 44}"/>
+  <line class="sep" x1="${(cx1 + cx2) / 2}" y1="40" x2="${(cx1 + cx2) / 2}" y2="${H - 40}"/>
+  <line class="sep" x1="${(cx2 + cx3) / 2}" y1="40" x2="${(cx2 + cx3) / 2}" y2="${H - 40}"/>
 
-  <!-- col 1: total -->
-  <text class="eyebrow" x="${cx1}" y="${cy - 34}" text-anchor="middle">TOTAL</text>
-  <text class="num" x="${cx1}" y="${cy}" text-anchor="middle" font-size="34">${fmtNumberFull(s.total)}</text>
-  <text class="label" x="${cx1}" y="${cy + 24}" text-anchor="middle">Contributions</text>
-  <text class="dim" x="${cx1}" y="${cy + 46}" text-anchor="middle">${fmtDateLong(s.since)} — Present</text>
+  <!-- col 1: total contributions -->
+  <text class="num" x="${cx1}" y="${cy}" text-anchor="middle" font-size="32">${fmtNumberFull(s.total)}</text>
+  <text class="label" x="${cx1}" y="${cy + 26}" text-anchor="middle">Total Contributions</text>
+  <text class="dim" x="${cx1}" y="${cy + 50}" text-anchor="middle">${fmtDateLong(s.since)} - Present</text>
 
   <!-- col 2: current streak ring -->
-  <g transform="translate(${cx2}, ${cy - 4})">
-    <circle r="${ringR + 6}" fill="url(#glow)"/>
-    <circle r="${ringR}" fill="none" stroke="rgba(255,149,0,0.18)" stroke-width="${ringStroke}"/>
-    <circle r="${ringR}" fill="none" stroke="url(#ember)" stroke-width="${ringStroke}"
+  <g transform="translate(${cx2}, ${cy + 4})">
+    <circle r="${ringR}" fill="none" stroke="#ff9500" stroke-opacity="0.28" stroke-width="${ringStroke}"/>
+    <circle r="${ringR}" fill="none" stroke="#ff9500" stroke-width="${ringStroke}"
             stroke-linecap="round" transform="rotate(-90)"
             stroke-dasharray="${2 * Math.PI * ringR}" stroke-dashoffset="0"/>
     <!-- flame icon at top of ring -->
-    <g transform="translate(0, -${ringR + 2})">
+    <g transform="translate(0, -${ringR + 6})">
       ${fireIcon()}
     </g>
-    <text class="num" y="10" text-anchor="middle" font-size="30">${s.current}</text>
+    <text class="num" y="8" text-anchor="middle" font-size="28">${s.current}</text>
   </g>
-  <text class="accent label" x="${cx2}" y="${cy + ringR + 22}" text-anchor="middle" style="font-weight:600">Current Streak</text>
-  <text class="dim" x="${cx2}" y="${cy + ringR + 42}" text-anchor="middle">${fmtDate(s.currentFrom)} — ${fmtDate(s.currentTo)}</text>
+  <text class="accent" x="${cx2}" y="${cy + ringR + 28}" text-anchor="middle">Current Streak</text>
+  <text class="dim" x="${cx2}" y="${cy + ringR + 48}" text-anchor="middle">${fmtDate(s.currentFrom)} - ${fmtDate(s.currentTo)}</text>
 
-  <!-- col 3: longest -->
-  <text class="eyebrow" x="${cx3}" y="${cy - 34}" text-anchor="middle">LONGEST</text>
-  <text class="num" x="${cx3}" y="${cy}" text-anchor="middle" font-size="34">${s.longest}</text>
-  <text class="label" x="${cx3}" y="${cy + 24}" text-anchor="middle">Day Streak</text>
-  <text class="dim" x="${cx3}" y="${cy + 46}" text-anchor="middle">${fmtDate(s.longestFrom)} — ${fmtDate(s.longestTo)}</text>
+  <!-- col 3: longest streak -->
+  <text class="num" x="${cx3}" y="${cy}" text-anchor="middle" font-size="32">${s.longest}</text>
+  <text class="label" x="${cx3}" y="${cy + 26}" text-anchor="middle">Longest Streak</text>
+  <text class="dim" x="${cx3}" y="${cy + 50}" text-anchor="middle">${fmtDate(s.longestFrom)} - ${fmtDate(s.longestTo)}</text>
 </svg>`;
 
   return svgResponse(svg);
@@ -567,10 +554,18 @@ function fmtNumberFull(n: number): string {
 }
 
 function fireIcon(): string {
-  // Clean flame silhouette, 24×28 viewbox equivalent, centered on origin.
-  return `<g transform="translate(-10, -11) scale(0.85)">
-    <path d="M12 1.5 C 10.8 4.5, 7.5 6.5, 7.5 11 C 7.5 12.7, 8.1 14.4, 9.2 15.6 C 8.6 15.1, 8.2 14.3, 8.2 13.5 C 8.2 11.3, 10.2 10.6, 10.8 8 C 11.8 10.3, 14 11.2, 14 13.5 C 14 14.6, 13.3 15.6, 12.2 16 C 14.7 15.5, 16.5 13.2, 16.5 10.5 C 16.5 6.8, 13.4 5, 12 1.5 Z"
-          fill="url(#ember)" stroke="#ffb347" stroke-width="0.4" stroke-linejoin="round"/>
+  // Red flame, classic streak-stats silhouette. Centered on origin.
+  return `<g transform="translate(-9, -11)">
+    <path d="M9 0 C 7.5 3.5, 3.5 5, 3.5 10 C 3.5 13, 5 15.5, 7.2 17
+             C 6.3 16, 6 14.8, 6.3 13.6 C 6.8 11.6, 8.2 10.5, 9 8.5
+             C 9.8 10.8, 11.8 11.5, 12.4 13.8
+             C 12.8 15.5, 12.3 17.2, 10.8 17.8
+             C 13.5 17.2, 15 14.8, 15 12
+             C 15 7.5, 11 5.5, 9 0 Z"
+          fill="#e8552b"/>
+    <path d="M9 7 C 8.3 8.5, 7 9.5, 7 11.5 C 7 13, 8 14, 9 14
+             C 10 14, 11 13, 11 11.5 C 11 10, 10 9.2, 9 7 Z"
+          fill="#ffb347"/>
   </g>`;
 }
 
@@ -724,12 +719,12 @@ async function renderGraph(user: string, env: Env): Promise<Response> {
   // If the fetched range is short, pad.
   const series = days.slice(-31);
 
-  const W = 900;
-  const H = 300;
-  const padL = 56;
-  const padR = 24;
-  const padT = 54;
-  const padB = 42;
+  const W = 920;
+  const H = 340;
+  const padL = 64;
+  const padR = 30;
+  const padT = 66;
+  const padB = 52;
 
   const innerW = W - padL - padR;
   const innerH = H - padT - padB;

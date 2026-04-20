@@ -103,16 +103,12 @@ jobs:
           plugin_followup_sections: repositories, user
           plugin_followup_indepth: yes
 
-      # ── 5. Achievements: trophy row ─────────────────────────────────────
-      # NOTE: currently shows "Unexpected error" because GitHub's GraphQL API
-      # returns a deprecation warning for "Projects (classic)" in the errors
-      # array, which @octokit/graphql treats as a fatal error. No fix in
-      # lowlighter/metrics v3.34. Continue-on-error keeps the rest running.
-      - name: achievements
+      # ── 5. Activity: recent public + private events ─────────────────────
+      - name: activity
         uses: lowlighter/metrics@v3.34
         continue-on-error: true
         with:
-          filename: website/public/metrics/achievements.svg
+          filename: website/public/metrics/activity.svg
           token: ${{ secrets.METRICS_TOKEN }}
           user: ${{ env.USER }}
           template: classic
@@ -120,34 +116,14 @@ jobs:
           config_output: svg
           config_animations: no
           output_action: commit
-          plugin_achievements: yes
-          plugin_achievements_threshold: C
-          plugin_achievements_secrets: yes
-          plugin_achievements_display: detailed
-          plugin_achievements_limit: 0
+          plugin_activity: yes
+          plugin_activity_limit: 10
+          plugin_activity_days: 14
+          plugin_activity_visibility: all
+          plugin_activity_timestamps: yes
 
-      # ── 6. Habits: "when I code" chart + fun facts ──────────────────────
-      # Reduced plugin_habits_from to avoid null-author crash in event stream.
-      - name: habits
-        uses: lowlighter/metrics@v3.34
-        continue-on-error: true
-        with:
-          filename: website/public/metrics/habits.svg
-          token: ${{ secrets.METRICS_TOKEN }}
-          user: ${{ env.USER }}
-          template: classic
-          base: ''
-          config_output: svg
-          config_timezone: ${{ env.TZ }}
-          config_animations: no
-          output_action: commit
-          plugin_habits: yes
-          plugin_habits_from: 200
-          plugin_habits_days: 14
-          plugin_habits_facts: yes
-          plugin_habits_charts: no
-
-      # ── 7. Lines of code: total additions / deletions ───────────────────
+      # ── 6. Lines of code: total additions / deletions ───────────────────
+      # plugin_lines_delay gives GitHub's stats API time to compute on first call.
       - name: lines
         uses: lowlighter/metrics@v3.34
         continue-on-error: true
@@ -161,8 +137,9 @@ jobs:
           config_animations: no
           output_action: commit
           plugin_lines: yes
-          plugin_lines_sections: base, history
+          plugin_lines_sections: base
           plugin_lines_repositories_limit: 0
+          plugin_lines_delay: 3
 
       # ── 8. Stargazers: star count chart over time ────────────────────────
       - name: stargazers

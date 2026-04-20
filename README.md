@@ -49,19 +49,19 @@ This GitHub profile holds my open-source code, side projects, and the source for
 
 <p align="center">
   <a href="https://github.com/thefourcraft">
-    <img alt="Streak" src="https://stats.david-furman.com/streak" />
+    <img alt="Streak" src="https://david-furman.com/api/stats/streak" />
   </a>
 </p>
 
 <p align="center">
   <a href="https://github.com/thefourcraft">
-    <img alt="Stats" src="https://stats.david-furman.com/stats" />
+    <img alt="Stats" src="https://david-furman.com/api/stats/stats" />
   </a>
 </p>
 
 <p align="center">
   <a href="https://github.com/thefourcraft">
-    <img alt="Contribution graph" src="https://stats.david-furman.com/graph" />
+    <img alt="Contribution graph" src="https://david-furman.com/api/stats/graph" />
   </a>
 </p>
 

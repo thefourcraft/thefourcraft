@@ -80,12 +80,11 @@ This GitHub profile holds my open-source code, side projects, and the source for
 
 <p align="center">
   <img alt="Pull-request follow-up: opened / merged / still-open" src="https://david-furman.com/metrics/followup.svg?v=2" width="49%" />
-  <img alt="Repositories" src="https://david-furman.com/metrics/repositories.svg" width="49%" />
+  <img alt="Stargazers over time" src="https://david-furman.com/metrics/stargazers.svg" width="49%" />
 </p>
 
 <p align="center">
-  <img alt="Lines of code written" src="https://david-furman.com/metrics/lines.svg" width="49%" />
-  <img alt="Stargazers over time" src="https://david-furman.com/metrics/stargazers.svg" width="49%" />
+  <img alt="Lines of code written" src="https://david-furman.com/metrics/lines.svg" />
 </p>
 
 

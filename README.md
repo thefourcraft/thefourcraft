@@ -6,19 +6,13 @@
   <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="28" alt="waving hand" />
 </h1>
 
-<p>I'm <strong>David Furman</strong>, CTO and co-founder of <a href="https://arcusis.com">Arcusis</a>.</p>
-
-<p>
-  I build enterprise-grade software, cloud infrastructure, and AI systems for<br/>
-  high-traffic communities and mission-critical platforms. I also chair the<br/>
-  <strong>Israeli Gaming Association</strong> and dedicate a significant portion of my work<br/>
-  to building technology that defends Jewish communities and the West from<br/>
-  coordinated digital threats.
-</p>
-
-<p>This GitHub profile holds my open-source code, side projects, and the source for my personal site at <a href="https://david-furman.com">david-furman.com</a>.</p>
-
 </div>
+
+I'm **David Furman**, CTO and co-founder of [Arcusis](https://arcusis.com).
+
+I build enterprise-grade software, cloud infrastructure, and AI systems for high-traffic communities and mission-critical platforms. I also chair the **Israeli Gaming Association** and dedicate a significant portion of my work to building technology that defends Jewish communities and the West from coordinated digital threats.
+
+This GitHub profile holds my open-source code, side projects, and the source for my personal site at [david-furman.com](https://david-furman.com).
 
 <!-- Contact -->
 <p align="center">

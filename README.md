@@ -70,7 +70,7 @@ This GitHub profile holds my open-source code, side projects, and the source for
 <h2 align="center">📈 Deep Dive</h2>
 
 <p align="center">
-  <img alt="Full-year 3D contribution calendar" src="https://david-furman.com/metrics/isocalendar.svg" />
+  <img alt="Full-year 3D contribution calendar" src="https://david-furman.com/metrics/isocalendar.svg?v=2" />
 </p>
 
 <p align="center">
@@ -79,12 +79,17 @@ This GitHub profile holds my open-source code, side projects, and the source for
 </p>
 
 <p align="center">
-  <img alt="Pull-request follow-up: opened / merged / still-open" src="https://david-furman.com/metrics/followup.svg" width="49%" />
+  <img alt="Pull-request follow-up: opened / merged / still-open" src="https://david-furman.com/metrics/followup.svg?v=2" width="49%" />
   <img alt="Coding habits — most-active hours and days" src="https://david-furman.com/metrics/habits.svg" width="49%" />
 </p>
 
 <p align="center">
   <img alt="GitHub achievements" src="https://david-furman.com/metrics/achievements.svg" />
+</p>
+
+<p align="center">
+  <img alt="Lines of code written" src="https://david-furman.com/metrics/lines.svg" width="49%" />
+  <img alt="Stargazers over time" src="https://david-furman.com/metrics/stargazers.svg" width="49%" />
 </p>
 
 

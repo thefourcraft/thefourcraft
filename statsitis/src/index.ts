@@ -568,8 +568,8 @@ async function renderStreak(user: string, env: Env): Promise<Response> {
     <g transform="translate(${cM}, 108)">
       <text x="0" y="32" text-anchor="middle" fill="${T.currStreakLabel}" font-family="'Segoe UI', Ubuntu, sans-serif" font-weight="700" font-size="14px">Current Streak</text>
     </g>
-    <g transform="translate(${cM}, 145)">
-      <text x="0" y="21" text-anchor="middle" fill="${T.sideDates}" font-family="'Segoe UI', Ubuntu, sans-serif" font-weight="400" font-size="12px" font-variant-numeric="tabular-nums">${fmtDate(s.currentFrom)} - ${fmtDate(s.currentTo)}</text>
+    <g transform="translate(${cM}, 114)">
+      <text x="0" y="32" text-anchor="middle" fill="${T.sideDates}" font-family="'Segoe UI', Ubuntu, sans-serif" font-weight="400" font-size="12px" font-variant-numeric="tabular-nums">${fmtDate(s.currentFrom)} - ${fmtDate(s.currentTo)}</text>
     </g>
 
     <!-- Ring (with mask cutting a slot for the fire icon) -->

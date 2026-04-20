@@ -1,4 +1,4 @@
-# Generate the 6 "deep dive" SVG cards via lowlighter/metrics.
+# Generate "deep dive" SVG cards via lowlighter/metrics.
 # Runs in the GitHub Actions runner, writes SVGs into
 # website/public/metrics/ on the default branch, which are then
 # served by the dfwebsite Cloudflare Worker at
@@ -44,6 +44,7 @@ jobs:
           base: ''
           config_timezone: ${{ env.TZ }}
           config_output: svg
+          config_animations: no
           output_action: commit
           plugin_isocalendar: yes
           plugin_isocalendar_duration: full-year
@@ -59,13 +60,14 @@ jobs:
           template: classic
           base: ''
           config_output: svg
+          config_animations: no
           output_action: commit
           plugin_notable: yes
           plugin_notable_from: organization
           plugin_notable_types: commit
           plugin_notable_self: yes
 
-      # ── 3. Languages ────────────────────────────────────────────────────
+      # ── 3. Languages (in-depth, includes private repos) ─────────────────
       - name: languages
         uses: lowlighter/metrics@v3.34
         continue-on-error: true
@@ -76,10 +78,13 @@ jobs:
           template: classic
           base: ''
           config_output: svg
+          config_animations: no
           output_action: commit
           plugin_languages: yes
           plugin_languages_sections: most-used
           plugin_languages_limit: 12
+          plugin_languages_indepth: yes
+          plugin_languages_analysis_timeout: 15
 
       # ── 4. Followup: PR lifecycle (opened / merged / still-open) ────────
       - name: followup
@@ -92,12 +97,17 @@ jobs:
           template: classic
           base: ''
           config_output: svg
+          config_animations: no
           output_action: commit
           plugin_followup: yes
           plugin_followup_sections: repositories, user
           plugin_followup_indepth: yes
 
       # ── 5. Achievements: trophy row ─────────────────────────────────────
+      # NOTE: currently shows "Unexpected error" because GitHub's GraphQL API
+      # returns a deprecation warning for "Projects (classic)" in the errors
+      # array, which @octokit/graphql treats as a fatal error. No fix in
+      # lowlighter/metrics v3.34. Continue-on-error keeps the rest running.
       - name: achievements
         uses: lowlighter/metrics@v3.34
         continue-on-error: true
@@ -108,6 +118,7 @@ jobs:
           template: classic
           base: ''
           config_output: svg
+          config_animations: no
           output_action: commit
           plugin_achievements: yes
           plugin_achievements_threshold: C
@@ -116,6 +127,7 @@ jobs:
           plugin_achievements_limit: 0
 
       # ── 6. Habits: "when I code" chart + fun facts ──────────────────────
+      # Reduced plugin_habits_from to avoid null-author crash in event stream.
       - name: habits
         uses: lowlighter/metrics@v3.34
         continue-on-error: true
@@ -127,12 +139,46 @@ jobs:
           base: ''
           config_output: svg
           config_timezone: ${{ env.TZ }}
+          config_animations: no
           output_action: commit
           plugin_habits: yes
-          plugin_habits_from: 1000
+          plugin_habits_from: 200
           plugin_habits_days: 14
           plugin_habits_facts: yes
           plugin_habits_charts: yes
+
+      # ── 7. Lines of code: total additions / deletions ───────────────────
+      - name: lines
+        uses: lowlighter/metrics@v3.34
+        continue-on-error: true
+        with:
+          filename: website/public/metrics/lines.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          user: ${{ env.USER }}
+          template: classic
+          base: ''
+          config_output: svg
+          config_animations: no
+          output_action: commit
+          plugin_lines: yes
+          plugin_lines_sections: base
+
+      # ── 8. Stargazers: star count chart over time ────────────────────────
+      - name: stargazers
+        uses: lowlighter/metrics@v3.34
+        continue-on-error: true
+        with:
+          filename: website/public/metrics/stargazers.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          user: ${{ env.USER }}
+          template: classic
+          base: ''
+          config_output: svg
+          config_animations: no
+          output_action: commit
+          plugin_stargazers: yes
+          plugin_stargazers_charts: yes
+          plugin_stargazers_charts_type: classic
 
       # Trigger the deploy workflow so newly committed SVGs go live.
       # GITHUB_TOKEN pushes don't auto-trigger other workflows, so we

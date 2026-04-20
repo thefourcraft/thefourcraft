@@ -657,9 +657,9 @@ async function renderStats(user: string, env: Env): Promise<Response> {
   const valX = W - 220;
   const H = rowY0 + rows.length * rowDY + 36;
 
-  const circleCX = W - 100;
-  const circleCY = titleY + 10;
-  const circleR = 26;
+  const circleCX = W - 96;
+  const circleCY = titleY + 8;
+  const circleR = 24;
   const circleC = 2 * Math.PI * circleR;
   const gradeOffset = circleC * (1 - grade.percent);
 
@@ -682,10 +682,10 @@ async function renderStats(user: string, env: Env): Promise<Response> {
 
   <!-- grade pill (top-right) -->
   <g transform="translate(${circleCX}, ${circleCY})">
-    <circle r="${circleR}" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.10)"/>
-    <circle r="${circleR - 2}" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="3"/>
-    <circle r="${circleR - 2}" fill="none" stroke="${COLORS.fg}" stroke-width="3"
-            stroke-dasharray="${2 * Math.PI * (circleR - 2)}" stroke-dashoffset="${2 * Math.PI * (circleR - 2) * (1 - grade.percent)}"
+    <circle r="${circleR}" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+    <circle r="${circleR - 3}" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="2.5"/>
+    <circle r="${circleR - 3}" fill="none" stroke="#ff9500" stroke-width="2.5"
+            stroke-dasharray="${2 * Math.PI * (circleR - 3)}" stroke-dashoffset="${2 * Math.PI * (circleR - 3) * (1 - grade.percent)}"
             stroke-linecap="round" transform="rotate(-90)"/>
     <text class="grade" text-anchor="middle" dominant-baseline="central">${grade.letter}</text>
   </g>

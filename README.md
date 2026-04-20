@@ -1,76 +1,50 @@
-<!-- Welcome Text -->
-<div align="center"><h1>Welcome 
-<img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="28">
+<!-- Welcome -->
+<div align="center">
+
+<h1>
+  Welcome
+  <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="28" alt="waving hand" />
 </h1>
 
-<!-- Contact Me -->
-<p align="center">
-    <a href="https://twitter.com/thefourcraft">
-    <img alt="Twitter" title="Twitter" 
-    src="photos/Twitter-icon.svg"/>
-    </a>
-    <a href="https://www.instagram.com/david_furman/">
-    <img alt="Instagram" title="Instagram" 
-    src="photos/Instagram-icon.svg"/>
-    </a>
-    <a href="https://www.linkedin.com/in/david-furman/t">
-    <img alt="Linkedin" title="Linkedin" 
-    src="photos/Linkedin-Icon.svg"/>
-    <a href="https://thefourcraft.com">
-    <img alt="Website" title="My Website" 
-    src="photos/Website-big-Icon.svg"/>
-    </a>
-    <a href="https://github.com/thefourcraft">
-    <img alt="GitHub" title="GitHub" 
-    src="photos/Github-icon.svg"/>
-    </a>
-    <a href="https://www.facebook.com/david2004furman">
-    <img alt="Facebook" title="Facebook" 
-    src="photos/Facebook-icon.svg"/>
-    </a>
-    <a href="mailto:me@thefourcraft.com?subject=[GitHub]">
-    <img alt="Email" title="Email" 
-    src="photos/Email-icon.svg"/>
-    </a>
+<p>I'm <strong>David Furman</strong>, CTO and co-founder of <a href="https://arcusis.com">Arcusis</a>.</p>
+
+<p>
+  I build enterprise-grade software, cloud infrastructure, and AI systems for<br/>
+  high-traffic communities and mission-critical platforms. I also chair the<br/>
+  <strong>Israeli Gaming Association</strong> and dedicate a significant portion of my work<br/>
+  to building technology that defends Jewish communities and the West from<br/>
+  coordinated digital threats.
 </p>
 
-> **Note**
-Icons by <a target="_blank" href="https://icons8.com">Icons8</a>
+<p>This GitHub profile holds my open-source code, side projects, and the source for my personal site at <a href="https://david-furman.com">david-furman.com</a>.</p>
 
-
-</td><td valign="top" width="33%">
-
-
-<!-- https://github.com/anuraghazra/github-readme-stats -->
-<div align="center">
-<h2>💻 GitHub Profile Stats</h2>
 </div>
 
-  <br/>
-    <a href="https://github.com/anuraghazra/github-readme-stats">
-    <img alt="thefourcraft Github Stats" 
-    src="https://streak-stats.demolab.com/?user=thefourcraft&theme=dark&hide_border=true&date_format=j%2Fn%5B%2FY%5D&fire=DD2727" 
-    height="192px" width= "3000px"/>
-    </a>
-    <div align="center">
-        <a href="https://github.com/anuraghazra/github-readme-stats">
-        <img alt="thefourcraft Score" 
-        src="https://github-readme-stats.vercel.app/api?username=thefourCraft&show_icons=true\&show=reviews,discussions_started,discussions_answered,prs_merged,prs_merged_percentage&theme=dark&hide_border=true&include_all_commits=true&count_private=true" />
-        </a>
-        <br/>
-        <img
-        src="https://github-readme-stats.vercel.app/api/wakatime?username=thefourCraft&layout=compact&theme=dark&hide_border=true" />
-    </div>
-  <br/>
-  
-> **Note**\
-Top languages are only a metric of the languages my public code consists of and doesn't reflect experience or skill level.\
-Wakatime stats are a new addition since Nov 20 2022 [Learn More](https://wakatime.com/@thefourCraft)\
-[![wakatime](https://wakatime.com/badge/user/2d4f1aae-0715-4418-a6f3-e6d05c70dffd.svg)](https://wakatime.com/@2d4f1aae-0715-4418-a6f3-e6d05c70dffd)
+<!-- Contact -->
+<p align="center">
+  <a href="https://www.linkedin.com/in/david-furman/" title="LinkedIn">
+    <img src="https://cdn.simpleicons.org/linkedin/0a66c2" alt="LinkedIn" height="28" />
+  </a>
+  &nbsp;
+  <a href="https://www.instagram.com/david_furman/" title="Instagram">
+    <img src="https://cdn.simpleicons.org/instagram/e4405f" alt="Instagram" height="28" />
+  </a>
+  &nbsp;
+  <a href="https://www.facebook.com/david2004furman" title="Facebook">
+    <img src="https://cdn.simpleicons.org/facebook/1877f2" alt="Facebook" height="28" />
+  </a>
+  &nbsp;
+  <a href="https://github.com/thefourcraft" title="GitHub">
+    <img src="https://cdn.simpleicons.org/github/ffffff" alt="GitHub" height="28" />
+  </a>
+  &nbsp;
+  <a href="https://david-furman.com" title="Website">
+    <img src="https://cdn.simpleicons.org/googlechrome/4285f4" alt="Website" height="28" />
+  </a>
+  &nbsp;
+  <a href="mailto:me@david-furman.com?subject=[GitHub]" title="Email">
+    <img src="https://cdn.simpleicons.org/gmail/ea4335" alt="Email" height="28" />
+  </a>
+</p>
 
-
-<!-- https://github.com/ashutosh00710/github-readme-activity-graph -->
-
-<a href="https://github.com/ashutosh00710/github-readme-activity-graph">
-<img alt="My Activity Graph" 
-src="https://github-readme-activity-graph.vercel.app/graph?username=thefourcraft&bg_color=161616&color=d3d3d3&line=e8eaea&point=5b5959&hide_border=true"/></a>
+<p align="center"><sub>Brand icons from <a href="https://simpleicons.org">Simple Icons</a> (CC0).</sub></p>

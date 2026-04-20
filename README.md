@@ -80,7 +80,7 @@ This GitHub profile holds my open-source code, side projects, and the source for
 
 <p align="center">
   <img alt="Pull-request follow-up: opened / merged / still-open" src="https://david-furman.com/metrics/followup.svg?v=2" width="49%" />
-  <img alt="Recent activity" src="https://david-furman.com/metrics/activity.svg" width="49%" />
+  <img alt="Repositories" src="https://david-furman.com/metrics/repositories.svg" width="49%" />
 </p>
 
 <p align="center">

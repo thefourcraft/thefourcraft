@@ -63,24 +63,7 @@ jobs:
           plugin_notable: yes
           plugin_notable_from: organization
           plugin_notable_types: commit
-          plugin_notable_repositories: yes
           plugin_notable_self: yes
-          plugin_notable_limit: 20
-
-      # Post-process: compress notable.svg with svgo (it can reach 5-6 MB due
-      # to embedded avatars, which breaks GitHub camo's ~5 MB proxy limit).
-      - name: compress notable.svg
-        if: always()
-        run: |
-          git pull --rebase
-          SVG=website/public/metrics/notable.svg
-          [ -f "$SVG" ] || { echo "notable.svg missing, skipping"; exit 0; }
-          npx --yes svgo@3 --multipass --quiet -o "$SVG" "$SVG"
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add "$SVG"
-          git diff --cached --quiet && echo "no change after svgo" || git commit -m "metrics: compress notable.svg"
-          git push
 
       # ── 3. Languages ────────────────────────────────────────────────────
       - name: languages

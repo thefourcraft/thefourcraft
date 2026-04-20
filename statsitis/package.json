@@ -1,0 +1,8 @@
+{
+  "name": "statsitis",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Self-hosted GitHub profile stat-card renderers (streak, stats, graph). Pure TS library consumed by the dfwebsite Cloudflare Worker.",
+  "main": "src/index.ts",
+  "types": "src/index.ts"
+}

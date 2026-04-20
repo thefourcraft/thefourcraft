@@ -5,5 +5,8 @@
   "compatibility_date": "2026-04-18",
   "compatibility_flags": ["nodejs_compat"],
   "workers_dev": true,
+  "vars": {
+    "GH_USER": "thefourcraft"
+  },
   "observability": { "enabled": true }
 }

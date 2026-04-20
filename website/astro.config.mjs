@@ -7,7 +7,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   site: 'https://david-furman.com',
-  output: 'static',
+  output: 'server',
   adapter: cloudflare({
     imageService: 'compile',
     prerenderEnvironment: 'node',

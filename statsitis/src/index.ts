@@ -13,38 +13,62 @@ export interface Env {
   GH_TOKEN?: string;
 }
 
-// ─── Router ─────────────────────────────────────────────────────────────────
+// ─── Public API ─────────────────────────────────────────────────────────────
+// `statsitis` is consumed by the dfwebsite Worker via Astro API endpoints
+// under /api/stats/*. The renderers are exported below for direct use; the
+// Worker router is retained as the default export for standalone deploys
+// and for local preview via `wrangler dev`.
+
+export { renderStreak, renderStats, renderGraph };
+
+/**
+ * Handle a stats request on a given pathname. Used by the website Worker to
+ * delegate /api/stats/{streak,stats,graph} without reimplementing routing or
+ * edge caching. Returns a fully-formed SVG response (or 404/500).
+ */
+export async function handleStatsRequest(
+  req: Request,
+  env: Env,
+  ctx: ExecutionContext,
+  pathname: string,
+): Promise<Response> {
+  const url = new URL(req.url);
+  const user = (url.searchParams.get('user') || env.GH_USER || 'thefourcraft').trim();
+
+  if (pathname === 'health') return text('ok');
+
+  const cache = (caches as unknown as { default: Cache }).default;
+  const cacheKey = new Request(url.toString(), { method: 'GET' });
+  const cached = await cache.match(cacheKey);
+  if (cached) return cached;
+
+  let body: Response;
+  try {
+    if (pathname === 'streak') body = await renderStreak(user, env);
+    else if (pathname === 'stats') body = await renderStats(user, env);
+    else if (pathname === 'graph') body = await renderGraph(user, env);
+    else return new Response('not found', { status: 404 });
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    return svgResponse(errorCard(msg), 500, 60);
+  }
+
+  const headers = new Headers(body.headers);
+  headers.set('Cache-Control', 'public, max-age=21600, s-maxage=21600');
+  headers.set('CDN-Cache-Control', 'public, max-age=21600');
+  const response = new Response(body.body, { status: body.status, headers });
+  ctx.waitUntil(cache.put(cacheKey, response.clone()));
+  return response;
+}
+
+// Standalone Worker entry (retained for `wrangler dev` inside statsitis/).
 export default {
   async fetch(req: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(req.url);
     const user = (url.searchParams.get('user') || env.GH_USER || 'thefourcraft').trim();
-
-    if (url.pathname === '/health') return text('ok');
-
-    const cache = (caches as unknown as { default: Cache }).default;
-    const cacheKey = new Request(url.toString(), { method: 'GET' });
-    const cached = await cache.match(cacheKey);
-    if (cached) return cached;
-
-    let body: Response;
-    try {
-      if (url.pathname === '/streak') body = await renderStreak(user, env);
-      else if (url.pathname === '/stats') body = await renderStats(user, env);
-      else if (url.pathname === '/graph') body = await renderGraph(user, env);
-      else if (url.pathname === '/' || url.pathname === '/index.html') body = indexPage(user);
-      else return new Response('not found', { status: 404 });
-    } catch (err) {
-      const msg = err instanceof Error ? err.message : String(err);
-      return svgResponse(errorCard(msg), 500, 60);
-    }
-
-    // Copy headers so we can mutate cache-control safely
-    const headers = new Headers(body.headers);
-    headers.set('Cache-Control', 'public, max-age=21600, s-maxage=21600');
-    headers.set('CDN-Cache-Control', 'public, max-age=21600');
-    const response = new Response(body.body, { status: body.status, headers });
-    ctx.waitUntil(cache.put(cacheKey, response.clone()));
-    return response;
+    const seg = url.pathname.replace(/^\/+/, '').split('/').pop() || '';
+    if (url.pathname === '/' || url.pathname === '/index.html') return indexPage(user);
+    return handleStatsRequest(req, env, ctx, seg);
   },
 };
 

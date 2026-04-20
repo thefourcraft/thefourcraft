@@ -43,7 +43,7 @@ This GitHub profile holds my open-source code, side projects, and the source for
 
 <p align="center"><sub>Icons: <a href="https://pictogrammers.com/library/mdi/">Material Design Icons</a> via the <a href="https://iconify.design">Iconify</a> API.</sub></p>
 
-<!-- GitHub stats — self-hosted on Cloudflare Workers (source: github.com/thefourcraft/thefourcraft/tree/production/stats) -->
+<!-- GitHub stats — self-hosted on Cloudflare Workers (source: github.com/thefourcraft/thefourcraft/tree/production/statsitis) -->
 
 <h2 align="center">📊 GitHub Stats</h2>
 
@@ -64,4 +64,27 @@ This GitHub profile holds my open-source code, side projects, and the source for
     <img alt="Contribution graph" src="https://david-furman.com/api/stats/graph" />
   </a>
 </p>
+
+<!-- Deep-dive cards — regenerated every 6h by .github/workflows/metrics.yml, served as static assets by the dfwebsite Cloudflare Worker -->
+
+<h2 align="center">📈 Deep Dive</h2>
+
+<p align="center">
+  <img alt="Full-year 3D contribution calendar" src="https://david-furman.com/metrics/isocalendar.svg" />
+</p>
+
+<p align="center">
+  <img alt="Notable contributions to external orgs &amp; repositories" src="https://david-furman.com/metrics/notable.svg" width="49%" />
+  <img alt="Languages (in-depth, includes private repositories)" src="https://david-furman.com/metrics/languages.svg" width="49%" />
+</p>
+
+<p align="center">
+  <img alt="Pull-request follow-up: opened / merged / still-open" src="https://david-furman.com/metrics/followup.svg" width="49%" />
+  <img alt="Coding habits — most-active hours and days" src="https://david-furman.com/metrics/habits.svg" width="49%" />
+</p>
+
+<p align="center">
+  <img alt="GitHub achievements" src="https://david-furman.com/metrics/achievements.svg" />
+</p>
+
 

@@ -1,0 +1,147 @@
+# Generate the 6 "deep dive" SVG cards via lowlighter/metrics.
+# Runs in the GitHub Actions runner, writes SVGs into
+# website/public/metrics/ on the default branch, which are then
+# served by the dfwebsite Cloudflare Worker at
+# https://david-furman.com/metrics/*.svg. No external services at
+# render time.
+
+name: Metrics (profile cards)
+
+on:
+  schedule:
+    # Every 6 hours, aligned with the dfwebsite edge cache TTL.
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+  push:
+    branches: [production]
+    paths: ['.github/workflows/metrics.yml']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: metrics-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Render profile cards
+    runs-on: ubuntu-latest
+    env:
+      USER: thefourcraft
+      TZ: Asia/Jerusalem
+      # commit batching: each step stages into the same commit
+      COMMIT_BRANCH: ${{ github.ref_name }}
+    steps:
+      # ── 1. Isocalendar: full-year 3D contribution calendar ──────────────
+      - name: isocalendar
+        uses: lowlighter/metrics@latest
+        with:
+          filename: website/public/metrics/isocalendar.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          user: ${{ env.USER }}
+          template: classic
+          base: ''
+          config_timezone: ${{ env.TZ }}
+          config_output: svg
+          output_action: commit
+          committer_branch: ${{ env.COMMIT_BRANCH }}
+          committer_message: 'metrics: refresh isocalendar'
+          plugin_isocalendar: yes
+          plugin_isocalendar_duration: full-year
+
+      # ── 2. Notable: contributions to external orgs/repos ────────────────
+      - name: notable
+        uses: lowlighter/metrics@latest
+        with:
+          filename: website/public/metrics/notable.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          user: ${{ env.USER }}
+          template: classic
+          base: ''
+          config_output: svg
+          output_action: commit
+          committer_branch: ${{ env.COMMIT_BRANCH }}
+          committer_message: 'metrics: refresh notable'
+          plugin_notable: yes
+          plugin_notable_from: all
+          plugin_notable_types: commit, pull_request, issue
+          plugin_notable_repositories: yes
+          plugin_notable_indepth: yes
+          plugin_notable_self: yes
+
+      # ── 3. Languages: git-log indepth (includes private repos) ──────────
+      - name: languages
+        uses: lowlighter/metrics@latest
+        with:
+          filename: website/public/metrics/languages.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          user: ${{ env.USER }}
+          template: classic
+          base: ''
+          config_output: svg
+          output_action: commit
+          committer_branch: ${{ env.COMMIT_BRANCH }}
+          committer_message: 'metrics: refresh languages'
+          plugin_languages: yes
+          plugin_languages_indepth: yes
+          plugin_languages_details: percentage, bytes-size, lines
+          plugin_languages_sections: most-used, recently-used
+          plugin_languages_analysis_timeout: 15
+          plugin_languages_limit: 12
+
+      # ── 4. Followup: PR lifecycle (opened / merged / still-open) ────────
+      - name: followup
+        uses: lowlighter/metrics@latest
+        with:
+          filename: website/public/metrics/followup.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          user: ${{ env.USER }}
+          template: classic
+          base: ''
+          config_output: svg
+          output_action: commit
+          committer_branch: ${{ env.COMMIT_BRANCH }}
+          committer_message: 'metrics: refresh followup'
+          plugin_followup: yes
+          plugin_followup_sections: repositories, user
+          plugin_followup_indepth: yes
+
+      # ── 5. Achievements: trophy row ─────────────────────────────────────
+      - name: achievements
+        uses: lowlighter/metrics@latest
+        with:
+          filename: website/public/metrics/achievements.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          user: ${{ env.USER }}
+          template: classic
+          base: ''
+          config_output: svg
+          output_action: commit
+          committer_branch: ${{ env.COMMIT_BRANCH }}
+          committer_message: 'metrics: refresh achievements'
+          plugin_achievements: yes
+          plugin_achievements_threshold: C
+          plugin_achievements_secrets: yes
+          plugin_achievements_display: detailed
+          plugin_achievements_limit: 0
+
+      # ── 6. Habits: "when I code" chart + fun facts ──────────────────────
+      - name: habits
+        uses: lowlighter/metrics@latest
+        with:
+          filename: website/public/metrics/habits.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          user: ${{ env.USER }}
+          template: classic
+          base: ''
+          config_output: svg
+          config_timezone: ${{ env.TZ }}
+          output_action: commit
+          committer_branch: ${{ env.COMMIT_BRANCH }}
+          committer_message: 'metrics: refresh habits'
+          plugin_habits: yes
+          plugin_habits_from: 1000
+          plugin_habits_days: 14
+          plugin_habits_facts: yes
+          plugin_habits_charts: yes

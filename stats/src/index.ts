@@ -486,64 +486,93 @@ function fmtNumber(n: number): string {
 }
 
 // ─── /streak card ───────────────────────────────────────────────────────────
+// Structurally matches DenverCoder1/github-readme-streak-stats dark theme, fire=DD2727.
+// Original card license: MIT. https://github.com/DenverCoder1/github-readme-streak-stats
 async function renderStreak(user: string, env: Env): Promise<Response> {
   const profile = await fetchUserProfile(user, env);
   const since = new Date(profile.created_at);
   const days = await fetchAllContributions(user, since, env);
   const s = computeStreak(days);
 
-  const W = 720;
-  const H = 230;
-  const cx1 = 170;
-  const cx2 = 360;
-  const cx3 = 550;
-  const cy = 110;
+  // Theme (dark):
+  const T = {
+    bg: '#151515',
+    border: 'transparent',
+    sideNums: '#FEFEFE',
+    sideLabels: '#FEFEFE',
+    sideDates: '#9E9E9E',
+    ring: '#FB8C00',
+    fire: '#FB8C00',
+    currStreakNum: '#FEFEFE',
+    currStreakLabel: '#FB8C00',
+    dividers: 'rgba(255,255,255,0.08)',
+  };
 
-  const ringR = 58;
-  const ringStroke = 5;
+  const W = 495;
+  const H = 195;
+  const c1 = 82.5;
+  const cM = 247.5;
+  const c3 = 412.5;
 
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="GitHub streak for ${esc(user)}">
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="isolation:isolate" viewBox="0 0 ${W} ${H}" width="${W}px" height="${H}px" direction="ltr" role="img" aria-label="GitHub streak for ${esc(user)}">
   <defs>
-    <style>
-      .bg{fill:${COLORS.bg};stroke:rgba(255,255,255,0.08)}
-      .num{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-weight:700;fill:${COLORS.fg};font-variant-numeric:tabular-nums;letter-spacing:-0.02em}
-      .label{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-weight:400;fill:${COLORS.fg};font-size:14px}
-      .dim{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-weight:400;fill:${COLORS.dim};font-size:11px;font-variant-numeric:tabular-nums}
-      .accent{fill:#ff9500;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-weight:600;font-size:14px}
-      .sep{stroke:rgba(255,255,255,0.10)}
-    </style>
+    <clipPath id="outer_rectangle"><rect width="${W}" height="${H}" rx="4.5"/></clipPath>
+    <mask id="mask_out_ring_behind_fire">
+      <rect width="${W}" height="${H}" fill="white"/>
+      <ellipse cx="${cM}" cy="32" rx="13" ry="18" fill="black"/>
+    </mask>
   </defs>
+  <g clip-path="url(#outer_rectangle)">
+    <rect fill="${T.bg}" stroke="${T.border}" rx="4.5" x="0.5" y="0.5" width="${W - 1}" height="${H - 1}"/>
 
-  <rect class="bg" x="0.5" y="0.5" width="${W - 1}" height="${H - 1}" rx="14" ry="14"/>
+    <!-- separators -->
+    <line x1="165" y1="28" x2="165" y2="170" stroke-width="1" stroke="${T.dividers}" stroke-linecap="square"/>
+    <line x1="330" y1="28" x2="330" y2="170" stroke-width="1" stroke="${T.dividers}" stroke-linecap="square"/>
 
-  <!-- hairline separators -->
-  <line class="sep" x1="${(cx1 + cx2) / 2}" y1="40" x2="${(cx1 + cx2) / 2}" y2="${H - 40}"/>
-  <line class="sep" x1="${(cx2 + cx3) / 2}" y1="40" x2="${(cx2 + cx3) / 2}" y2="${H - 40}"/>
-
-  <!-- col 1: total contributions -->
-  <text class="num" x="${cx1}" y="${cy}" text-anchor="middle" font-size="32">${fmtNumberFull(s.total)}</text>
-  <text class="label" x="${cx1}" y="${cy + 26}" text-anchor="middle">Total Contributions</text>
-  <text class="dim" x="${cx1}" y="${cy + 50}" text-anchor="middle">${fmtDateLong(s.since)} - Present</text>
-
-  <!-- col 2: current streak ring -->
-  <g transform="translate(${cx2}, ${cy + 4})">
-    <circle r="${ringR}" fill="none" stroke="#ff9500" stroke-opacity="0.28" stroke-width="${ringStroke}"/>
-    <circle r="${ringR}" fill="none" stroke="#ff9500" stroke-width="${ringStroke}"
-            stroke-linecap="round" transform="rotate(-90)"
-            stroke-dasharray="${2 * Math.PI * ringR}" stroke-dashoffset="0"/>
-    <!-- flame icon at top of ring -->
-    <g transform="translate(0, -${ringR + 6})">
-      ${fireIcon()}
+    <!-- col 1: Total Contributions -->
+    <g transform="translate(${c1}, 48)">
+      <text x="0" y="32" text-anchor="middle" fill="${T.sideNums}" font-family="'Segoe UI', Ubuntu, sans-serif" font-weight="700" font-size="28px" font-variant-numeric="tabular-nums">${fmtNumberFull(s.total)}</text>
     </g>
-    <text class="num" y="8" text-anchor="middle" font-size="28">${s.current}</text>
-  </g>
-  <text class="accent" x="${cx2}" y="${cy + ringR + 28}" text-anchor="middle">Current Streak</text>
-  <text class="dim" x="${cx2}" y="${cy + ringR + 48}" text-anchor="middle">${fmtDate(s.currentFrom)} - ${fmtDate(s.currentTo)}</text>
+    <g transform="translate(${c1}, 84)">
+      <text x="0" y="32" text-anchor="middle" fill="${T.sideLabels}" font-family="'Segoe UI', Ubuntu, sans-serif" font-weight="400" font-size="14px">Total Contributions</text>
+    </g>
+    <g transform="translate(${c1}, 114)">
+      <text x="0" y="32" text-anchor="middle" fill="${T.sideDates}" font-family="'Segoe UI', Ubuntu, sans-serif" font-weight="400" font-size="12px" font-variant-numeric="tabular-nums">${fmtDateLong(s.since)} - Present</text>
+    </g>
 
-  <!-- col 3: longest streak -->
-  <text class="num" x="${cx3}" y="${cy}" text-anchor="middle" font-size="32">${s.longest}</text>
-  <text class="label" x="${cx3}" y="${cy + 26}" text-anchor="middle">Longest Streak</text>
-  <text class="dim" x="${cx3}" y="${cy + 50}" text-anchor="middle">${fmtDate(s.longestFrom)} - ${fmtDate(s.longestTo)}</text>
+    <!-- col 2: Current Streak -->
+    <g transform="translate(${cM}, 108)">
+      <text x="0" y="32" text-anchor="middle" fill="${T.currStreakLabel}" font-family="'Segoe UI', Ubuntu, sans-serif" font-weight="700" font-size="14px">Current Streak</text>
+    </g>
+    <g transform="translate(${cM}, 145)">
+      <text x="0" y="21" text-anchor="middle" fill="${T.sideDates}" font-family="'Segoe UI', Ubuntu, sans-serif" font-weight="400" font-size="12px" font-variant-numeric="tabular-nums">${fmtDate(s.currentFrom)} - ${fmtDate(s.currentTo)}</text>
+    </g>
+
+    <!-- Ring (with mask cutting a slot for the fire icon) -->
+    <g mask="url(#mask_out_ring_behind_fire)">
+      <circle cx="${cM}" cy="71" r="40" fill="none" stroke="${T.ring}" stroke-width="5"/>
+    </g>
+    <!-- Fire icon -->
+    <g transform="translate(${cM}, 19.5)" stroke-opacity="0">
+      <path d="M -12 -0.5 L 15 -0.5 L 15 23.5 L -12 23.5 L -12 -0.5 Z" fill="none"/>
+      <path d="M 1.5 0.67 C 1.5 0.67 2.24 3.32 2.24 5.47 C 2.24 7.53 0.89 9.2 -1.17 9.2 C -3.23 9.2 -4.79 7.53 -4.79 5.47 L -4.76 5.11 C -6.78 7.51 -8 10.62 -8 13.99 C -8 18.41 -4.42 22 0 22 C 4.42 22 8 18.41 8 13.99 C 8 8.6 5.41 3.79 1.5 0.67 Z M -0.29 19 C -2.07 19 -3.51 17.6 -3.51 15.86 C -3.51 14.24 -2.46 13.1 -0.7 12.74 C 1.07 12.38 2.9 11.53 3.92 10.16 C 4.31 11.45 4.51 12.81 4.51 14.2 C 4.51 16.85 2.36 19 -0.29 19 Z" fill="${T.fire}"/>
+    </g>
+    <!-- Current Streak big number -->
+    <g transform="translate(${cM}, 48)">
+      <text x="0" y="32" text-anchor="middle" fill="${T.currStreakNum}" font-family="'Segoe UI', Ubuntu, sans-serif" font-weight="700" font-size="28px" font-variant-numeric="tabular-nums">${s.current}</text>
+    </g>
+
+    <!-- col 3: Longest Streak -->
+    <g transform="translate(${c3}, 48)">
+      <text x="0" y="32" text-anchor="middle" fill="${T.sideNums}" font-family="'Segoe UI', Ubuntu, sans-serif" font-weight="700" font-size="28px" font-variant-numeric="tabular-nums">${s.longest}</text>
+    </g>
+    <g transform="translate(${c3}, 84)">
+      <text x="0" y="32" text-anchor="middle" fill="${T.sideLabels}" font-family="'Segoe UI', Ubuntu, sans-serif" font-weight="400" font-size="14px">Longest Streak</text>
+    </g>
+    <g transform="translate(${c3}, 114)">
+      <text x="0" y="32" text-anchor="middle" fill="${T.sideDates}" font-family="'Segoe UI', Ubuntu, sans-serif" font-weight="400" font-size="12px" font-variant-numeric="tabular-nums">${fmtDate(s.longestFrom)} - ${fmtDate(s.longestTo)}</text>
+    </g>
+  </g>
 </svg>`;
 
   return svgResponse(svg);
@@ -554,19 +583,8 @@ function fmtNumberFull(n: number): string {
 }
 
 function fireIcon(): string {
-  // Red flame, classic streak-stats silhouette. Centered on origin.
-  return `<g transform="translate(-9, -11)">
-    <path d="M9 0 C 7.5 3.5, 3.5 5, 3.5 10 C 3.5 13, 5 15.5, 7.2 17
-             C 6.3 16, 6 14.8, 6.3 13.6 C 6.8 11.6, 8.2 10.5, 9 8.5
-             C 9.8 10.8, 11.8 11.5, 12.4 13.8
-             C 12.8 15.5, 12.3 17.2, 10.8 17.8
-             C 13.5 17.2, 15 14.8, 15 12
-             C 15 7.5, 11 5.5, 9 0 Z"
-          fill="#e8552b"/>
-    <path d="M9 7 C 8.3 8.5, 7 9.5, 7 11.5 C 7 13, 8 14, 9 14
-             C 10 14, 11 13, 11 11.5 C 11 10, 10 9.2, 9 7 Z"
-          fill="#ffb347"/>
-  </g>`;
+  // Retained for completeness; the streak card now inlines the upstream path.
+  return '';
 }
 
 // ─── /stats card ────────────────────────────────────────────────────────────

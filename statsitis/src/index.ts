@@ -54,8 +54,8 @@ export async function handleStatsRequest(
   }
 
   const headers = new Headers(body.headers);
-  headers.set('Cache-Control', 'public, max-age=21600, s-maxage=21600');
-  headers.set('CDN-Cache-Control', 'public, max-age=21600');
+  headers.set('Cache-Control', 'public, max-age=1800, s-maxage=1800');
+  headers.set('CDN-Cache-Control', 'public, max-age=1800');
   const response = new Response(body.body, { status: body.status, headers });
   ctx.waitUntil(cache.put(cacheKey, response.clone()));
   return response;
@@ -73,7 +73,7 @@ export default {
 };
 
 // ─── Response helpers ───────────────────────────────────────────────────────
-function svgResponse(svg: string, status = 200, maxAge = 21600): Response {
+function svgResponse(svg: string, status = 200, maxAge = 1800): Response {
   return new Response(svg, {
     status,
     headers: {
@@ -568,7 +568,7 @@ async function renderStreak(user: string, env: Env): Promise<Response> {
     <g transform="translate(${cM}, 108)">
       <text x="0" y="32" text-anchor="middle" fill="${T.currStreakLabel}" font-family="'Segoe UI', Ubuntu, sans-serif" font-weight="700" font-size="14px">Current Streak</text>
     </g>
-    <g transform="translate(${cM}, 114)">
+    <g transform="translate(${cM}, 130)">
       <text x="0" y="32" text-anchor="middle" fill="${T.sideDates}" font-family="'Segoe UI', Ubuntu, sans-serif" font-weight="400" font-size="12px" font-variant-numeric="tabular-nums">${fmtDate(s.currentFrom)} - ${fmtDate(s.currentTo)}</text>
     </g>
 

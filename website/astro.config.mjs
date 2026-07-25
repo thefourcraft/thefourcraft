@@ -10,7 +10,6 @@ export default defineConfig({
   output: 'server',
   adapter: cloudflare({
     imageService: 'compile',
-    prerenderEnvironment: 'node',
   }),
   // Preserve production URLs: every .html path from the legacy site
   // must 301 to its clean-URL equivalent so backlinks and indexed
@@ -45,8 +44,5 @@ export default defineConfig({
   },
   image: {
     responsiveStyles: true,
-  },
-  experimental: {
-    clientPrerender: true,
   },
 });

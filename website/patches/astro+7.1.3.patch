@@ -1,0 +1,37 @@
+diff --git a/node_modules/astro/dist/core/build/static-build.js b/node_modules/astro/dist/core/build/static-build.js
+index d06bbd6..b2c9da5 100644
+--- a/node_modules/astro/dist/core/build/static-build.js
++++ b/node_modules/astro/dist/core/build/static-build.js
+@@ -177,6 +177,9 @@ async function buildEnvironments(opts, internals) {
+         }
+         const sortedClientInput = Array.from(internals.clientInput).sort();
+         builder2.environments.client.config.build.rolldownOptions.input = sortedClientInput;
++        // Vite 7 may still consult rollupOptions.input; without this it defaults to index.html and fails SSR/client builds under @cloudflare/vite-plugin
++        builder2.environments.client.config.build.rollupOptions ??= {};
++        builder2.environments.client.config.build.rollupOptions.input = sortedClientInput;
+         settings.timer.start("Client build");
+         await builder2.build(builder2.environments.client);
+         settings.timer.end("Client build");
+@@ -197,6 +200,7 @@ async function buildEnvironments(opts, internals) {
+ }
+ function getPrerenderEntryFileName(prerenderOutput) {
+   const outputs = viteBuildReturnToRolldownOutputs(prerenderOutput);
++  let cloudflareWorkerEntry;
+   for (const output of outputs) {
+     for (const chunk of output.output) {
+       if (chunk.type !== "asset" && "fileName" in chunk) {
+@@ -204,9 +208,14 @@ function getPrerenderEntryFileName(prerenderOutput) {
+         if (fileName.startsWith(PRERENDER_ENTRY_FILENAME_PREFIX)) {
+           return fileName;
+         }
++        // @astrojs/cloudflare + @cloudflare/vite-plugin emit the prerender worker as index.js
++        if (fileName === "index.js" || fileName.endsWith("/index.js")) {
++          cloudflareWorkerEntry = fileName;
++        }
+       }
+     }
+   }
++  if (cloudflareWorkerEntry) return cloudflareWorkerEntry;
+   throw new Error(
+     "Could not find the prerender entry point in the build output. This is likely a bug in Astro."
+   );

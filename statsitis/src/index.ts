@@ -297,16 +297,14 @@ async function ghGraphQL<T>(env: Env, query: string, variables: Record<string, u
 }
 
 async function fetchLifetimeTotals(user: string, createdAt: Date, env: Env): Promise<LifetimeTotals> {
-  // Walk yearly windows from account creation → now, summing contribution totals.
-  // contributionsCollection counts INCLUDE private contributions when the
-  // authenticated viewer is the same user as the queried login.
+  // Contribution-graph metrics (commits / reviews) are summed over yearly windows.
+  // These INCLUDE private contributions when the authenticated viewer is the same user.
+  // PR / issue inventory and merge rate use the user.* connections so numerator and
+  // denominator share the same universe (never mix contribution PRs with connection merged).
   const today = new Date();
   const yearStart = new Date(createdAt);
   let commits = 0;
-  let prs = 0;
   let reviews = 0;
-  let issues = 0;
-  const reposContributedSet = new Set<string>();
 
   while (yearStart <= today) {
     const end = new Date(yearStart);
@@ -317,10 +315,7 @@ async function fetchLifetimeTotals(user: string, createdAt: Date, env: Env): Pro
       user: {
         contributionsCollection: {
           totalCommitContributions: number;
-          totalPullRequestContributions: number;
           totalPullRequestReviewContributions: number;
-          totalIssueContributions: number;
-          commitContributionsByRepository: Array<{ repository: { nameWithOwner: string } }>;
         };
       };
     }>(
@@ -329,12 +324,7 @@ async function fetchLifetimeTotals(user: string, createdAt: Date, env: Env): Pro
         user(login:$user){
           contributionsCollection(from:$from,to:$to){
             totalCommitContributions
-            totalPullRequestContributions
             totalPullRequestReviewContributions
-            totalIssueContributions
-            commitContributionsByRepository(maxRepositories:100){
-              repository{ nameWithOwner }
-            }
           }
         }
       }`,
@@ -346,24 +336,20 @@ async function fetchLifetimeTotals(user: string, createdAt: Date, env: Env): Pro
     );
     const c = data.user.contributionsCollection;
     commits += c.totalCommitContributions;
-    prs += c.totalPullRequestContributions;
     reviews += c.totalPullRequestReviewContributions;
-    issues += c.totalIssueContributions;
-    for (const r of c.commitContributionsByRepository) reposContributedSet.add(r.repository.nameWithOwner);
 
     const next = new Date(end);
     next.setDate(next.getDate() + 1);
     yearStart.setTime(next.getTime());
   }
 
-  // Last 365 days summary (separate single call for the "last year" metrics).
+  // Last 365 days contribution total (green-square sum).
   const oneYearAgo = new Date();
   oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
   const lastYear = await ghGraphQL<{
     user: {
       contributionsCollection: {
         contributionCalendar: { totalContributions: number };
-        commitContributionsByRepository: Array<{ repository: { nameWithOwner: string } }>;
       };
     };
   }>(
@@ -372,27 +358,33 @@ async function fetchLifetimeTotals(user: string, createdAt: Date, env: Env): Pro
       user(login:$user){
         contributionsCollection(from:$from,to:$to){
           contributionCalendar{ totalContributions }
-          commitContributionsByRepository(maxRepositories:100){ repository{ nameWithOwner } }
         }
       }
     }`,
     { user, from: oneYearAgo.toISOString(), to: today.toISOString() },
   );
 
-  // Merged PRs + discussions started (all-time, includes private when self).
-  const totals = await ghGraphQL<{
+  // Inventory metrics from the same connection family (private included when self-token).
+  const inventory = await ghGraphQL<{
     user: {
       pullRequests: { totalCount: number };
       mergedPRs: { totalCount: number };
+      issues: { totalCount: number };
       repositoryDiscussions: { totalCount: number };
+      repositoriesContributedTo: { totalCount: number };
     };
   }>(
     env,
     `query($user:String!){
       user(login:$user){
-        pullRequests(states:MERGED){ totalCount }
+        pullRequests{ totalCount }
         mergedPRs: pullRequests(states:MERGED){ totalCount }
+        issues{ totalCount }
         repositoryDiscussions{ totalCount }
+        repositoriesContributedTo(
+          contributionTypes:[COMMIT, ISSUE, PULL_REQUEST, REPOSITORY, PULL_REQUEST_REVIEW]
+          includeUserRepositories:true
+        ){ totalCount }
       }
     }`,
     { user },
@@ -400,15 +392,14 @@ async function fetchLifetimeTotals(user: string, createdAt: Date, env: Env): Pro
 
   return {
     commits,
-    prs,
-    prsMerged: totals.user.mergedPRs.totalCount,
+    prs: inventory.user.pullRequests.totalCount,
+    prsMerged: inventory.user.mergedPRs.totalCount,
     prsReviewed: reviews,
-    issues,
-    reposContributed: reposContributedSet.size,
+    issues: inventory.user.issues.totalCount,
+    reposContributed: inventory.user.repositoriesContributedTo.totalCount,
     lastYearContribs: lastYear.user.contributionsCollection.contributionCalendar.totalContributions,
-    lastYearReposContributed:
-      lastYear.user.contributionsCollection.commitContributionsByRepository.length,
-    discussionsStarted: totals.user.repositoryDiscussions.totalCount,
+    lastYearReposContributed: inventory.user.repositoriesContributedTo.totalCount,
+    discussionsStarted: inventory.user.repositoryDiscussions.totalCount,
   };
 }
 
@@ -444,20 +435,31 @@ function computeStreak(days: Day[]): Streak {
       run = 0;
     }
   }
-  // Current streak: walk from the most recent day backward. A streak is ongoing if
-  // today OR yesterday has contributions (allow a 1-day grace for today's contribs
-  // not yet posted), and extends while previous days are non-zero.
+  // Current streak: walk backward from the latest day that is "today" in the series.
+  // Grace: if the last calendar day (today) has 0 contributions, still count a streak
+  // that ends on yesterday — but only that one trailing zero is skipped.
   let current = 0;
   let currentFrom = '';
   let currentTo = '';
+  const todayIso = new Date().toISOString().slice(0, 10);
+  let started = false;
   for (let i = days.length - 1; i >= 0; i--) {
-    if (days[i].count > 0) {
-      if (current === 0) currentTo = days[i].date;
+    const d = days[i];
+    if (!started) {
+      if (d.count > 0) {
+        started = true;
+        current = 1;
+        currentFrom = d.date;
+        currentTo = d.date;
+        continue;
+      }
+      // Grace only for calendar today with no contribs yet.
+      if (d.date === todayIso) continue;
+      break;
+    }
+    if (d.count > 0) {
       current += 1;
-      currentFrom = days[i].date;
-    } else if (current === 0 && i === days.length - 1) {
-      // today has none yet — keep scanning
-      continue;
+      currentFrom = d.date;
     } else {
       break;
     }
@@ -623,7 +625,9 @@ async function renderStats(user: string, env: Env): Promise<Response> {
     env,
   ).catch(() => 0);
 
-  const mergedPct = totals.prs > 0 ? (totals.prsMerged / totals.prs) * 100 : 0;
+  // Merge rate uses the same connection universe: MERGED ⊆ all authored PRs.
+  const mergedPct =
+    totals.prs > 0 ? Math.min(100, (totals.prsMerged / totals.prs) * 100) : 0;
 
   const grade = computeGrade({
     commits: totals.commits,
@@ -637,7 +641,9 @@ async function renderStats(user: string, env: Env): Promise<Response> {
   const name = (profile.name || profile.login).split(' ')[0];
 
   const rows: [string, string][] = [
+    // Commits/reviews: contribution-graph totals (GitHub green-square rules; private when self).
     ['Total Commits', fmtNumberFull(totals.commits)],
+    // PRs/issues: authored inventory from user.* connections (same family for merge %).
     ['Total Pull Requests', fmtNumberFull(totals.prs)],
     ['PRs Merged', `${fmtNumberFull(totals.prsMerged)}  ·  ${mergedPct.toFixed(1)}%`],
     ['PRs Reviewed', fmtNumberFull(totals.prsReviewed)],
@@ -645,7 +651,7 @@ async function renderStats(user: string, env: Env): Promise<Response> {
     ['Discussions Started', fmtNumberFull(totals.discussionsStarted)],
     ['Discussions Answered', fmtNumberFull(discussionsAnswered)],
     ['Contributions (last year)', fmtNumberFull(totals.lastYearContribs)],
-    ['Orgs & Repos Contributed to', fmtNumberFull(totals.reposContributed)],
+    ['Repos contributed to', fmtNumberFull(totals.reposContributed)],
   ];
 
   const W = 720;

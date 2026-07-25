@@ -92,12 +92,7 @@ function installGithubMock() {
             user: {
               contributionsCollection: {
                 totalCommitContributions: 1200,
-                totalPullRequestContributions: 80,
                 totalPullRequestReviewContributions: 40,
-                totalIssueContributions: 20,
-                commitContributionsByRepository: [
-                  { repository: { nameWithOwner: 'thefourcraft/thefourcraft' } },
-                ],
               },
             },
           },
@@ -110,22 +105,28 @@ function installGithubMock() {
             user: {
               contributionsCollection: {
                 contributionCalendar: { totalContributions: 900 },
-                commitContributionsByRepository: [
-                  { repository: { nameWithOwner: 'thefourcraft/thefourcraft' } },
-                ],
               },
             },
           },
         });
       }
 
-      if (q.includes('mergedPRs') || q.includes('repositoryDiscussions')) {
+      // Inventory query: opened PRs, merged PRs, issues, discussions, repos.
+      // Intentionally large merged vs small contribution totals in other mocks —
+      // merge % must use connection opened (100), not contribution PRs.
+      if (
+        q.includes('mergedPRs') ||
+        q.includes('repositoriesContributedTo') ||
+        (q.includes('pullRequests') && q.includes('issues'))
+      ) {
         return jsonResponse({
           data: {
             user: {
-              pullRequests: { totalCount: 70 },
-              mergedPRs: { totalCount: 65 },
+              pullRequests: { totalCount: 100 },
+              mergedPRs: { totalCount: 84 },
+              issues: { totalCount: 50 },
               repositoryDiscussions: { totalCount: 5 },
+              repositoriesContributedTo: { totalCount: 12 },
             },
           },
         });
@@ -227,9 +228,14 @@ test('stats card returns real SVG with activity rows via shipped renderer', asyn
     assert.match(body, /GitHub stats for thefourcraft/);
     assert.match(body, /Total Commits/);
     assert.match(body, /Total Pull Requests/);
-    // Lifetime totals sum yearly windows (mock returns 1200 commits/year from 2020).
-    // Assert the shipped renderer put a multi-digit commits figure in the Total Commits row.
+    // Lifetime commits: sum yearly contribution windows (mock 1200/year from 2020).
     assert.match(body, /Total Commits<\/text>\s*<text class="v"[^>]*>[\d,]+<\/text>/);
+    // PR inventory from connection API (not contribution graph).
+    assert.match(body, /Total Pull Requests<\/text>\s*<text class="v"[^>]*>100<\/text>/);
+    // Merge rate must be merged/opened from same universe: 84/100 = 84.0% (never >100%).
+    assert.match(body, /PRs Merged<\/text>\s*<text class="v"[^>]*>84  ·  84\.0%<\/text>/);
+    assert.doesNotMatch(body, /\d{3,}\.\d%/); // no absurd 900%-style percentages
+    assert.match(body, /Repos contributed to<\/text>\s*<text class="v"[^>]*>12<\/text>/);
     assert.match(body, /David&#39;s GitHub Activity|David's GitHub Activity/);
   } finally {
     fetchMock.mock.restore();

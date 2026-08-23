@@ -1,8 +1,19 @@
 /// <reference path="../.astro/types.d.ts" />
 
 interface Env {
-  GOOGLE_CHAT_WEBHOOK_URL: string;
+  GH_USER: string;
+  GH_TOKEN?: string;
   ASSETS: Fetcher;
+}
+
+// Minimal Workers runtime typings (no @cloudflare/workers-types dependency).
+declare module 'cloudflare:workers' {
+  export const env: Env;
+}
+
+interface ExecutionContext {
+  waitUntil(promise: Promise<unknown>): void;
+  passThroughOnException(): void;
 }
 
 declare namespace App {

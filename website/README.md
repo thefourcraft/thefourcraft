@@ -1,10 +1,10 @@
 # DF-Website
 
-David Furman's personal website — built with **Astro 6**, **Tailwind CSS v4**, and deployed on **Cloudflare Workers** (Static Assets).
+David Furman's personal website — built with **Astro 7**, **Tailwind CSS v4**, and deployed on **Cloudflare Workers** (Static Assets).
 
 ## Stack
 
-- **[Astro 6](https://astro.build)** — `output: 'static'` with one on-demand `/api/contact` route
+- **[Astro 7](https://astro.build)** — `output: 'server'` with on-demand `/api/stats/*` routes
 - **[Tailwind CSS v4](https://tailwindcss.com)** — design tokens defined via `@theme` in `src/styles/global.css`
 - **[astro-icon](https://github.com/natemoo-re/astro-icon)** — Iconify (`lucide`, `simple-icons`)
 - **Self-hosted fonts** — Inter Tight (variable) + M PLUS Rounded 1c via `@fontsource`
@@ -16,12 +16,13 @@ David Furman's personal website — built with **Astro 6**, **Tailwind CSS v4**,
 
 ```
 src/
-├── components/      Reusable Astro components (Nav, Footer, Hero, Cards, Forms…)
+├── components/      Reusable Astro components (Nav, Footer, Hero, Cards…)
 ├── config/          Site-wide config (nav links, socials, analytics IDs)
-├── content/         Content collections (projects/)
+├── content/         Content collections (opinions/)
+├── i18n/            Locale contract (en/he/ru) for future localisation
 ├── layouts/         Shared page layouts (Base.astro)
-├── pages/           Routes (index, work, resume, contact, privacy, 404)
-│   └── api/         Server endpoints (contact)
+├── pages/           Routes (index, work, opinions, contact, legal, 404)
+│   └── api/stats/   Server endpoints — GitHub stat cards (see statsitis/)
 └── styles/          Tailwind layer + design tokens
 public/
 ├── images/          Static image assets
@@ -40,45 +41,42 @@ For previewing in the **actual** Cloudflare Workers runtime:
 
 ```sh
 cp .dev.vars.example .dev.vars
-# Edit .dev.vars and paste your Google Chat webhook URL
+# Edit .dev.vars and paste your GitHub PAT (GH_TOKEN)
 npm run build
 npm run preview      # Wrangler dev (full Workers runtime + secrets)
 ```
 
 ## Secrets
 
-The contact form posts to `/api/contact`, which forwards messages to a private Google Chat
-space webhook. The webhook URL is **never** committed.
+| Secret | Purpose | How to set |
+|---|---|---|
+| `GH_TOKEN` | GitHub PAT for `/api/stats/*` cards (private contributions included when it's the user's own token) | Local: `.dev.vars` · Production: `npx wrangler secret put GH_TOKEN` |
 
-| Environment | How to set |
-|---|---|
-| Local | Copy `.dev.vars.example` → `.dev.vars` and fill in `GOOGLE_CHAT_WEBHOOK_URL` |
-| Production | `npx wrangler secret put GOOGLE_CHAT_WEBHOOK_URL` |
+The contact page reveals email addresses behind a client-side policy gate; there is no form backend.
 
 ## Deployment
+
+Pushes to the `production` branch trigger [.github/workflows/deploy.yml](../.github/workflows/deploy.yml), which builds and deploys the single `dfwebsite` Worker. To deploy manually:
 
 ```sh
 npm run deploy       # astro build && wrangler deploy
 ```
 
-Cloudflare Workers project name: `df-website` (configured in `wrangler.toml`).
+Cloudflare Workers project name: `dfwebsite` (configured in `wrangler.jsonc`).
 
-## Adding a project
+## Adding an opinion post
 
-Drop a new `.md` file into `src/content/projects/`:
+Drop a new `.md` file into `src/content/opinions/`:
 
 ```md
 ---
-title: 'Project name'
-slug: 'project-slug'
-role: 'My role'
+title: 'Post title'
 summary: 'Short description.'
-image: '/images/project-logo.png'
-href: 'https://example.com'   # optional
-tags: ['tag-a', 'tag-b']
-featured: true                 # show on Work-page carousel
-order: 1
+publishDate: 2026-08-23
+draft: false          # optional, hides the post while true
 ---
+
+Body text in markdown.
 ```
 
 Schema is defined in `src/content.config.ts`.

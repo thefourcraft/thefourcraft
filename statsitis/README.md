@@ -11,7 +11,7 @@ Self-hosted GitHub profile stat-card renderers. Pure TypeScript library with **n
 | `/api/stats/graph`                 | 30-day contribution line chart                                   |
 | `/api/stats/health`                | `ok`                                                             |
 
-All responses are SVG, cached on Cloudflare's edge for 6 hours.
+All responses are SVG, cached on Cloudflare's edge for 30 minutes.
 
 ## How data is fetched
 

@@ -1,3 +1,4 @@
 # Local dev secrets — copy to .dev.vars (gitignored) and fill in.
-# Set in production with: npx wrangler secret put GOOGLE_CHAT_WEBHOOK_URL
-GOOGLE_CHAT_WEBHOOK_URL=""
+# Set in production with: npx wrangler secret put GH_TOKEN
+# Fine-grained GitHub PAT used by /api/stats/* (private contributions included).
+GH_TOKEN=""

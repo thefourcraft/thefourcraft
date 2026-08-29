@@ -2,22 +2,7 @@
 export const prerender = true;
 import Base from '../layouts/Base.astro';
 import SimpleHero from '../components/SimpleHero.astro';
-import ProjectSection from '../components/ProjectSection.astro';
 import { Icon } from 'astro-icon/components';
-
-const companyBody = `I am the CTO and Co-founder of Arcusis, founded on October 9, 2025.
-
-Our mission is to build enterprise-grade advanced software solutions for customers who demand high-quality systems to power the core of their businesses.
-
-Arcusis serves as my toolbox to invest in the passions that matter most, like fueling Israel's booming gaming industry and pioneering other game-changing projects.`;
-
-const communityBody = `I also manage Israel's largest gaming community, the go-to hub for hundreds of thousands of teens after school!
-
-With over 300,000 members representing 3% of Israel's population, this powerhouse platform is where Israeli youth hang out, connect, and level up. As part of Arcusis, we're pouring massive resources into programs and infrastructure to empower these teens to become the absolute best they can be.`;
-
-const countryBody = `Since the barbaric October 7th massacre by Hamas savages, Jews worldwide have faced an explosion of antisemitism and violent attacks from the unholy alliance of Islamists, leftists, and their useful idiots. As an entrepreneur, I refuse to stand by, and I fight back.
-
-Starting October 8, 2023, I've worked relentlessly, day and night, to build technologies that help us crush antisemitism and safeguard Jewish lives across the globe. I've poured over $100,000 of my own savings into this war effort, forging alliances with truth warriors united in one sacred mission: defending the West, Israel, and the Jewish people from the jihadist cancer and its enablers.`;
 
 // Timeline entries. Each company is a block; sub-roles are nested when
 // a single company has multiple positions.
@@ -149,6 +134,30 @@ const articles = [
   { title: "Lessons From NASA's Playbook For Spacecraft Software", date: 'May 30, 2024', href: 'https://www.linkedin.com/pulse/lessons-from-nasas-playbook-spacecraft-software-david-furman-he1if' },
 ];
 
+const fronts = [
+  {
+    index: '01',
+    kicker: 'Arcusis',
+    title: 'My Company',
+    line: 'Enterprise-grade software, built for customers who demand high-quality systems at the core of their business.',
+    stat: 'CTO & Co-founder · Oct 2025',
+  },
+  {
+    index: '02',
+    kicker: 'Gaming community',
+    title: 'My Community',
+    line: "Israel's largest gaming community — hundreds of thousands of teens after school, backed by real programs and infrastructure.",
+    stat: '300K+ members · 3% of Israel',
+  },
+  {
+    index: '03',
+    kicker: 'Defense & advocacy',
+    title: 'My Country',
+    line: 'Technologies that counter antisemitism and defend Jewish communities, built day and night since October 8, 2023.',
+    stat: '$100K+ personal investment',
+  },
+];
+
 const ironSwordsNote = `"Iron Swords Platform" launched on October 8, 2023, one day after the massacre. Over 30 volunteers worked in 24-hour shifts to build the most advanced volunteer-coordination platform of the war. It reached 11,000 users and 3,000 pages before we had to close it when cloud costs became unsustainable.`;
 ---
 
@@ -164,181 +173,170 @@ const ironSwordsNote = `"Iron Swords Platform" launched on October 8, 2023, one 
     </p>
   </SimpleHero>
 
-  <ProjectSection id="my-company" title="My Company" body={companyBody} />
-
-  <ProjectSection id="my-community" title="My Community" body={communityBody} />
-
-  <ProjectSection id="my-country" title="My Country" body={countryBody} />
-
-  <!-- Professional background -->
-  <section id="experience" class="bg-night pb-20 pt-4 text-paper md:pb-28 md:pt-6">
+  <section id="resume" class="bg-night pb-24 pt-4 text-paper md:pb-32">
     <div class="container-app">
-      <div class="mx-auto max-w-[1040px]">
-        <div class="showcase-intro reveal">
-          <span class="showcase-eyebrow">§ Résumé</span>
-          <h2 class="showcase-h2">
-        Professional background
-      </h2>
-          <p class="showcase-lead">
-            A longer-form timeline: the companies, roles, and dates. Pulled straight
-            from my LinkedIn so nothing goes stale.
+      <div class="resume mx-auto max-w-[860px]">
+
+        <!-- Highlights: the three fronts, as a compact row -->
+        <section class="rsec reveal" aria-labelledby="fronts-title">
+          <h2 id="fronts-title" class="rhead">§ Highlights</h2>
+          <p class="rlead">
+            Three fronts, one through-line: build systems that hold up when they
+            matter — for business, for community, for country.
           </p>
-        </div>
+          <ul class="fronts">
+            {fronts.map((f) => (
+              <li class="front">
+                <p class="front-kicker">
+                  <span class="front-index" aria-hidden="true">{f.index}</span>
+                  {f.kicker}
+                </p>
+                <p class="front-title">{f.title}</p>
+                <p class="front-line">{f.line}</p>
+                <p class="front-stat">{f.stat}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
 
-        <ol class="timeline mt-16">
-          {experience.map((entry) => (
-            <li class="timeline-entry reveal">
-              <div class="timeline-meta">
-                <span class="timeline-dot" aria-hidden="true"></span>
-                <p class="timeline-duration">{entry.duration}</p>
-                <p class="timeline-company">{entry.company}</p>
-                <p class="timeline-location">{entry.location}</p>
-              </div>
+        <!-- Professional background -->
+        <section id="experience" class="rsec reveal" aria-labelledby="xp-title">
+          <h2 id="xp-title" class="rhead">§ Professional background</h2>
+          <p class="rlead">
+            The companies, roles, and dates — pulled straight from my LinkedIn so
+            nothing goes stale.
+          </p>
 
-              <div class="timeline-body">
-                <ul class="roles">
+          <ol class="xp-list">
+            {experience.map((entry) => (
+              <li class="xp">
+                <div class="xp-head">
+                  <div class="xp-head-main">
+                    <p class="xp-company">{entry.company}</p>
+                    <p class="xp-location">{entry.location}</p>
+                  </div>
+                  <p class="xp-duration">{entry.duration}</p>
+                </div>
+
+                <ul class="xp-roles">
                   {entry.roles.map((role) => (
-                    <li class={`role${entry.roles.length > 1 ? ' role--nested' : ''}`}>
-                      <p class="role-title">{role.title}</p>
-                      <p class="role-meta">
-                        <span>{role.period}</span>
-                        {role.length && <span class="role-dim"> · {role.length}</span>}
-                        {role.type && <span class="role-dim"> · {role.type}</span>}
-                      </p>
-                      {'note' in role && role.note && <p class="role-note">{role.note}</p>}
+                    <li class="xp-role">
+                      <div class="xp-role-head">
+                        <p class="xp-role-title">{role.title}</p>
+                        <p class="xp-role-meta">
+                          <span>{role.period}</span>
+                          {role.length && <span class="xp-dim"> · {role.length}</span>}
+                          {role.type && <span class="xp-dim"> · {role.type}</span>}
+                        </p>
+                      </div>
+                      {'note' in role && role.note && <p class="xp-note">{role.note}</p>}
                     </li>
                   ))}
                 </ul>
 
                 {entry.skills && (
-                  <p class="role-skills">
+                  <p class="xp-skills">
                     <Icon name="lucide:tag" class="inline-block h-3.5 w-3.5 -translate-y-px opacity-60" aria-hidden="true" />
                     {' '}{entry.skills.join(' · ')}
                   </p>
                 )}
-              </div>
-            </li>
-          ))}
-        </ol>
-      </div>
-    </div>
-  </section>
-
-  <!-- Organizations & Projects -->
-  <section class="bg-night pb-20 pt-4 text-paper md:pb-28">
-    <div class="container-app">
-      <div class="mx-auto grid max-w-[1040px] gap-14 md:grid-cols-[1fr_1fr] md:gap-16">
-        <div class="reveal">
-          <span class="showcase-eyebrow">§ Organizations</span>
-          <h2 class="showcase-h3 mt-1">
-        Where else I show up
-      </h2>
-
-          <ul class="org-list mt-8">
-            {organizations.map((o) => (
-              <li class="org-item">
-                <p class="org-name">{o.name}</p>
-                {o.role && <p class="org-role">{o.role}</p>}
-                <p class="org-period">{o.period}</p>
-                <p class="org-affiliation">
-                  <Icon name="lucide:link-2" class="inline-block h-3.5 w-3.5 -translate-y-px opacity-60" aria-hidden="true" />
-                  {' '}{o.affiliation}
-                </p>
-                <p class="org-note">{o.note}</p>
               </li>
             ))}
-          </ul>
-        </div>
+          </ol>
+        </section>
 
-        <div class="reveal">
-          <span class="showcase-eyebrow">§ Past project</span>
-          <h2 class="showcase-h3 mt-1">
-        Iron Swords Platform
-      </h2>
-          <p class="project-tag">
-            <span class="project-badge">Closed</span>
-            <span>Oct, Dec 2023</span>
-          </p>
-          <p class="project-note">{ironSwordsNote}</p>
-        </div>
-      </div>
-    </div>
-  </section>
+        <!-- Organizations & past project -->
+        <section class="rsec reveal" aria-labelledby="org-title">
+          <h2 id="org-title" class="rhead">§ Organizations &amp; projects</h2>
+          <div class="org-grid">
+            <div>
+              <h3 class="rsub">Where else I show up</h3>
+              <ul class="org-list">
+                {organizations.map((o) => (
+                  <li class="org-item">
+                    <p class="org-name">{o.name}</p>
+                    {o.role && <p class="org-role">{o.role}</p>}
+                    <p class="org-period">{o.period} · {o.affiliation}</p>
+                    <p class="org-note">{o.note}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-  <!-- Volunteering -->
-  <section class="bg-night pb-20 pt-4 text-paper md:pb-28">
-    <div class="container-app">
-      <div class="mx-auto max-w-[1040px]">
-        <div class="reveal">
-          <span class="showcase-eyebrow">§ Volunteering</span>
-          <h2 class="showcase-h3 mt-1">
-        Localization &amp; side work, done for free
-      </h2>
-          <p class="showcase-lead max-w-[720px]">
+            <div>
+              <h3 class="rsub">Past project</h3>
+              <div class="past-project">
+                <p class="org-name">Iron Swords Platform</p>
+                <p class="org-period">
+                  <span class="project-badge">Closed</span>
+                  <span>Oct – Dec 2023</span>
+                </p>
+                <p class="org-note">{ironSwordsNote}</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Volunteering -->
+        <section class="rsec reveal" aria-labelledby="vol-title">
+          <h2 id="vol-title" class="rhead">§ Volunteering</h2>
+          <p class="rlead">
             Years of unpaid translation and testing work so Hebrew-speaking users
             could use the same tools as everyone else.
           </p>
-        </div>
 
-        <ul class="volunteer-list mt-10">
-          {volunteer.map((v) => (
-            <li class="volunteer-row reveal">
-              <div class="volunteer-row-main">
-                <p class="volunteer-role">{v.role}</p>
-                <p class="volunteer-org">{v.org}</p>
-              </div>
-              <div class="volunteer-row-meta">
-                <p class="volunteer-period">{v.period}</p>
-                <p class="volunteer-length">{v.length} · {v.cause}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
-  </section>
+          <ul class="vol-list">
+            {volunteer.map((v) => (
+              <li class="vol-row">
+                <div class="vol-main">
+                  <p class="vol-role">{v.role}</p>
+                  <p class="vol-org">{v.org}</p>
+                </div>
+                <div class="vol-meta">
+                  <p class="vol-period">{v.period}</p>
+                  <p class="vol-length">{v.length} · {v.cause}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
 
-  <!-- Writing -->
-  <section class="bg-night pb-24 pt-4 text-paper md:pb-32">
-    <div class="container-app">
-      <div class="mx-auto max-w-[1040px]">
-        <div class="reveal flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <span class="showcase-eyebrow">§ Writing</span>
-            <h2 class="showcase-h3 mt-1">
-        On LinkedIn Pulse
-      </h2>
+        <!-- Writing -->
+        <section class="rsec reveal" aria-labelledby="writing-title">
+          <div class="flex flex-wrap items-end justify-between gap-4">
+            <h2 id="writing-title" class="rhead">§ Writing</h2>
+            <a
+              href="https://www.linkedin.com/newsletters/the-df-files-7062371340606930944/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="article-all"
+            >
+              All articles
+              <Icon name="lucide:arrow-up-right" class="h-4 w-4" aria-hidden="true" />
+            </a>
           </div>
-          <a
-            href="https://www.linkedin.com/newsletters/the-df-files-7062371340606930944/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="article-all"
-          >
-            All articles
-            <Icon name="lucide:arrow-up-right" class="h-4 w-4" aria-hidden="true" />
-          </a>
-        </div>
 
-        <ul class="article-list mt-8">
-          {articles.map((a) => (
-            <li class="reveal">
-              <a
-                href={a.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="article-row group"
-              >
-                <span class="article-date">{a.date}</span>
-                <span class="article-title">{a.title}</span>
-                <Icon name="lucide:arrow-up-right" class="article-arrow" aria-hidden="true" />
-              </a>
-            </li>
-          ))}
-        </ul>
+          <ul class="article-list">
+            {articles.map((a) => (
+              <li>
+                <a
+                  href={a.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="article-row group"
+                >
+                  <span class="article-date">{a.date}</span>
+                  <span class="article-title">{a.title}</span>
+                  <Icon name="lucide:arrow-up-right" class="article-arrow" aria-hidden="true" />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
 
-        <div class="reveal mt-16 flex flex-col items-start gap-4">
-          <p class="font-sans text-display-7 text-paper/70">
+        <!-- Footer CTA -->
+        <div class="reveal rfoot">
+          <p class="rfoot-note">
             The full profile, recommendations, and activity live on LinkedIn.
           </p>
           <a
@@ -352,317 +350,339 @@ const ironSwordsNote = `"Iron Swords Platform" launched on October 8, 2023, one 
             <Icon name="lucide:arrow-right" class="h-4 w-4" aria-hidden="true" />
           </a>
         </div>
+
       </div>
     </div>
   </section>
 </Base>
 
 <style>
-  /* Shared section chrome -------------------------------------------- */
-  .showcase-eyebrow {
-    display: inline-block;
+  /* Résumé sheet ------------------------------------------------------- */
+  .resume {
+    padding-top: 2.5rem;
+  }
+
+  .rsec {
+    padding: 3rem 0 0;
+    margin-top: 3rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .rsec:first-child {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .rhead {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245, 245, 245, 0.6);
+  }
+
+  .rsub {
+    margin: 1.5rem 0 0;
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--color-paper);
+  }
+
+  .rlead {
+    margin: 0.75rem 0 0;
+    max-width: 620px;
+    font-family: var(--font-sans);
+    font-size: 0.98rem;
+    line-height: 1.6;
+    color: rgba(245, 245, 245, 0.75);
+  }
+
+  /* Highlights row ----------------------------------------------------- */
+  .fronts {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .fronts { grid-template-columns: repeat(3, 1fr); }
+  }
+  .front {
+    padding: 1.25rem 1.25rem 1.35rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.02);
+  }
+  .front-kicker {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-paper-muted);
+  }
+  .front-index {
+    margin-right: 0.6rem;
+    font-weight: 700;
+    color: var(--color-amber);
+  }
+  .front-title {
+    margin: 0.5rem 0 0;
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--color-paper);
+  }
+  .front-line {
+    margin: 0.5rem 0 0;
+    font-family: var(--font-sans);
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: rgba(245, 245, 245, 0.72);
+  }
+  .front-stat {
+    margin: 0.85rem 0 0;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
     font-family: var(--font-sans);
     font-size: 0.72rem;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: rgba(245, 245, 245, 0.55);
   }
-  .showcase-h2 {
-    margin-top: 0.4rem;
-    font-family: var(--font-display);
-    font-size: clamp(2.1rem, 4.2vw, 3.25rem);
-    line-height: 1.05;
-    font-weight: 400;
-  }
-  .showcase-h3 {
-    font-family: var(--font-display);
-    font-size: clamp(1.6rem, 3vw, 2.1rem);
-    line-height: 1.1;
-    font-weight: 400;
-  }
-  .showcase-lead {
-    margin-top: 1rem;
-    font-family: var(--font-sans);
-    font-size: 1.02rem;
-    line-height: 1.55;
-    color: rgba(245, 245, 245, 0.78);
-    max-width: 640px;
-  }
-  .showcase-intro {
-    position: relative;
-    padding-top: 2.5rem;
-  }
-  .showcase-intro::before {
-    content: '';
-    display: block;
-    width: 56px;
-    height: 1px;
-    background: rgba(255, 255, 255, 0.2);
-    margin-bottom: 1.25rem;
-  }
 
-  /* Timeline --------------------------------------------------------- */
-  .timeline {
+  /* Experience ---------------------------------------------------------- */
+  .xp-list {
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 2rem 0 0;
     display: flex;
     flex-direction: column;
-    gap: 3.5rem;
   }
-  .timeline-entry {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-    position: relative;
+  .xp {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
   }
-  @media (min-width: 768px) {
-    .timeline-entry {
-      grid-template-columns: 220px 1fr;
-      gap: 3rem;
-    }
-  }
+  .xp:last-child { border-bottom: 0; padding-bottom: 0; }
 
-  .timeline-meta { position: relative; }
-  .timeline-dot { display: none; }
-  @media (min-width: 768px) {
-    .timeline-meta { padding-left: 1.5rem; }
-    .timeline-dot {
-      display: block;
-      position: absolute;
-      top: 0.9rem;
-      left: 0;
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: var(--color-paper);
-      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
-    }
-    .timeline-entry::before {
-      content: '';
-      position: absolute;
-      left: 3px;
-      top: 1.75rem;
-      bottom: -3.5rem;
-      width: 1px;
-      background: rgba(255, 255, 255, 0.08);
-    }
-    .timeline-entry:last-child::before { display: none; }
+  .xp-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.25rem 1.5rem;
   }
-
-  .timeline-duration {
+  .xp-company {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--color-paper);
+  }
+  .xp-location {
+    margin: 0.15rem 0 0;
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    color: var(--color-paper-muted);
+  }
+  .xp-duration {
     margin: 0;
     font-family: var(--font-sans);
-    font-size: 0.7rem;
-    letter-spacing: 0.14em;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--color-paper-muted);
-  }
-  .timeline-company {
-    font-family: var(--font-display);
-    font-size: 1.2rem;
-    font-weight: 600;
-    line-height: 1.2;
-    margin: 0.5rem 0 0;
-    color: var(--color-paper);
-  }
-  .timeline-location {
-    margin: 0.35rem 0 0;
-    font-family: var(--font-sans);
-    font-size: 0.85rem;
-    color: var(--color-paper-muted);
-    line-height: 1.4;
+    white-space: nowrap;
   }
 
-  .timeline-body { min-width: 0; padding-top: 0.1rem; }
-
-  .roles {
+  .xp-roles {
     list-style: none;
     padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-  }
-  .role { padding: 0.9rem 0; }
-  .role + .role { border-top: 1px solid rgba(255, 255, 255, 0.06); }
-  .role:first-child { padding-top: 0; }
-  .role:last-child { padding-bottom: 0; }
-
-  .role-title {
-    font-family: var(--font-display);
-    font-size: 1.05rem;
-    font-weight: 600;
-    margin: 0;
-    color: var(--color-paper);
-    line-height: 1.3;
-  }
-  .role-meta {
     margin: 0.35rem 0 0;
-    font-family: var(--font-sans);
-    font-size: 0.85rem;
-    color: var(--color-paper-body);
-    line-height: 1.5;
   }
-  .role-dim { color: var(--color-paper-muted); }
-  .role-note {
-    margin: 0.65rem 0 0;
+  .xp-role {
+    padding: 0.75rem 0 0;
+    margin-top: 0.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  .xp-role:first-child {
+    border-top: 0;
+    margin-top: 0;
+    padding-top: 0.9rem;
+  }
+  .xp-role-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.15rem 1.5rem;
+  }
+  .xp-role-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 0.98rem;
+    font-weight: 500;
+    color: rgba(245, 245, 245, 0.92);
+  }
+  .xp-role-meta {
+    margin: 0;
     font-family: var(--font-sans);
-    font-size: 0.92rem;
+    font-size: 0.8rem;
+    color: var(--color-paper-body);
+    white-space: nowrap;
+  }
+  .xp-dim { color: var(--color-paper-muted); }
+  .xp-note {
+    margin: 0.5rem 0 0;
+    max-width: 62ch;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
     line-height: 1.6;
     color: var(--color-paper-body);
-    max-width: 58ch;
   }
-  .role-skills {
-    margin: 1.1rem 0 0;
-    padding-top: 0.85rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  .xp-skills {
+    margin: 0.85rem 0 0;
     font-family: var(--font-sans);
-    font-size: 0.78rem;
+    font-size: 0.76rem;
     color: var(--color-paper-muted);
     letter-spacing: 0.01em;
   }
 
-  /* Organizations --------------------------------------------------- */
+  /* Organizations & past project --------------------------------------- */
+  .org-grid {
+    margin-top: 0.5rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  @media (min-width: 768px) {
+    .org-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+  }
+
   .org-list {
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 1.25rem 0 0;
     display: flex;
     flex-direction: column;
-    gap: 2.75rem;
+    gap: 1.75rem;
   }
   .org-item {
-    padding-bottom: 2.75rem;
+    padding-bottom: 1.75rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.07);
   }
   .org-item:last-child { border-bottom: 0; padding-bottom: 0; }
   .org-name {
     margin: 0;
     font-family: var(--font-display);
-    font-size: 1.1rem;
+    font-size: 1.02rem;
     font-weight: 600;
     color: var(--color-paper);
   }
   .org-role {
     margin: 0.1rem 0 0;
     font-family: var(--font-sans);
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     color: rgba(245, 245, 245, 0.75);
   }
   .org-period {
-    margin: 0.25rem 0 0;
-    font-family: var(--font-sans);
-    font-size: 0.78rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgba(245, 245, 245, 0.5);
-  }
-  .org-affiliation {
-    margin: 0.4rem 0 0;
-    font-family: var(--font-sans);
-    font-size: 0.82rem;
-    color: rgba(245, 245, 245, 0.55);
-  }
-  .org-note {
-    margin: 0.65rem 0 0;
-    font-family: var(--font-sans);
-    font-size: 0.92rem;
-    line-height: 1.55;
-    color: rgba(245, 245, 245, 0.8);
-  }
-
-  /* Project callout ------------------------------------------------- */
-  .project-tag {
-    margin: 0.75rem 0 0;
+    margin: 0.35rem 0 0;
     display: flex;
     align-items: center;
     gap: 0.7rem;
     font-family: var(--font-sans);
-    font-size: 0.78rem;
+    font-size: 0.72rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(245, 245, 245, 0.55);
+    color: rgba(245, 245, 245, 0.5);
   }
+  .org-note {
+    margin: 0.5rem 0 0;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: rgba(245, 245, 245, 0.78);
+  }
+
+  .past-project { margin-top: 1.25rem; }
   .project-badge {
     display: inline-block;
-    padding: 0.22rem 0.6rem;
+    padding: 0.18rem 0.55rem;
     border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 999px;
     font-family: var(--font-display);
-    font-size: 0.68rem;
+    font-size: 0.64rem;
     letter-spacing: 0.14em;
     color: rgba(245, 245, 245, 0.85);
   }
-  .project-note {
-    margin: 1rem 0 0;
-    font-family: var(--font-sans);
-    font-size: 0.97rem;
-    line-height: 1.6;
-    color: rgba(245, 245, 245, 0.85);
-  }
 
-  /* Volunteering table ---------------------------------------------- */
-  .volunteer-list {
+  /* Volunteering -------------------------------------------------------- */
+  .vol-list {
     list-style: none;
     padding: 0;
-    margin: 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 1.75rem 0 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
   }
-  .volunteer-row {
+  .vol-row {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 0.35rem;
-    padding: 1.1rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    transition: background 200ms;
+    gap: 0.25rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
   }
   @media (min-width: 768px) {
-    .volunteer-row {
+    .vol-row {
       grid-template-columns: 1fr auto;
       align-items: baseline;
       gap: 2rem;
-      padding: 1.25rem 0.5rem;
+      padding: 1.1rem 0.25rem;
     }
+    .vol-meta { text-align: right; }
   }
-  .volunteer-row:hover { background: rgba(255, 255, 255, 0.02); }
-  .volunteer-role {
+  .vol-role {
     margin: 0;
     font-family: var(--font-display);
-    font-size: 1.02rem;
+    font-size: 0.98rem;
     font-weight: 500;
     color: var(--color-paper);
   }
-  .volunteer-org {
-    margin: 0.15rem 0 0;
+  .vol-org {
+    margin: 0.1rem 0 0;
     font-family: var(--font-sans);
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     color: rgba(245, 245, 245, 0.7);
   }
-  .volunteer-period {
+  .vol-period {
     margin: 0;
     font-family: var(--font-sans);
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     color: rgba(245, 245, 245, 0.8);
   }
-  @media (min-width: 768px) {
-    .volunteer-row-meta { text-align: right; }
-  }
-  .volunteer-length {
-    margin: 0.15rem 0 0;
+  .vol-length {
+    margin: 0.1rem 0 0;
     font-family: var(--font-sans);
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: rgba(245, 245, 245, 0.45);
   }
 
-  /* Articles list --------------------------------------------------- */
+  /* Writing -------------------------------------------------------------- */
   .article-all {
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
     font-family: var(--font-sans);
-    font-size: 0.82rem;
+    font-size: 0.78rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: rgba(245, 245, 245, 0.7);
@@ -674,8 +694,8 @@ const ironSwordsNote = `"Iron Swords Platform" launched on October 8, 2023, one 
   .article-list {
     list-style: none;
     padding: 0;
-    margin: 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 1.75rem 0 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
   }
   .article-row {
     display: grid;
@@ -683,9 +703,9 @@ const ironSwordsNote = `"Iron Swords Platform" launched on October 8, 2023, one 
     grid-template-areas:
       'date arrow'
       'title arrow';
-    gap: 0.25rem 1rem;
-    padding: 1.25rem 0.25rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    gap: 0.2rem 1rem;
+    padding: 1.05rem 0.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
     color: var(--color-paper);
     text-decoration: none;
     transition: background 200ms, padding 200ms;
@@ -696,7 +716,7 @@ const ironSwordsNote = `"Iron Swords Platform" launched on October 8, 2023, one 
       grid-template-areas: 'date title arrow';
       align-items: center;
       gap: 2rem;
-      padding: 1.4rem 0.5rem;
+      padding: 1.15rem 0.5rem;
     }
   }
   .article-row:hover {
@@ -706,7 +726,7 @@ const ironSwordsNote = `"Iron Swords Platform" launched on October 8, 2023, one 
   .article-date {
     grid-area: date;
     font-family: var(--font-sans);
-    font-size: 0.76rem;
+    font-size: 0.72rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: rgba(245, 245, 245, 0.5);
@@ -714,7 +734,7 @@ const ironSwordsNote = `"Iron Swords Platform" launched on October 8, 2023, one 
   .article-title {
     grid-area: title;
     font-family: var(--font-display);
-    font-size: 1.05rem;
+    font-size: 1rem;
     font-weight: 500;
     line-height: 1.35;
   }
@@ -731,16 +751,32 @@ const ironSwordsNote = `"Iron Swords Platform" launched on October 8, 2023, one 
     transform: translate(2px, -2px);
   }
 
+  /* Footer CTA ------------------------------------------------------------ */
+  .rfoot {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .rfoot-note {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 0.92rem;
+    color: rgba(245, 245, 245, 0.7);
+  }
   .showcase-linkedin {
     display: inline-flex;
     align-items: center;
     gap: 0.6rem;
     background: var(--color-paper);
     color: var(--color-ink);
-    padding: 0.75rem 1.35rem;
+    padding: 0.7rem 1.3rem;
     border-radius: 9999px;
     font-family: var(--font-display);
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     text-decoration: none;
     transition: transform 200ms var(--ease-out-expo);
   }

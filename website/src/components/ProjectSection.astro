@@ -1,41 +1,218 @@
 ---
+interface Stat {
+  value: string;
+  label: string;
+}
 interface Props {
   id: string;
+  index: string;
+  kicker: string;
   title: string;
   body: string;
-  image?: string;
+  image: string;
   imageAlt?: string;
+  stats?: Stat[];
+  flip?: boolean;
+  revealDelay?: number;
 }
-const { id, title, body, image, imageAlt = '' } = Astro.props;
+const {
+  id,
+  index,
+  kicker,
+  title,
+  body,
+  image,
+  imageAlt = '',
+  stats = [],
+  flip = false,
+  revealDelay = 200,
+} = Astro.props;
 ---
 
-<section id={id} class="bg-night py-20 text-paper md:py-32">
-  <div class="container-app">
-    {image ? (
-      <div class="grid grid-cols-1 gap-10 md:grid-cols-12 md:items-center">
-        <div class="reveal md:col-span-4">
-          <img src={image} alt={imageAlt} class="mx-auto w-full max-w-sm rounded-card" loading="lazy" decoding="async" />
-        </div>
-        <div class="reveal md:col-span-8">
-          <h2 class="font-display text-display-2 font-semibold leading-[1.1] text-paper">
-        {title}
-      </h2>
-          <p class="mt-5 whitespace-pre-line font-sans text-display-7 text-paper">{body}</p>
-          <div class="mt-8 flex flex-wrap gap-4">
-            <slot />
-          </div>
-        </div>
-      </div>
-    ) : (
-      <div class="reveal mx-auto max-w-[1100px]">
-        <h2 class="font-display text-display-2 font-semibold leading-[1.1] text-paper">
-        {title}
-      </h2>
-        <p class="mt-5 whitespace-pre-line font-sans text-display-7 text-paper">{body}</p>
-        <div class="mt-8 flex flex-wrap gap-4">
-          <slot />
-        </div>
-      </div>
-    )}
+<section
+  id={id}
+  class:list={['work-card', 'reveal', flip && 'work-card--flip']}
+  style={`--reveal-delay: ${revealDelay}ms;`}
+  aria-labelledby={`${id}-title`}
+>
+  <div class="work-media">
+    <img src={image} alt={imageAlt} width="1280" height="720" loading="lazy" decoding="async" />
+  </div>
+  <div class="work-body">
+    <p class="work-eyebrow">
+      <span class="work-index" aria-hidden="true">{index}</span>
+      {kicker}
+    </p>
+    <h2 id={`${id}-title`} class="work-title">{title}</h2>
+    <p class="work-text">{body}</p>
+    {
+      stats.length > 0 && (
+        <ul class="work-stats">
+          {stats.map((s) => (
+            <li class="work-stat">
+              <span class="stat-value">{s.value}</span>
+              <span class="stat-label">{s.label}</span>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+    <div class="work-actions">
+      <slot />
+    </div>
   </div>
 </section>
+
+<style>
+  .work-card {
+    display: grid;
+    grid-template-columns: 1fr;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-card);
+    transition:
+      opacity 900ms var(--ease-out-expo) var(--reveal-delay, 0ms),
+      transform 300ms var(--ease-out-expo),
+      border-color 300ms,
+      box-shadow 300ms;
+  }
+  .work-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.22);
+    box-shadow: 0 24px 48px -24px rgba(0, 0, 0, 0.6);
+  }
+  @media (hover: none) {
+    .work-card:hover {
+      transform: none;
+      box-shadow: none;
+    }
+  }
+
+  .work-media {
+    position: relative;
+    overflow: hidden;
+    background: #0a0a0a;
+    aspect-ratio: 16 / 9;
+  }
+  .work-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 600ms var(--ease-out-expo);
+  }
+  .work-card:hover .work-media img {
+    transform: scale(1.04);
+  }
+
+  .work-body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.75rem 1.5rem 2rem;
+  }
+  @media (min-width: 768px) {
+    .work-body {
+      padding: 2.5rem 2.75rem 2.6rem;
+    }
+  }
+
+  .work-eyebrow {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-paper-muted);
+  }
+  .work-index {
+    margin-right: 0.75rem;
+    font-weight: 700;
+    color: var(--color-amber);
+  }
+
+  .work-title {
+    margin: 0.75rem 0 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+    line-height: 1.1;
+    font-weight: 600;
+    color: var(--color-paper);
+  }
+
+  .work-text {
+    margin: 1rem 0 0;
+    font-family: var(--font-sans);
+    font-size: 1.02rem;
+    line-height: 1.6;
+    color: var(--color-paper-body);
+    white-space: pre-line;
+  }
+
+  .work-stats {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    padding: 0;
+    margin: 1.5rem 0 0;
+  }
+  .work-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0.6rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.02);
+  }
+  .stat-value {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-paper);
+    line-height: 1.2;
+  }
+  .stat-label {
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-paper-muted);
+  }
+
+  .work-actions {
+    margin-top: 1.5rem;
+  }
+  .work-actions:empty {
+    display: none;
+  }
+
+  /* Desktop: media column beside content, alternating sides for rhythm */
+  @media (min-width: 900px) {
+    .work-card {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    }
+    .work-card--flip .work-media {
+      order: 2;
+    }
+    .work-card--flip .work-body {
+      order: 1;
+    }
+    .work-media {
+      aspect-ratio: auto;
+      min-height: 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .work-card,
+    .work-card:hover {
+      transition: none;
+      transform: none;
+    }
+    .work-media img {
+      transition: none;
+    }
+  }
+</style>

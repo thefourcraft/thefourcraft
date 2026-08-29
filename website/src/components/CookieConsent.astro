@@ -72,6 +72,11 @@
     transform: translateY(120%);
     transition: transform 400ms var(--ease-out-expo);
   }
+  /* Keep the banner clear of the side FAB stack (accessibility / cookies /
+     language) so it never covers or blocks those buttons. */
+  @media (min-width: 641px) {
+    .consent-root { inset: auto calc(1rem + 4.25rem) 1rem 1rem; }
+  }
   .consent-root[data-state='visible'] { transform: translateY(0); }
   .consent-root[data-state='hidden'] { visibility: hidden; }
 
@@ -195,6 +200,8 @@
       root.dataset.state = 'visible';
       root.dataset.expanded = expanded ? 'true' : 'false';
       if (expanded && details) details.open = true;
+      // One surface at a time: tell the accessibility/language panels to close.
+      document.dispatchEvent(new CustomEvent('df:consent-shown'));
     };
     const hide = () => { root.dataset.state = 'hidden'; };
 
@@ -227,5 +234,10 @@
     });
 
     document.addEventListener('df:open-consent', () => show(true));
+    // An accessibility/language panel just opened: step aside so the two
+    // surfaces never overlap. The banner can be re-opened from the cookie FAB.
+    document.addEventListener('df:surface-opened', () => {
+      if (root.dataset.state === 'visible') hide();
+    });
   }
 </script>

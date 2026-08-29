@@ -143,7 +143,9 @@ import { Icon } from 'astro-icon/components';
     position: fixed;
     right: 1rem;
     bottom: 1rem;
-    z-index: 1035;
+    /* Above the consent banner (1040) and nav (1030): these panels are
+       explicitly user-initiated and must never be buried underneath. */
+    z-index: 1045;
   }
   [dir='rtl'] .side-controls { right: auto; left: 1rem; }
 
@@ -191,6 +193,9 @@ import { Icon } from 'astro-icon/components';
     right: calc(100% + 0.75rem);
     bottom: 0;
     width: 280px;
+    max-height: calc(100dvh - 6.5rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
     background: var(--color-paper);
     color: var(--color-ink);
     border-radius: 1.25rem;
@@ -426,6 +431,8 @@ import { Icon } from 'astro-icon/components';
     panel.hidden = false;
     a11yFab.setAttribute('aria-expanded', 'true');
     closeLang();
+    // One surface at a time: get the consent banner out of the way.
+    document.dispatchEvent(new CustomEvent('df:surface-opened'));
   };
   const closePanel = () => {
     if (!root || !panel || !a11yFab) return;
@@ -439,6 +446,8 @@ import { Icon } from 'astro-icon/components';
     langPanel.hidden = false;
     langFab.setAttribute('aria-expanded', 'true');
     closePanel();
+    // One surface at a time: get the consent banner out of the way.
+    document.dispatchEvent(new CustomEvent('df:surface-opened'));
   };
   const closeLang = () => {
     if (!root || !langPanel || !langFab) return;
@@ -464,6 +473,12 @@ import { Icon } from 'astro-icon/components';
     if (e.key !== 'Escape') return;
     if (root?.dataset.a11yState === 'open') closePanel();
     if (root?.dataset.langState === 'open') closeLang();
+  });
+  // The consent banner just appeared (initial or re-opened): close our
+  // panels so the two surfaces never stack on top of each other.
+  document.addEventListener('df:consent-shown', () => {
+    closePanel();
+    closeLang();
   });
   document.addEventListener('click', (e) => {
     if (!root) return;

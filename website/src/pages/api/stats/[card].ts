@@ -11,7 +11,9 @@ export const GET: APIRoute = async ({ params, request, locals }) => {
 
   const runtimeCtx = (locals as { cfContext?: ExecutionContext }).cfContext;
   const ctx: ExecutionContext = runtimeCtx ?? ({
-    waitUntil: () => {},
+    waitUntil: (p: Promise<unknown>) => {
+      void p;
+    },
     passThroughOnException: () => {},
   } as unknown as ExecutionContext);
 

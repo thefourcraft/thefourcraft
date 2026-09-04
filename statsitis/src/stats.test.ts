@@ -74,65 +74,35 @@ function installGithubMock() {
       const payload = JSON.parse(bodyText) as { query?: string };
       const q = payload.query || '';
 
-      if (q.includes('contributionCalendar') && q.includes('contributionDays')) {
-        return jsonResponse({
-          data: {
-            user: {
-              contributionsCollection: {
-                contributionCalendar: { weeks },
-              },
-            },
-          },
-        });
-      }
+      const yearBlock = {
+        totalCommitContributions: 1200,
+        totalPullRequestReviewContributions: 40,
+        contributionCalendar: {
+          totalContributions: 900,
+          weeks,
+        },
+      };
+      const inventory = {
+        pullRequests: { totalCount: 100 },
+        mergedPRs: { totalCount: 84 },
+        issues: { totalCount: 50 },
+        repositoryDiscussions: { totalCount: 5 },
+        repositoriesContributedTo: { totalCount: 12 },
+      };
 
-      if (q.includes('totalCommitContributions')) {
-        return jsonResponse({
-          data: {
-            user: {
-              contributionsCollection: {
-                totalCommitContributions: 1200,
-                totalPullRequestReviewContributions: 40,
-              },
-            },
-          },
-        });
+      const aliases = [...q.matchAll(/\b(y\d+|lastYear):/g)].map((m) => m[1]);
+      const user: Record<string, unknown> = {};
+      if (q.includes('mergedPRs') || q.includes('repositoriesContributedTo') || q.includes('pullRequests')) {
+        Object.assign(user, inventory);
       }
-
-      if (q.includes('contributionCalendar{ totalContributions }')) {
-        return jsonResponse({
-          data: {
-            user: {
-              contributionsCollection: {
-                contributionCalendar: { totalContributions: 900 },
-              },
-            },
-          },
-        });
+      for (const alias of aliases) {
+        user[alias] =
+          alias === 'lastYear' ? { contributionCalendar: { totalContributions: 900 } } : yearBlock;
       }
-
-      // Inventory query: opened PRs, merged PRs, issues, discussions, repos.
-      // Intentionally large merged vs small contribution totals in other mocks —
-      // merge % must use connection opened (100), not contribution PRs.
-      if (
-        q.includes('mergedPRs') ||
-        q.includes('repositoriesContributedTo') ||
-        (q.includes('pullRequests') && q.includes('issues'))
-      ) {
-        return jsonResponse({
-          data: {
-            user: {
-              pullRequests: { totalCount: 100 },
-              mergedPRs: { totalCount: 84 },
-              issues: { totalCount: 50 },
-              repositoryDiscussions: { totalCount: 5 },
-              repositoriesContributedTo: { totalCount: 12 },
-            },
-          },
-        });
+      if (!aliases.length && q.includes('contributionsCollection')) {
+        user.contributionsCollection = yearBlock;
       }
-
-      return jsonResponse({ data: {} });
+      return jsonResponse({ data: { user } });
     }
 
     return new Response(`unexpected fetch: ${method} ${url}`, { status: 500 });
@@ -237,6 +207,25 @@ test('stats card returns real SVG with activity rows via shipped renderer', asyn
     assert.doesNotMatch(body, /\d{3,}\.\d%/); // no absurd 900%-style percentages
     assert.match(body, /Repos contributed to<\/text>\s*<text class="v"[^>]*>12<\/text>/);
     assert.match(body, /David&#39;s GitHub Activity|David's GitHub Activity/);
+    // Values right-align to card padding (720 - 40), not inset under the grade ring.
+    assert.match(body, /class="v" x="680" y="\d+" text-anchor="end"/);
+  } finally {
+    fetchMock.mock.restore();
+  }
+});
+
+test('second request for the same URL is a Cache API hit (no extra GitHub fetch)', async () => {
+  const fetchMock = installGithubMock();
+  const url = `https://example.test/api/stats/graph?cb=${Date.now()}-cache`;
+  try {
+    const first = await handleStatsRequest(new Request(url), ENV, ctx(), 'graph');
+    assert.equal(first.status, 200);
+    const githubCalls = fetchMock.mock.calls.length;
+    assert.ok(githubCalls > 0);
+    const second = await handleStatsRequest(new Request(url), ENV, ctx(), 'graph');
+    assert.equal(second.status, 200);
+    assert.equal(fetchMock.mock.calls.length, githubCalls);
+    assert.equal(second.headers.get('x-dfstats-generated'), first.headers.get('x-dfstats-generated'));
   } finally {
     fetchMock.mock.restore();
   }

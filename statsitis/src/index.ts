@@ -21,10 +21,18 @@ export interface Env {
 
 export { renderStreak, renderStats, renderGraph };
 
+const PUBLIC_TTL_S = 21600; // 6h — browsers + GitHub camo (camo times out ~5s on miss)
+const EDGE_TTL_S = 604800; // 7d — Cache API keep-alive for stale-while-revalidate
+const FRESH_MS = 30 * 60 * 1000;
+
 /**
  * Handle a stats request on a given pathname. Used by the website Worker to
  * delegate /api/stats/{streak,stats,graph} without reimplementing routing or
  * edge caching. Returns a fully-formed SVG response (or 404/500).
+ *
+ * Cache is served first so GitHub's camo proxy never waits on GraphQL.
+ * A miss awaits cache.put (waitUntil is a no-op in some Astro adapters).
+ * Stale entries older than 30 minutes refresh in the background.
  */
 export async function handleStatsRequest(
   req: Request,
@@ -38,26 +46,67 @@ export async function handleStatsRequest(
   if (pathname === 'health') return text('ok');
 
   const cache = (caches as unknown as { default: Cache }).default;
-  const cacheKey = new Request(url.toString(), { method: 'GET' });
-  const cached = await cache.match(cacheKey);
-  if (cached) return cached;
+  // Ignore cache-bust query params (v=) so GitHub camo `?v=2` still hits a warm entry.
+  const cacheUrl = new URL(url.origin + url.pathname);
+  cacheUrl.searchParams.set('user', user);
+  cacheUrl.searchParams.set('g', '2');
+  const cacheKey = new Request(cacheUrl.toString(), { method: 'GET' });
 
-  let body: Response;
+  let cached: Response | undefined;
   try {
-    if (pathname === 'streak') body = await renderStreak(user, env);
-    else if (pathname === 'stats') body = await renderStats(user, env);
-    else if (pathname === 'graph') body = await renderGraph(user, env);
-    else return new Response('not found', { status: 404 });
+    cached = await cache.match(cacheKey);
+  } catch {
+    cached = undefined;
+  }
+
+  if (cached) {
+    const generated = Number(cached.headers.get('x-dfstats-generated') || '0');
+    if (!generated || Date.now() - generated > FRESH_MS) {
+      ctx.waitUntil(
+        buildAndStore(cache, cacheKey, user, env, pathname).then(() => undefined).catch(() => undefined),
+      );
+    }
+    return cached;
+  }
+
+  try {
+    return await buildAndStore(cache, cacheKey, user, env, pathname);
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     return svgResponse(errorCard(msg), 500, 60);
   }
+}
 
-  const headers = new Headers(body.headers);
-  headers.set('Cache-Control', 'public, max-age=1800, s-maxage=1800');
-  headers.set('CDN-Cache-Control', 'public, max-age=1800');
-  const response = new Response(body.body, { status: body.status, headers });
-  ctx.waitUntil(cache.put(cacheKey, response.clone()));
+async function buildAndStore(
+  cache: Cache,
+  cacheKey: Request,
+  user: string,
+  env: Env,
+  pathname: string,
+): Promise<Response> {
+  let body: Response;
+  if (pathname === 'streak') body = await renderStreak(user, env);
+  else if (pathname === 'stats') body = await renderStats(user, env);
+  else if (pathname === 'graph') body = await renderGraph(user, env);
+  else return new Response('not found', { status: 404 });
+
+  const generated = String(Date.now());
+  const publicHeaders = new Headers(body.headers);
+  publicHeaders.set(
+    'Cache-Control',
+    `public, max-age=${PUBLIC_TTL_S}, s-maxage=${PUBLIC_TTL_S}, stale-while-revalidate=${EDGE_TTL_S}`,
+  );
+  publicHeaders.set('CDN-Cache-Control', `public, max-age=${PUBLIC_TTL_S}`);
+  publicHeaders.set('x-dfstats-generated', generated);
+  const response = new Response(body.body, { status: body.status, headers: publicHeaders });
+
+  try {
+    const stored = response.clone();
+    stored.headers.set('Cache-Control', `public, max-age=${EDGE_TTL_S}`);
+    await cache.put(cacheKey, stored);
+  } catch {
+    // Cache API unavailable — still return the live SVG.
+  }
   return response;
 }
 
@@ -73,7 +122,7 @@ export default {
 };
 
 // ─── Response helpers ───────────────────────────────────────────────────────
-function svgResponse(svg: string, status = 200, maxAge = 1800): Response {
+function svgResponse(svg: string, status = 200, maxAge = PUBLIC_TTL_S): Response {
   return new Response(svg, {
     status,
     headers: {
@@ -98,6 +147,23 @@ async function ghFetch(url: string, env: Env, extra: RequestInit = {}): Promise<
 }
 
 type Day = { date: string; count: number };
+
+const MAX_YEAR_WINDOWS = 15;
+
+function yearWindows(since: Date, today = new Date()): Array<{ from: Date; to: Date }> {
+  const windows: Array<{ from: Date; to: Date }> = [];
+  let cursor = new Date(since);
+  while (cursor <= today && windows.length < MAX_YEAR_WINDOWS) {
+    const end = new Date(cursor);
+    end.setFullYear(end.getFullYear() + 1);
+    if (end > today) end.setTime(today.getTime());
+    windows.push({ from: new Date(cursor), to: new Date(end) });
+    const next = new Date(end);
+    next.setDate(next.getDate() + 1);
+    cursor = next;
+  }
+  return windows;
+}
 
 /** Fetch daily contribution counts via GraphQL. Requires GH_TOKEN; max 1-year window per call. */
 async function fetchContributionDays(
@@ -185,34 +251,95 @@ async function fetchContributionDaysHTML(user: string, from: string, to: string)
   return days;
 }
 
-/** Fetch all contribution days since user creation up to today. Caps at ~10 years. */
-async function fetchAllContributions(user: string, since: Date, env: Env): Promise<Day[]> {
-  const today = new Date();
-  const all: Day[] = [];
-  let cursor = new Date(since);
-  // Walk year windows. GitHub's contributions endpoint accepts arbitrary date spans
-  // but is fastest when we request ≤ ~1 year per call.
-  while (cursor <= today) {
-    const end = new Date(cursor);
-    end.setFullYear(end.getFullYear() + 1);
-    if (end > today) end.setTime(today.getTime());
-    const chunk = await fetchContributionDays(
-      user,
-      cursor.toISOString().slice(0, 10),
-      end.toISOString().slice(0, 10),
-      env,
-    );
-    all.push(...chunk);
-    const next = new Date(end);
-    next.setDate(next.getDate() + 1);
-    cursor = next;
-  }
-  // Deduplicate by date (endpoint may include overlap boundary days).
+function dedupeDays(all: Day[]): Day[] {
   const byDate = new Map<string, number>();
   for (const d of all) byDate.set(d.date, d.count);
   return Array.from(byDate, ([date, count]) => ({ date, count })).sort((a, b) =>
     a.date < b.date ? -1 : a.date > b.date ? 1 : 0,
   );
+}
+
+/** Fetch all contribution days since user creation. One aliased GraphQL query. */
+async function fetchAllContributions(user: string, since: Date, env: Env): Promise<Day[]> {
+  const windows = yearWindows(since);
+  if (!env.GH_TOKEN) {
+    const all: Day[] = [];
+    for (const w of windows) {
+      all.push(
+        ...(await fetchContributionDays(
+          user,
+          w.from.toISOString().slice(0, 10),
+          w.to.toISOString().slice(0, 10),
+          env,
+        )),
+      );
+    }
+    return dedupeDays(all);
+  }
+
+  const CHUNK = 1;
+  const groups: Array<Array<{ from: Date; to: Date }>> = [];
+  for (let i = 0; i < windows.length; i += CHUNK) groups.push(windows.slice(i, i + CHUNK));
+  try {
+    const parts = await Promise.all(groups.map((g) => fetchAllContributionsBatched(user, g, env)));
+    return dedupeDays(parts.flat());
+  } catch {
+    const all: Day[] = [];
+    for (const w of windows) {
+      all.push(
+        ...(await fetchContributionDays(
+          user,
+          w.from.toISOString().slice(0, 10),
+          w.to.toISOString().slice(0, 10),
+          env,
+        )),
+      );
+    }
+    return dedupeDays(all);
+  }
+}
+
+async function fetchAllContributionsBatched(
+  user: string,
+  windows: Array<{ from: Date; to: Date }>,
+  env: Env,
+): Promise<Day[]> {
+  const varDefs = ['$user:String!', ...windows.flatMap((_, i) => [`$from${i}:DateTime!`, `$to${i}:DateTime!`])].join(
+    ',',
+  );
+  const selections = windows
+    .map(
+      (_, i) =>
+        `y${i}: contributionsCollection(from:$from${i}, to:$to${i}) {
+          contributionCalendar { weeks { contributionDays { date contributionCount } } }
+        }`,
+    )
+    .join('\n');
+  const variables: Record<string, unknown> = { user };
+  windows.forEach((w, i) => {
+    variables[`from${i}`] = w.from.toISOString().slice(0, 10) + 'T00:00:00Z';
+    variables[`to${i}`] = w.to.toISOString().slice(0, 10) + 'T23:59:59Z';
+  });
+
+  const data = await ghGraphQL<{
+    user: Record<
+      string,
+      {
+        contributionCalendar?: {
+          weeks: Array<{ contributionDays: Array<{ date: string; contributionCount: number }> }>;
+        };
+      }
+    >;
+  }>(env, `query(${varDefs}){ user(login:$user){ ${selections} } }`, variables);
+
+  const all: Day[] = [];
+  for (let i = 0; i < windows.length; i++) {
+    const weeks = data.user?.[`y${i}`]?.contributionCalendar?.weeks ?? [];
+    for (const w of weeks) {
+      for (const d of w.contributionDays) all.push({ date: d.date, count: d.contributionCount });
+    }
+  }
+  return dedupeDays(all);
 }
 
 async function fetchUserProfile(user: string, env: Env) {
@@ -246,13 +373,18 @@ async function fetchTotalStars(user: string, env: Env): Promise<number> {
 }
 
 async function fetchSearchTotal(q: string, env: Env): Promise<number> {
-  const r = await ghFetch(
-    `https://api.github.com/search/issues?q=${encodeURIComponent(q)}&per_page=1`,
-    env,
-  );
-  if (!r.ok) return 0;
-  const d = (await r.json()) as { total_count: number };
-  return d.total_count;
+  try {
+    const r = await ghFetch(
+      `https://api.github.com/search/issues?q=${encodeURIComponent(q)}&per_page=1`,
+      env,
+      { signal: AbortSignal.timeout(1500) },
+    );
+    if (!r.ok) return 0;
+    const d = (await r.json()) as { total_count: number };
+    return d.total_count;
+  } catch {
+    return 0;
+  }
 }
 
 async function fetchCommitCount(user: string, env: Env): Promise<number> {
@@ -296,99 +428,100 @@ async function ghGraphQL<T>(env: Env, query: string, variables: Record<string, u
   return j.data as T;
 }
 
-async function fetchLifetimeTotals(user: string, createdAt: Date, env: Env): Promise<LifetimeTotals> {
-  // Contribution-graph metrics (commits / reviews) are summed over yearly windows.
-  // These INCLUDE private contributions when the authenticated viewer is the same user.
-  // PR / issue inventory and merge rate use the user.* connections so numerator and
-  // denominator share the same universe (never mix contribution PRs with connection merged).
-  const today = new Date();
-  const yearStart = new Date(createdAt);
+type YearTotals = {
+  totalCommitContributions: number;
+  totalPullRequestReviewContributions: number;
+};
+
+async function fetchYearTotals(
+  user: string,
+  windows: Array<{ from: Date; to: Date }>,
+  env: Env,
+): Promise<YearTotals> {
+  const varDefs = ['$user:String!', ...windows.flatMap((_, i) => [`$from${i}:DateTime!`, `$to${i}:DateTime!`])].join(
+    ',',
+  );
+  const selections = windows
+    .map(
+      (_, i) =>
+        `y${i}: contributionsCollection(from:$from${i}, to:$to${i}) {
+          totalCommitContributions
+          totalPullRequestReviewContributions
+        }`,
+    )
+    .join('\n');
+  const variables: Record<string, unknown> = { user };
+  windows.forEach((w, i) => {
+    variables[`from${i}`] = w.from.toISOString();
+    variables[`to${i}`] = w.to.toISOString();
+  });
+  const data = await ghGraphQL<{ user: Record<string, YearTotals> }>(
+    env,
+    `query(${varDefs}){ user(login:$user){ ${selections} } }`,
+    variables,
+  );
   let commits = 0;
   let reviews = 0;
+  for (let i = 0; i < windows.length; i++) {
+    const c = data.user[`y${i}`];
+    if (!c) continue;
+    commits += c.totalCommitContributions;
+    reviews += c.totalPullRequestReviewContributions;
+  }
+  return { totalCommitContributions: commits, totalPullRequestReviewContributions: reviews };
+}
 
-  while (yearStart <= today) {
-    const end = new Date(yearStart);
-    end.setFullYear(end.getFullYear() + 1);
-    if (end > today) end.setTime(today.getTime());
+async function fetchLifetimeTotals(user: string, createdAt: Date, env: Env): Promise<LifetimeTotals> {
+  // Year windows run in parallel chunks — GitHub evaluates each contributionsCollection
+  // serially inside a single query, which is what made /stats miss GitHub camo's ~5s budget.
+  // Inventory + last-year total share one query. Private contribs included when self-token.
+  const windows = yearWindows(createdAt);
+  const today = new Date();
+  const oneYearAgo = new Date();
+  oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
 
-    const data = await ghGraphQL<{
+  const CHUNK = 1;
+  const groups: Array<Array<{ from: Date; to: Date }>> = [];
+  for (let i = 0; i < windows.length; i += CHUNK) groups.push(windows.slice(i, i + CHUNK));
+
+  const [inventory, ...yearParts] = await Promise.all([
+    ghGraphQL<{
       user: {
-        contributionsCollection: {
-          totalCommitContributions: number;
-          totalPullRequestReviewContributions: number;
-        };
+        pullRequests: { totalCount: number };
+        mergedPRs: { totalCount: number };
+        issues: { totalCount: number };
+        repositoryDiscussions: { totalCount: number };
+        repositoriesContributedTo: { totalCount: number };
+        lastYear: { contributionCalendar: { totalContributions: number } };
       };
     }>(
       env,
-      `query($user:String!,$from:DateTime!,$to:DateTime!){
+      `query($user:String!,$lastFrom:DateTime!,$lastTo:DateTime!){
         user(login:$user){
-          contributionsCollection(from:$from,to:$to){
-            totalCommitContributions
-            totalPullRequestReviewContributions
+          pullRequests{ totalCount }
+          mergedPRs: pullRequests(states:MERGED){ totalCount }
+          issues{ totalCount }
+          repositoryDiscussions{ totalCount }
+          repositoriesContributedTo(
+            contributionTypes:[COMMIT, ISSUE, PULL_REQUEST, REPOSITORY, PULL_REQUEST_REVIEW]
+            includeUserRepositories:true
+          ){ totalCount }
+          lastYear: contributionsCollection(from:$lastFrom, to:$lastTo){
+            contributionCalendar{ totalContributions }
           }
         }
       }`,
-      {
-        user,
-        from: yearStart.toISOString(),
-        to: end.toISOString(),
-      },
-    );
-    const c = data.user.contributionsCollection;
-    commits += c.totalCommitContributions;
-    reviews += c.totalPullRequestReviewContributions;
+      { user, lastFrom: oneYearAgo.toISOString(), lastTo: today.toISOString() },
+    ),
+    ...groups.map((g) => fetchYearTotals(user, g, env)),
+  ]);
 
-    const next = new Date(end);
-    next.setDate(next.getDate() + 1);
-    yearStart.setTime(next.getTime());
+  let commits = 0;
+  let reviews = 0;
+  for (const p of yearParts) {
+    commits += p.totalCommitContributions;
+    reviews += p.totalPullRequestReviewContributions;
   }
-
-  // Last 365 days contribution total (green-square sum).
-  const oneYearAgo = new Date();
-  oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
-  const lastYear = await ghGraphQL<{
-    user: {
-      contributionsCollection: {
-        contributionCalendar: { totalContributions: number };
-      };
-    };
-  }>(
-    env,
-    `query($user:String!,$from:DateTime!,$to:DateTime!){
-      user(login:$user){
-        contributionsCollection(from:$from,to:$to){
-          contributionCalendar{ totalContributions }
-        }
-      }
-    }`,
-    { user, from: oneYearAgo.toISOString(), to: today.toISOString() },
-  );
-
-  // Inventory metrics from the same connection family (private included when self-token).
-  const inventory = await ghGraphQL<{
-    user: {
-      pullRequests: { totalCount: number };
-      mergedPRs: { totalCount: number };
-      issues: { totalCount: number };
-      repositoryDiscussions: { totalCount: number };
-      repositoriesContributedTo: { totalCount: number };
-    };
-  }>(
-    env,
-    `query($user:String!){
-      user(login:$user){
-        pullRequests{ totalCount }
-        mergedPRs: pullRequests(states:MERGED){ totalCount }
-        issues{ totalCount }
-        repositoryDiscussions{ totalCount }
-        repositoriesContributedTo(
-          contributionTypes:[COMMIT, ISSUE, PULL_REQUEST, REPOSITORY, PULL_REQUEST_REVIEW]
-          includeUserRepositories:true
-        ){ totalCount }
-      }
-    }`,
-    { user },
-  );
 
   return {
     commits,
@@ -397,7 +530,7 @@ async function fetchLifetimeTotals(user: string, createdAt: Date, env: Env): Pro
     prsReviewed: reviews,
     issues: inventory.user.issues.totalCount,
     reposContributed: inventory.user.repositoriesContributedTo.totalCount,
-    lastYearContribs: lastYear.user.contributionsCollection.contributionCalendar.totalContributions,
+    lastYearContribs: inventory.user.lastYear.contributionCalendar.totalContributions,
     lastYearReposContributed: inventory.user.repositoriesContributedTo.totalCount,
     discussionsStarted: inventory.user.repositoryDiscussions.totalCount,
   };
@@ -616,14 +749,10 @@ function fireIcon(): string {
 // ─── /stats card ────────────────────────────────────────────────────────────
 async function renderStats(user: string, env: Env): Promise<Response> {
   const profile = await fetchUserProfile(user, env);
-  const totals = await fetchLifetimeTotals(user, new Date(profile.created_at), env);
-
-  // Discussions answered isn't directly queryable via GraphQL. Use the REST
-  // search API as a best-effort signal (returns 0 if indexing hasn't caught up).
-  const discussionsAnswered = await fetchSearchTotal(
-    `type:discussion answered-by:${user}`,
-    env,
-  ).catch(() => 0);
+  const [totals, discussionsAnswered] = await Promise.all([
+    fetchLifetimeTotals(user, new Date(profile.created_at), env),
+    fetchSearchTotal(`type:discussion answered-by:${user}`, env).catch(() => 0),
+  ]);
 
   // Merge rate uses the same connection universe: MERGED ⊆ all authored PRs.
   const mergedPct =
@@ -663,10 +792,10 @@ async function renderStats(user: string, env: Env): Promise<Response> {
   const H = rowY0 + rows.length * rowDY + 36;
 
   const circleR = 24;
-  const circleCX = W - padX - circleR;   // 656 — flush with right padding
-  const circleCY = 50;                    // vertically in the title zone
+  const circleCX = W - padX - circleR;
+  const circleCY = 50;
   const gradeOffset = 2 * Math.PI * (circleR - 3) * (1 - grade.percent);
-  const valEndX = circleCX - circleR - 20; // 612 — clear of ring by 20px
+  const valEndX = W - padX;
 
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="GitHub stats for ${esc(user)}">
   <defs>
@@ -757,12 +886,15 @@ async function renderGraph(user: string, env: Env): Promise<Response> {
   const start = new Date(today);
   start.setDate(start.getDate() - 30);
 
-  const days = await fetchContributionDays(
-    user,
-    start.toISOString().slice(0, 10),
-    today.toISOString().slice(0, 10),
-    env,
-  );
+  const [days, profile] = await Promise.all([
+    fetchContributionDays(
+      user,
+      start.toISOString().slice(0, 10),
+      today.toISOString().slice(0, 10),
+      env,
+    ),
+    fetchUserProfile(user, env),
+  ]);
   // If the fetched range is short, pad.
   const series = days.slice(-31);
 
@@ -802,7 +934,6 @@ async function renderGraph(user: string, env: Env): Promise<Response> {
     })
     .join('');
 
-  const profile = await fetchUserProfile(user, env);
   const name = (profile.name || profile.login).split(' ')[0];
 
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="Contribution graph for ${esc(user)}">

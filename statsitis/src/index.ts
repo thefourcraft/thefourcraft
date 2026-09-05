@@ -19,11 +19,38 @@ export interface Env {
 // Worker router is retained as the default export for standalone deploys
 // and for local preview via `wrangler dev`.
 
-export { renderStreak, renderStats, renderGraph };
+export { renderStreak, renderStats, renderGraph, renderPulse };
 
-const PUBLIC_TTL_S = 21600; // 6h — browsers + GitHub camo (camo times out ~5s on miss)
-const EDGE_TTL_S = 604800; // 7d — Cache API keep-alive for stale-while-revalidate
+const PUBLIC_TTL_S = 300; // 5 min — GitHub camo freezes images for as long as this
+const CAMO_TTL_S = 120; // 2 min when the requester is GitHub's camo proxy
+const EDGE_TTL_S = 604800; // 7d — Cache API keep-alive so origin stays fast
 const FRESH_MS = 30 * 60 * 1000;
+
+type RangeId = '7d' | '30d' | '1y';
+type Range = { id: RangeId; days: number; label: string };
+
+function parseRange(raw: string | null): Range {
+  const v = (raw || '').toLowerCase();
+  if (v === '30d' || v === '30') return { id: '30d', days: 30, label: 'Last 30 days' };
+  if (v === '1y' || v === '365d' || v === 'year') return { id: '1y', days: 365, label: 'Last 12 months' };
+  return { id: '7d', days: 7, label: 'Last 7 days' };
+}
+
+function publicMaxAge(req: Request): number {
+  const ua = req.headers.get('user-agent') || '';
+  return /camo/i.test(ua) ? CAMO_TTL_S : PUBLIC_TTL_S;
+}
+
+function withPublicCache(res: Response, req: Request): Response {
+  const ttl = publicMaxAge(req);
+  const headers = new Headers(res.headers);
+  headers.set(
+    'Cache-Control',
+    `public, max-age=${ttl}, s-maxage=${ttl}, stale-while-revalidate=3600`,
+  );
+  headers.set('CDN-Cache-Control', `public, max-age=${ttl}`);
+  return new Response(res.body, { status: res.status, headers });
+}
 
 /**
  * Handle a stats request on a given pathname. Used by the website Worker to
@@ -42,14 +69,22 @@ export async function handleStatsRequest(
 ): Promise<Response> {
   const url = new URL(req.url);
   const user = (url.searchParams.get('user') || env.GH_USER || 'thefourcraft').trim();
+  const range = parseRange(url.searchParams.get('range'));
+  // Graph stays 30d on the profile unless ?range= is set. Pulse defaults to 7d.
+  const graphRange = url.searchParams.has('range')
+    ? range
+    : ({ id: '30d', days: 30, label: 'Last 30 days' } satisfies Range);
 
   if (pathname === 'health') return text('ok');
 
   const cache = (caches as unknown as { default: Cache }).default;
-  // Ignore cache-bust query params (v=) so GitHub camo `?v=2` still hits a warm entry.
+  // Ignore cache-bust `v=` so camo busts don't fragment the origin cache.
+  // Range IS part of the key — 7d vs 30d are different SVGs.
   const cacheUrl = new URL(url.origin + url.pathname);
   cacheUrl.searchParams.set('user', user);
-  cacheUrl.searchParams.set('g', '2');
+  cacheUrl.searchParams.set('g', '3');
+  if (pathname === 'pulse') cacheUrl.searchParams.set('range', range.id);
+  if (pathname === 'graph') cacheUrl.searchParams.set('range', graphRange.id);
   const cacheKey = new Request(cacheUrl.toString(), { method: 'GET' });
 
   let cached: Response | undefined;
@@ -63,14 +98,18 @@ export async function handleStatsRequest(
     const generated = Number(cached.headers.get('x-dfstats-generated') || '0');
     if (!generated || Date.now() - generated > FRESH_MS) {
       ctx.waitUntil(
-        buildAndStore(cache, cacheKey, user, env, pathname).then(() => undefined).catch(() => undefined),
+        buildAndStore(cache, cacheKey, user, env, pathname, range, graphRange)
+          .then(() => undefined)
+          .catch(() => undefined),
       );
     }
-    return cached;
+    // Never forward the 7-day Cache API TTL to GitHub camo — that froze the profile.
+    return withPublicCache(cached.clone(), req);
   }
 
   try {
-    return await buildAndStore(cache, cacheKey, user, env, pathname);
+    const built = await buildAndStore(cache, cacheKey, user, env, pathname, range, graphRange);
+    return withPublicCache(built, req);
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     return svgResponse(errorCard(msg), 500, 60);
@@ -83,22 +122,19 @@ async function buildAndStore(
   user: string,
   env: Env,
   pathname: string,
+  range: Range,
+  graphRange: Range,
 ): Promise<Response> {
   let body: Response;
   if (pathname === 'streak') body = await renderStreak(user, env);
   else if (pathname === 'stats') body = await renderStats(user, env);
-  else if (pathname === 'graph') body = await renderGraph(user, env);
+  else if (pathname === 'graph') body = await renderGraph(user, env, graphRange.days);
+  else if (pathname === 'pulse') body = await renderPulse(user, env, range);
   else return new Response('not found', { status: 404 });
 
-  const generated = String(Date.now());
-  const publicHeaders = new Headers(body.headers);
-  publicHeaders.set(
-    'Cache-Control',
-    `public, max-age=${PUBLIC_TTL_S}, s-maxage=${PUBLIC_TTL_S}, stale-while-revalidate=${EDGE_TTL_S}`,
-  );
-  publicHeaders.set('CDN-Cache-Control', `public, max-age=${PUBLIC_TTL_S}`);
-  publicHeaders.set('x-dfstats-generated', generated);
-  const response = new Response(body.body, { status: body.status, headers: publicHeaders });
+  const headers = new Headers(body.headers);
+  headers.set('x-dfstats-generated', String(Date.now()));
+  const response = new Response(body.body, { status: body.status, headers });
 
   try {
     const stored = response.clone();
@@ -428,6 +464,62 @@ async function ghGraphQL<T>(env: Env, query: string, variables: Record<string, u
   return j.data as T;
 }
 
+type PulseTotals = {
+  commits: number;
+  prs: number;
+  prsMerged: number;
+  reviews: number;
+  issues: number;
+  contribs: number;
+};
+
+async function fetchPulse(user: string, range: Range, env: Env): Promise<PulseTotals> {
+  const to = new Date();
+  const from = new Date(to);
+  from.setUTCDate(from.getUTCDate() - (range.days - 1));
+  const fromIso = from.toISOString();
+  const toIso = to.toISOString();
+  const fromDay = fromIso.slice(0, 10);
+
+  const [gql, prsMerged] = await Promise.all([
+    ghGraphQL<{
+      user: {
+        contributionsCollection: {
+          totalCommitContributions: number;
+          totalPullRequestContributions: number;
+          totalPullRequestReviewContributions: number;
+          totalIssueContributions: number;
+          contributionCalendar: { totalContributions: number };
+        };
+      };
+    }>(
+      env,
+      `query($user:String!,$from:DateTime!,$to:DateTime!){
+        user(login:$user){
+          contributionsCollection(from:$from,to:$to){
+            totalCommitContributions
+            totalPullRequestContributions
+            totalPullRequestReviewContributions
+            totalIssueContributions
+            contributionCalendar{ totalContributions }
+          }
+        }
+      }`,
+      { user, from: fromIso, to: toIso },
+    ),
+    fetchSearchTotal(`author:${user} type:pr is:merged merged:>=${fromDay}`, env).catch(() => 0),
+  ]);
+  const c = gql.user.contributionsCollection;
+  return {
+    commits: c.totalCommitContributions,
+    prs: c.totalPullRequestContributions,
+    prsMerged,
+    reviews: c.totalPullRequestReviewContributions,
+    issues: c.totalIssueContributions,
+    contribs: c.contributionCalendar.totalContributions,
+  };
+}
+
 type YearTotals = {
   totalCommitContributions: number;
   totalPullRequestReviewContributions: number;
@@ -741,6 +833,51 @@ function fmtNumberFull(n: number): string {
   return n.toLocaleString('en-US');
 }
 
+// ─── /pulse card (windowed activity: 7d / 30d / 1y) ─────────────────────────
+async function renderPulse(user: string, env: Env, range: Range): Promise<Response> {
+  const [profile, pulse] = await Promise.all([
+    fetchUserProfile(user, env),
+    fetchPulse(user, range, env),
+  ]);
+  const name = (profile.name || profile.login).split(' ')[0];
+  const cols: [string, string][] = [
+    ['Commits', fmtNumberFull(pulse.commits)],
+    ['PRs opened', fmtNumberFull(pulse.prs)],
+    ['PRs merged', fmtNumberFull(pulse.prsMerged)],
+    ['Reviews', fmtNumberFull(pulse.reviews)],
+  ];
+
+  const W = 720;
+  const H = 195;
+  const colW = W / cols.length;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="GitHub pulse for ${esc(user)}, ${esc(range.label)}">
+  <defs>
+    <style>
+      .bg{fill:${COLORS.bg};stroke:rgba(255,255,255,0.08)}
+      .title{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-weight:700;fill:${COLORS.fg};font-size:18px}
+      .sub{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-weight:600;fill:${COLORS.dim};font-size:10px;letter-spacing:0.16em;text-transform:uppercase}
+      .num{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-weight:700;fill:${COLORS.fg};font-size:28px;font-variant-numeric:tabular-nums}
+      .lbl{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-weight:400;fill:${COLORS.dim};font-size:13px}
+      .div{stroke:rgba(255,255,255,0.08)}
+    </style>
+  </defs>
+  <rect class="bg" x="0.5" y="0.5" width="${W - 1}" height="${H - 1}" rx="14" ry="14"/>
+  <text class="title" x="40" y="42">${esc(name)}'s Pulse</text>
+  <text class="sub" x="40" y="64">${esc(range.label)} · public &amp; private</text>
+  ${cols
+    .map(([label, value], i) => {
+      const cx = colW * i + colW / 2;
+      const divider =
+        i > 0 ? `<line class="div" x1="${colW * i}" y1="88" x2="${colW * i}" y2="${H - 24}"/>` : '';
+      return `${divider}
+    <text class="num" x="${cx}" y="128" text-anchor="middle">${esc(value)}</text>
+    <text class="lbl" x="${cx}" y="154" text-anchor="middle">${esc(label)}</text>`;
+    })
+    .join('')}
+</svg>`;
+  return svgResponse(svg);
+}
+
 function fireIcon(): string {
   // Retained for completeness; the streak card now inlines the upstream path.
   return '';
@@ -880,13 +1017,13 @@ function computeGrade(g: GradeInput): { letter: string; percent: number } {
 }
 
 // ─── /graph (last 30 days line chart) ───────────────────────────────────────
-async function renderGraph(user: string, env: Env): Promise<Response> {
-  // Use a 31-day window so "21-20" reads nicely (rolling month end-of-period).
+async function renderGraph(user: string, env: Env, windowDays = 30): Promise<Response> {
   const today = new Date();
   const start = new Date(today);
-  start.setDate(start.getDate() - 30);
+  const span = Math.max(1, windowDays);
+  start.setDate(start.getDate() - span);
 
-  const [days, profile] = await Promise.all([
+  const [contribDays, profile] = await Promise.all([
     fetchContributionDays(
       user,
       start.toISOString().slice(0, 10),
@@ -895,8 +1032,7 @@ async function renderGraph(user: string, env: Env): Promise<Response> {
     ),
     fetchUserProfile(user, env),
   ]);
-  // If the fetched range is short, pad.
-  const series = days.slice(-31);
+  const series = contribDays.slice(-(span + 1));
 
   const W = 920;
   const H = 340;

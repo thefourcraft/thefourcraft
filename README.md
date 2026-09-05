@@ -48,20 +48,34 @@ This GitHub profile holds my open-source code, side projects, and the source for
 <h2 align="center">📊 GitHub Stats</h2>
 
 <p align="center">
-  <a href="https://github.com/thefourcraft">
-    <img alt="Streak" src="https://david-furman.com/api/stats/streak?v=2" />
+  <a href="https://david-furman.com/stats?range=7d">7d</a>
+  ·
+  <a href="https://david-furman.com/stats?range=30d">30d</a>
+  ·
+  <a href="https://david-furman.com/stats?range=1y">1y</a>
+</p>
+
+<p align="center">
+  <a href="https://david-furman.com/stats?range=7d">
+    <img alt="Pulse (last 7 days)" src="https://david-furman.com/api/stats/pulse?range=7d&v=3" />
   </a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/thefourcraft">
-    <img alt="Stats" src="https://david-furman.com/api/stats/stats?v=2" />
+  <a href="https://david-furman.com/stats">
+    <img alt="Streak" src="https://david-furman.com/api/stats/streak?v=3" />
   </a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/thefourcraft">
-    <img alt="Contribution graph" src="https://david-furman.com/api/stats/graph?v=2" />
+  <a href="https://david-furman.com/stats">
+    <img alt="Stats" src="https://david-furman.com/api/stats/stats?v=3" />
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://david-furman.com/stats?range=30d">
+    <img alt="Contribution graph" src="https://david-furman.com/api/stats/graph?v=3" />
   </a>
 </p>
 

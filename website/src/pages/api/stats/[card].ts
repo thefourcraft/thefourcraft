@@ -6,7 +6,7 @@ export const prerender = false;
 
 export const GET: APIRoute = async ({ params, request, locals }) => {
   const card = String(params.card || '');
-  const allowed = new Set(['streak', 'stats', 'graph', 'health']);
+  const allowed = new Set(['streak', 'stats', 'graph', 'pulse', 'health']);
   if (!allowed.has(card)) return new Response('not found', { status: 404 });
 
   const runtimeCtx = (locals as { cfContext?: ExecutionContext }).cfContext;

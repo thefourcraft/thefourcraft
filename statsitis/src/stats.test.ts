@@ -76,7 +76,9 @@ function installGithubMock() {
 
       const yearBlock = {
         totalCommitContributions: 1200,
+        totalPullRequestContributions: 15,
         totalPullRequestReviewContributions: 40,
+        totalIssueContributions: 8,
         contributionCalendar: {
           totalContributions: 900,
           weeks,
@@ -260,4 +262,45 @@ test('invalid card path is 404 from shipped handler', async () => {
     'nope',
   );
   assert.equal(res.status, 404);
+});
+
+test('pulse card returns windowed SVG for range=7d', async () => {
+  const fetchMock = installGithubMock();
+  try {
+    const res = await handleStatsRequest(
+      new Request(`https://example.test/api/stats/pulse?range=7d&cb=${Date.now()}-pulse`),
+      ENV,
+      ctx(),
+      'pulse',
+    );
+    const body = await res.text();
+    assert.equal(res.status, 200, body.slice(0, 300));
+    assert.match(res.headers.get('Content-Type') || '', /image\/svg\+xml/);
+    assert.doesNotMatch(body, /dfstats error|GH_TOKEN required/);
+    assert.match(body, /GitHub pulse for thefourcraft/);
+    assert.match(body, /Last 7 days/);
+    assert.match(body, /Commits/);
+    assert.match(body, /PRs opened/);
+    assert.match(body, /PRs merged/);
+    assert.match(body, /Reviews/);
+    assert.match(res.headers.get('Cache-Control') || '', /max-age=300/);
+    assert.doesNotMatch(res.headers.get('Cache-Control') || '', /max-age=604800/);
+  } finally {
+    fetchMock.mock.restore();
+  }
+});
+
+test('cached card is served with short public TTL, not the 7-day store TTL', async () => {
+  const fetchMock = installGithubMock();
+  const url = `https://example.test/api/stats/graph?cb=${Date.now()}-ttl`;
+  try {
+    const first = await handleStatsRequest(new Request(url), ENV, ctx(), 'graph');
+    const second = await handleStatsRequest(new Request(url), ENV, ctx(), 'graph');
+    assert.equal(first.status, 200);
+    assert.equal(second.status, 200);
+    assert.match(second.headers.get('Cache-Control') || '', /max-age=300/);
+    assert.doesNotMatch(second.headers.get('Cache-Control') || '', /max-age=604800/);
+  } finally {
+    fetchMock.mock.restore();
+  }
 });

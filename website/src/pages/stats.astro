@@ -1,0 +1,87 @@
+---
+export const prerender = true;
+import Base from '../layouts/Base.astro';
+
+const ranges = [
+  { id: '7d', label: '7 days' },
+  { id: '30d', label: '30 days' },
+  { id: '1y', label: '12 months' },
+] as const;
+---
+
+<Base
+  title="GitHub Stats"
+  description="Live GitHub activity for David Furman — commits, pull requests, reviews, and contribution graphs."
+>
+  <section class="bg-night px-6 pb-24 pt-32 text-paper md:px-16 md:pt-40">
+    <div class="container-app max-w-[920px]">
+      <p class="reveal font-sans text-sm uppercase tracking-[0.18em] text-paper/50">
+        GitHub
+      </p>
+      <h1 class="reveal mt-3 font-display text-4xl font-semibold tracking-tight md:text-5xl">
+        Activity
+      </h1>
+      <p class="reveal mt-4 max-w-xl text-paper/70">
+        Windowed pulse plus lifetime totals. Switch the range — the cards reload from
+        the same Worker that powers the GitHub profile.
+      </p>
+
+      <div class="reveal mt-8 flex flex-wrap gap-2" role="tablist" aria-label="Activity range">
+        {ranges.map((r) => (
+          <a
+            href={`/stats?range=${r.id}`}
+            data-range={r.id}
+            class="range-tab rounded-full border border-white/15 px-4 py-2 text-sm text-paper/80 hover:border-white/40 hover:text-paper"
+          >
+            {r.label}
+          </a>
+        ))}
+      </div>
+
+      <figure class="reveal mt-10 overflow-hidden rounded-2xl bg-[#111]">
+        <img
+          id="pulse-card"
+          src="/api/stats/pulse?range=7d"
+          alt="GitHub pulse"
+          class="w-full"
+          width="720"
+          height="195"
+        />
+      </figure>
+      <figure class="reveal mt-6 overflow-hidden rounded-2xl bg-[#111]">
+        <img
+          id="graph-card"
+          src="/api/stats/graph?range=30d"
+          alt="Contribution graph"
+          class="w-full"
+          width="920"
+          height="340"
+        />
+      </figure>
+      <figure class="reveal mt-6 overflow-hidden rounded-2xl bg-[#111]">
+        <img src="/api/stats/streak" alt="GitHub streak" class="w-full" width="495" height="195" />
+      </figure>
+      <figure class="reveal mt-6 overflow-hidden rounded-2xl bg-[#111]">
+        <img src="/api/stats/stats" alt="GitHub lifetime stats" class="w-full" width="720" height="442" />
+      </figure>
+    </div>
+  </section>
+</Base>
+
+<script is:inline>
+  (function () {
+    var params = new URLSearchParams(window.location.search);
+    var range = params.get('range') || '7d';
+    if (range !== '7d' && range !== '30d' && range !== '1y') range = '7d';
+    var pulse = document.getElementById('pulse-card');
+    var graph = document.getElementById('graph-card');
+    if (pulse) pulse.src = '/api/stats/pulse?range=' + range;
+    if (graph) graph.src = '/api/stats/graph?range=' + range;
+    document.querySelectorAll('[data-range]').forEach(function (el) {
+      var on = el.getAttribute('data-range') === range;
+      el.classList.toggle('border-white/60', on);
+      el.classList.toggle('text-paper', on);
+      el.setAttribute('aria-current', on ? 'page' : 'false');
+    });
+  })();
+</script>

@@ -104,7 +104,12 @@ function installGithubMock() {
       if (!aliases.length && q.includes('contributionsCollection')) {
         user.contributionsCollection = yearBlock;
       }
-      return jsonResponse({ data: { user } });
+      const data: Record<string, unknown> = { user };
+      if (q.includes('prsOpened') || q.includes('prsMerged')) {
+        data.prsOpened = { issueCount: 15 };
+        data.prsMerged = { issueCount: 12 };
+      }
+      return jsonResponse({ data });
     }
 
     return new Response(`unexpected fetch: ${method} ${url}`, { status: 500 });
@@ -282,6 +287,8 @@ test('pulse card returns windowed SVG for range=7d', async () => {
     assert.match(body, /Commits/);
     assert.match(body, /PRs opened/);
     assert.match(body, /PRs merged/);
+    assert.match(body, />15</);
+    assert.match(body, />12</);
     assert.match(body, /Reviews/);
     assert.match(res.headers.get('Cache-Control') || '', /max-age=300/);
     assert.doesNotMatch(res.headers.get('Cache-Control') || '', /max-age=604800/);

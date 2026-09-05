@@ -82,7 +82,7 @@ export async function handleStatsRequest(
   // Range IS part of the key — 7d vs 30d are different SVGs.
   const cacheUrl = new URL(url.origin + url.pathname);
   cacheUrl.searchParams.set('user', user);
-  cacheUrl.searchParams.set('g', '3');
+  cacheUrl.searchParams.set('g', '4');
   if (pathname === 'pulse') cacheUrl.searchParams.set('range', range.id);
   if (pathname === 'graph') cacheUrl.searchParams.set('range', graphRange.id);
   const cacheKey = new Request(cacheUrl.toString(), { method: 'GET' });
@@ -473,6 +473,30 @@ type PulseTotals = {
   contribs: number;
 };
 
+async function fetchCommitSearch(
+  user: string,
+  fromDay: string,
+  toDay: string,
+  env: Env,
+): Promise<number | null> {
+  try {
+    const q = `author:${user} committer-date:${fromDay}..${toDay}`;
+    const r = await ghFetch(
+      `https://api.github.com/search/commits?q=${encodeURIComponent(q)}&per_page=1`,
+      env,
+      {
+        headers: { Accept: 'application/vnd.github.cloak-preview+json' },
+        signal: AbortSignal.timeout(4000),
+      },
+    );
+    if (!r.ok) return null;
+    const d = (await r.json()) as { total_count: number };
+    return d.total_count;
+  } catch {
+    return null;
+  }
+}
+
 async function fetchPulse(user: string, range: Range, env: Env): Promise<PulseTotals> {
   const to = new Date();
   const from = new Date(to);
@@ -480,40 +504,50 @@ async function fetchPulse(user: string, range: Range, env: Env): Promise<PulseTo
   const fromIso = from.toISOString();
   const toIso = to.toISOString();
   const fromDay = fromIso.slice(0, 10);
+  const toDay = toIso.slice(0, 10);
 
-  const [gql, prsMerged] = await Promise.all([
+  // PRs: GraphQL search (same inventory as the lifetime card, private included
+  // when GH_TOKEN is the user). Date range is a closed `from..to` window.
+  // Commits: search index (all branches) with contribution-graph as floor.
+  const openedQ = `author:${user} is:pr created:${fromDay}..${toDay}`;
+  const mergedQ = `author:${user} is:pr is:merged merged:${fromDay}..${toDay}`;
+
+  const [gql, commitsSearch] = await Promise.all([
     ghGraphQL<{
       user: {
         contributionsCollection: {
           totalCommitContributions: number;
-          totalPullRequestContributions: number;
           totalPullRequestReviewContributions: number;
           totalIssueContributions: number;
           contributionCalendar: { totalContributions: number };
         };
       };
+      prsOpened: { issueCount: number };
+      prsMerged: { issueCount: number };
     }>(
       env,
-      `query($user:String!,$from:DateTime!,$to:DateTime!){
+      `query($user:String!,$from:DateTime!,$to:DateTime!,$openedQ:String!,$mergedQ:String!){
         user(login:$user){
           contributionsCollection(from:$from,to:$to){
             totalCommitContributions
-            totalPullRequestContributions
             totalPullRequestReviewContributions
             totalIssueContributions
             contributionCalendar{ totalContributions }
           }
         }
+        prsOpened: search(query:$openedQ, type:ISSUE){ issueCount }
+        prsMerged: search(query:$mergedQ, type:ISSUE){ issueCount }
       }`,
-      { user, from: fromIso, to: toIso },
+      { user, from: fromIso, to: toIso, openedQ, mergedQ },
     ),
-    fetchSearchTotal(`author:${user} type:pr is:merged merged:>=${fromDay}`, env).catch(() => 0),
+    fetchCommitSearch(user, fromDay, toDay, env),
   ]);
   const c = gql.user.contributionsCollection;
+  const graphCommits = c.totalCommitContributions;
   return {
-    commits: c.totalCommitContributions,
-    prs: c.totalPullRequestContributions,
-    prsMerged,
+    commits: Math.max(commitsSearch ?? 0, graphCommits),
+    prs: gql.prsOpened.issueCount,
+    prsMerged: gql.prsMerged.issueCount,
     reviews: c.totalPullRequestReviewContributions,
     issues: c.totalIssueContributions,
     contribs: c.contributionCalendar.totalContributions,
@@ -1062,13 +1096,16 @@ async function renderGraph(user: string, env: Env, windowDays = 30): Promise<Res
     })
     .join(' ');
 
-  const dots = series
-    .map((d, i) => {
-      const x = padL + i * stepX;
-      const y = padT + innerH - (d.count / maxY) * innerH;
-      return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="3.2" fill="${COLORS.faint}"/>`;
-    })
-    .join('');
+  const showDots = series.length <= 45;
+  const dots = showDots
+    ? series
+        .map((d, i) => {
+          const x = padL + i * stepX;
+          const y = padT + innerH - (d.count / maxY) * innerH;
+          return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="3.2" fill="${COLORS.faint}"/>`;
+        })
+        .join('')
+    : '';
 
   const name = (profile.name || profile.login).split(' ')[0];
 
@@ -1101,15 +1138,14 @@ async function renderGraph(user: string, env: Env, windowDays = 30): Promise<Res
   <path d="${path}" fill="none" stroke="${COLORS.fg}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
   ${dots}
 
-  <!-- x axis: day numbers -->
-  ${series
-    .map((d, i) => {
+  <!-- x axis: days for short windows, months for ~1y -->
+  ${xAxisLabels(series)
+    .map(({ i, text }) => {
       const x = padL + i * stepX;
-      const day = parseInt(d.date.slice(8), 10);
-      return `<text class="axis" x="${x}" y="${H - padB + 18}" text-anchor="middle">${day}</text>`;
+      return `<text class="axis" x="${x}" y="${H - padB + 18}" text-anchor="middle">${text}</text>`;
     })
     .join('')}
-  <text class="axisLabel" x="${W / 2}" y="${H - 10}" text-anchor="middle">Days</text>
+  <text class="axisLabel" x="${W / 2}" y="${H - 10}" text-anchor="middle">${series.length > 100 ? 'Months' : 'Days'}</text>
 </svg>`;
   return svgResponse(svg);
 }
@@ -1118,6 +1154,35 @@ function niceStep(max: number): number {
   const steps = [1, 2, 5, 10, 20, 25, 50, 100, 200, 500, 1000];
   for (const s of steps) if (max / s <= 6) return s;
   return 1000;
+}
+
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+function xAxisLabels(series: Day[]): Array<{ i: number; text: string }> {
+  const n = series.length;
+  if (n === 0) return [];
+  if (n <= 32) {
+    return series.map((d, i) => ({ i, text: String(parseInt(d.date.slice(8), 10)) }));
+  }
+  if (n <= 100) {
+    const out: Array<{ i: number; text: string }> = [];
+    for (let i = 0; i < n; i++) {
+      if (i === 0 || i === n - 1 || i % 7 === 0) {
+        const [, m, d] = series[i].date.split('-');
+        out.push({ i, text: `${parseInt(d, 10)}/${parseInt(m, 10)}` });
+      }
+    }
+    return out;
+  }
+  const out: Array<{ i: number; text: string }> = [];
+  let lastMonth = '';
+  for (let i = 0; i < n; i++) {
+    const month = series[i].date.slice(0, 7);
+    if (month === lastMonth) continue;
+    lastMonth = month;
+    out.push({ i, text: MONTHS[parseInt(month.slice(5), 10) - 1] ?? month });
+  }
+  return out;
 }
 
 // ─── Error / index ──────────────────────────────────────────────────────────
